@@ -28,7 +28,9 @@ export default function RequestQuotationForm({
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [company, setCompany] = useState("");
-  const [interest, setInterest] = useState(interests[0]);
+  const [interest, setInterest] = useState<(typeof interests)[number]>(
+  interests[0]
+);
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
   const productSeedDone = useRef(false);
@@ -165,7 +167,9 @@ export default function RequestQuotationForm({
         <select
           id="rq-interest"
           value={interest}
-          onChange={(e) => setInterest(e.target.value)}
+          onChange={(e) =>
+  setInterest(e.target.value as (typeof interests)[number])
+}
           className="h-11 w-full rounded-lg border border-foreground/15 bg-card px-3 text-sm text-foreground outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
         >
           {interests.map((opt) => (
