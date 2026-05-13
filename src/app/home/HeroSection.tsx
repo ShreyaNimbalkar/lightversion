@@ -21,129 +21,238 @@ export default function HeroSection() {
   const { openQuotation } = useEnquiryModal();
 
   return (
-    <section className="relative flex min-h-[100dvh] items-center overflow-x-hidden bg-section pb-10 pt-6 text-foreground sm:pb-0">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-0 top-0 h-80 w-80 rounded-full bg-brand/10 blur-3xl" />
-        <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-accent/15 blur-3xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(26,58,107,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(26,58,107,0.04)_1px,transparent_1px)] bg-[size:72px_72px]" />
+    <section className="relative overflow-hidden bg-section text-foreground">
+
+      {/* BACKGROUND */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+
+        <div className="absolute left-[-120px] top-[-120px] h-[280px] w-[280px] rounded-full bg-brand/10 blur-3xl md:h-[420px] md:w-[420px]" />
+
+        <div className="absolute bottom-[-150px] right-[-100px] h-[320px] w-[320px] rounded-full bg-accent/15 blur-3xl md:h-[500px] md:w-[500px]" />
+
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(26,58,107,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(26,58,107,0.04)_1px,transparent_1px)] bg-[size:64px_64px]" />
+
       </div>
 
-      <div className="relative z-10 mx-auto w-full min-w-0 max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-12">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-14 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pb-24 lg:pt-36">
+
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
+
+          {/* LEFT */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={{
+              duration: 0.6,
+              ease: "easeOut",
+            }}
+            className="w-full"
           >
-            <div className="mb-6 flex max-w-full flex-col gap-2 rounded-lg border border-foreground/10 bg-card px-3 py-2 shadow-sm sm:mb-8 sm:flex-row sm:items-center sm:gap-3 sm:px-4">
-              <FontAwesomeIcon icon={faCircleCheck} className="shrink-0 text-sm text-brand" />
-              <span className="text-xs font-medium leading-snug text-foreground/80 sm:text-sm">
-                Pune · Since {site.establishedYear} · GST-ready invoices · Two service points
+
+            {/* TOP BADGE */}
+            <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-foreground/10 bg-card px-4 py-2 shadow-sm">
+
+              <FontAwesomeIcon
+                icon={faCircleCheck}
+                className="text-xs text-brand"
+              />
+
+              <span className="text-[11px] font-medium leading-relaxed text-foreground/75 sm:text-sm">
+
+                Pune · Since {site.establishedYear} · GST-ready invoices
+
               </span>
+
             </div>
 
-            <h1 className="text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-[2.65rem]">
-              {site.brandName} — IT support
-              <span className="mt-1 block text-brand">your finance team can file with confidence</span>
+            {/* HEADING */}
+            <h1 className="max-w-2xl text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-[4rem]">
+
+              {site.brandName}
+
+              <span className="mt-2 block text-brand">
+                IT support built for modern businesses
+              </span>
+
             </h1>
 
+            {/* DESCRIPTION */}
             <p className="mt-6 max-w-xl text-base leading-relaxed text-foreground/70 sm:text-lg">
-              Workshop and on-site help for laptops, desktops, rentals, structured cabling, Wi‑Fi, CCTV, IP PBX, and
-              attendance systems — plus Microsoft, Tally, and security licensing through proper distribution. We quote
-              labour and parts before we spend your budget, and we leave cable maps and photos when the job is done.
+
+              Workshop and on-site support for laptops, desktops,
+              networking, CCTV, IP PBX, rentals, attendance systems,
+              and enterprise software licensing.
+
             </p>
 
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            {/* BUTTONS */}
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+
               <motion.button
                 type="button"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 onClick={() => openQuotation()}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-7 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand/25 transition-colors duration-200 hover:bg-brand-hover"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-brand px-6 text-sm font-semibold text-white shadow-lg shadow-brand/20 transition hover:bg-brand-hover sm:h-14 sm:px-8"
               >
+
                 Request quotation
-                <FontAwesomeIcon icon={faArrowRight} className="text-xs opacity-90" />
+
+                <FontAwesomeIcon
+                  icon={faArrowRight}
+                  className="text-xs"
+                />
+
               </motion.button>
 
               <Link
                 href="/repair-rental"
-                className="inline-flex items-center justify-center rounded-lg border border-foreground/15 bg-card px-7 py-3.5 text-sm font-semibold text-foreground shadow-sm transition hover:border-brand hover:text-brand"
+                className="inline-flex h-12 items-center justify-center rounded-xl border border-foreground/15 bg-card px-6 text-sm font-semibold text-foreground transition hover:border-brand hover:text-brand sm:h-14 sm:px-8"
               >
+
                 View services
+
               </Link>
+
             </div>
 
-            <p className="mt-4 text-sm text-foreground/60">
+            {/* CONTACT */}
+            <p className="mt-5 text-sm leading-relaxed text-foreground/60">
+
               Prefer to talk first?{" "}
+
               <Link
                 href="/contact"
-                className="font-medium text-brand underline-offset-2 hover:underline"
+                className="font-medium text-brand underline-offset-4 hover:underline"
               >
+
                 Contact the team
+
               </Link>
-              .
+
             </p>
 
-            <div className="mt-12 grid grid-cols-1 gap-6 border-t border-foreground/10 pt-10 sm:grid-cols-3">
+            {/* FEATURES */}
+            <div className="mt-10 grid gap-6 border-t border-foreground/10 pt-8 sm:grid-cols-2 lg:grid-cols-3">
+
               {[
-                ["Two Pune locations", "Manikbaug workshop dispatch · Navi Peth walk-in for sales and drop-offs"],
-                ["No surprise bills", "Scope and parts discussed in writing before clockable work starts"],
-                ["Real people on the phone", "You reach the same desk that updates your ticket — not a random script"],
+                [
+                  "Two Pune locations",
+                  "Workshop dispatch and walk-in support",
+                ],
+
+                [
+                  "Transparent pricing",
+                  "Parts and labour discussed before work starts",
+                ],
+
+                [
+                  "Real support",
+                  "Direct communication with technicians",
+                ],
               ].map(([title, detail], index) => (
                 <motion.div
                   key={title}
-                  initial={{ opacity: 0, y: 12 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 + index * 0.08 }}
+                  transition={{
+                    delay: 0.2 + index * 0.1,
+                  }}
+                  className="rounded-2xl border border-foreground/10 bg-card/60 p-4 backdrop-blur"
                 >
-                  <h3 className="text-sm font-semibold text-foreground">{title}</h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-foreground/60">
+
+                  <h3 className="text-sm font-semibold text-foreground">
+                    {title}
+                  </h3>
+
+                  <p className="mt-2 text-xs leading-relaxed text-foreground/60">
                     {detail}
                   </p>
+
                 </motion.div>
               ))}
+
             </div>
+
           </motion.div>
 
+          {/* RIGHT */}
           <motion.div
-            className="relative"
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.55, delay: 0.1, ease: "easeOut" }}
+            transition={{
+              duration: 0.6,
+              delay: 0.15,
+            }}
+            className="relative"
           >
-            <div className="relative overflow-hidden rounded-2xl border border-foreground/10 bg-card shadow-xl">
+
+            <div className="relative overflow-hidden rounded-[28px] border border-foreground/10 bg-card shadow-2xl">
+
               <Image
                 src="https://images.unsplash.com/photo-1581092160562-40aa08f9a097?q=80&w=1200&auto=format&fit=crop"
-                alt="Engineer reviewing network equipment in a client environment"
+                alt="IT engineer"
                 width={1200}
                 height={900}
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="h-[320px] w-full object-cover sm:h-[420px] lg:h-[520px]"
+                className="h-[280px] w-full object-cover sm:h-[420px] md:h-[500px] lg:h-[620px]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-surface-deep/50 via-transparent to-transparent" />
 
-              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6">
-                <div className="max-w-md rounded-xl border border-foreground/15 bg-card/95 p-4 shadow-lg backdrop-blur sm:p-5 dark:border-white/10 dark:bg-surface-deep/90">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+              {/* FLOATING CARD */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.4,
+                }}
+                className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6"
+              >
+
+                <div className="rounded-2xl border border-white/10 bg-card/90 p-4 shadow-xl backdrop-blur-lg sm:p-5">
+
                   <div className="flex items-start gap-3">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand/10">
-                      <FontAwesomeIcon icon={faServer} className="text-brand" />
+
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand/10">
+
+                      <FontAwesomeIcon
+                        icon={faServer}
+                        className="text-brand"
+                      />
+
                     </div>
+
                     <div>
+
                       <h4 className="text-sm font-semibold text-foreground">
-                        Networking & field documentation
+                        Networking & documentation
                       </h4>
+
                       <p className="mt-1 text-xs leading-relaxed text-foreground/70">
-                        Port labels, rack photos, and test notes — so the next engineer is not guessing above your ceiling tiles.
+
+                        Port labels, rack photos, and proper testing notes
+                        for every installation.
+
                       </p>
+
                     </div>
+
                   </div>
+
                 </div>
-              </div>
+
+              </motion.div>
+
             </div>
+
           </motion.div>
+
         </div>
+
       </div>
+
     </section>
   );
 }
