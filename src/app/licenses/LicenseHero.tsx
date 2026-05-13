@@ -62,7 +62,7 @@ export default function LicenseHero() {
               that disappear when audit season arrives.
             </p>
 
-            <HeroChecklist items={LICENSE_HIGHLIGHTS} className="mt-6 lg:hidden" />
+            {/* <HeroChecklist items={LICENSE_HIGHLIGHTS} className="mt-6 lg:hidden" /> */}
           </motion.div>
 
           {/* RIGHT */}
@@ -189,7 +189,7 @@ export default function LicenseHero() {
                 </div>
               </div> */}
             {/* </div> */}
-            <HeroChecklist items={LICENSE_HIGHLIGHTS} className="mt-10" />
+            <HeroChecklist items={LICENSE_HIGHLIGHTS} className="mt-10 hidden lg:block" />
           </motion.div>
         </div>
 

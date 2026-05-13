@@ -59,7 +59,7 @@ export default function RepairRentalHero() {
               CCTV kits, and spares — always with a ticket number and a written parts quote before we spend your money.
             </p>
 
-            <HeroChecklist items={REPAIR_HIGHLIGHTS} className="mt-6 lg:hidden" />
+            {/* <HeroChecklist items={REPAIR_HIGHLIGHTS} className="mt-6 lg:hidden" /> */}
           </motion.div>
 
           {/* RIGHT */}
@@ -157,7 +157,7 @@ export default function RepairRentalHero() {
                 </div>
               </div> */}
             {/* </div> */}
-            <HeroChecklist items={REPAIR_HIGHLIGHTS} className="mt-10" />
+            <HeroChecklist items={REPAIR_HIGHLIGHTS} className="mt-10 hidden lg:block" />
           </motion.div>
         </div>
 

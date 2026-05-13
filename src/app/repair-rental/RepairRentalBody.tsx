@@ -91,7 +91,7 @@ export default function RepairRentalBody() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="max-w-3xl"
+            className="max-w-7xl"
           >
             <div className="inline-flex items-center rounded-full border border-brand/20 bg-brand/10 px-5 py-2 text-sm font-semibold text-brand">
               Our Solutions

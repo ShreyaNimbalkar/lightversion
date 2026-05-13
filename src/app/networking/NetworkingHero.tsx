@@ -63,7 +63,7 @@ export default function NetworkingHero() {
               back first.
             </p>
 
-            <HeroChecklist items={NETWORKING_HIGHLIGHTS} className="mt-6 lg:hidden" />
+            {/* <HeroChecklist items={NETWORKING_HIGHLIGHTS} className="mt-6 lg:hidden" /> */}
           </motion.div>
 
           {/* RIGHT */}
@@ -168,7 +168,7 @@ export default function NetworkingHero() {
                 </div>
               </div> */}
             {/* </div> */}
-            <HeroChecklist items={NETWORKING_HIGHLIGHTS} className="mt-10" />
+            <HeroChecklist items={NETWORKING_HIGHLIGHTS} className="mt-10 hidden lg:block " />
           </motion.div>
         </div>
 

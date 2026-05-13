@@ -91,13 +91,11 @@ export default function NetworkingBody() {
   return (
     <>
       <section className="relative overflow-hidden bg-section py-24 sm:py-28">
-        {/* BACKGROUND */}
+       {/* GLOW */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-0 h-[420px] w-[420px] rounded-full bg-brand/10 blur-3xl" />
+          <div className="absolute top-20 left-0 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
 
-          <div className="absolute bottom-0 left-0 h-[320px] w-[320px] rounded-full bg-brand-deep/20 blur-3xl" />
-
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:80px_80px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:80px_80px]" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,9 +105,13 @@ export default function NetworkingBody() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="max-w-3xl"
+            className="max-w-7xl"
           >
-            <div className="inline-flex items-center rounded-lg border border-surface-nav/20 bg-card px-4 py-2 text-xs font-semibold uppercase tracking-wide text-brand-deep">
+            {/* <div className="inline-flex items-center rounded-lg border border-surface-nav/20 bg-card px-4 py-2 text-xs font-semibold uppercase tracking-wide text-brand-deep">
+              Networking & on-site installs
+            </div> */}
+
+            <div className="inline-flex items-center rounded-full border border-brand/25 bg-brand/10 px-5 py-2 text-sm font-semibold tracking-wide text-brand backdrop-blur-xl">
               Networking & on-site installs
             </div>
 
@@ -118,7 +120,7 @@ export default function NetworkingBody() {
               <span className="text-brand"> networking infrastructure</span>
             </h2>
 
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-foreground/70">
+            <p className="mt-6 max-w-7xl text-base leading-relaxed text-foreground/70">
               Cabling, switching, Wi‑Fi, CCTV, and PBX — documented with photos and
               port maps so the next engineer (us or yours) is not guessing in the
               ceiling void.
@@ -126,7 +128,7 @@ export default function NetworkingBody() {
           </motion.div>
 
           {/* ================= SERVICES ================= */}
-          <div className="mt-20 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {/* <div className="mt-20 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
             {services.map((service, index) => (
               <motion.div
                 key={index}
@@ -184,7 +186,7 @@ export default function NetworkingBody() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </div> */}
         </div>
       </section>
 
