@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* Manual dark mode (next-themes adds .dark on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Light / dark design tokens */
+:root {
+  --section: #f0f4ff;
+  --card: #ffffff;
+  --background: #f0f4ff;
+  --foreground: #0a1628;
+  --brand-deep: #1a3a6b;
+  --surface-nav: #1a3a6b;
+  --surface-deep: #0a1628;
+  --primary-cta: #0057ff;
+  --primary-cta-hover: #0046d6;
+  --accent-sky: #4da6ff;
+}
+
+.dark {
+  --section: #0c1222;
+  --card: #141c2e;
+  --background: #0a0f1a;
+  --foreground: #e8eef7;
+  --brand-deep: #93c5fd;
+  --surface-nav: #152a4d;
+  --surface-deep: #050a12;
+  --primary-cta: #3b82f6;
+  --primary-cta-hover: #60a5fa;
+  --accent-sky: #38bdf8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface-deep: var(--surface-deep);
+  --color-surface-nav: var(--surface-nav);
+  --color-brand: var(--primary-cta);
+  --color-brand-hover: var(--primary-cta-hover);
+  --color-brand-deep: var(--brand-deep);
+  --color-accent: var(--accent-sky);
+  --color-section: var(--section);
+  --color-card: var(--card);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--section);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.45s ease-out forwards;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-scroll {
+  animation: marquee-scroll 28s linear infinite;
+}
