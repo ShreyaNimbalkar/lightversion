@@ -78,13 +78,11 @@ export default function LicenseBody() {
   return (
     <>
       <section className="relative overflow-hidden bg-section py-28">
-        {/* BACKGROUND */}
+        {/* GLOW */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-0 h-[420px] w-[420px] rounded-full bg-brand/10 blur-3xl" />
+          <div className="absolute top-20 left-0 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
 
-          <div className="absolute bottom-0 left-0 h-[320px] w-[320px] rounded-full bg-brand-deep/20 blur-3xl" />
-
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:80px_80px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:80px_80px]" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -94,18 +92,16 @@ export default function LicenseBody() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="max-w-3xl"
+            className="max-w-7xl"
           >
             <div className="inline-flex items-center rounded-full border border-brand/25 bg-brand/10 px-5 py-2 text-sm font-semibold tracking-wide text-brand backdrop-blur-xl">
               Licensed software (authorised channels)
             </div>
 
-            <h2 className="mt-6 text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-foreground">
+
+            <h2 className="mt-6 text-4xl md:text-5xl font-bold text-foreground leading-tight">
               Genuine Software
-              <span className="bg-gradient-to-r from-brand to-brand-deep bg-clip-text text-transparent">
-                {" "}
-                Licensing Services
-              </span>
+              <span className="text-brand"> Licensing Services</span>
             </h2>
 
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-foreground/70">
@@ -116,7 +112,7 @@ export default function LicenseBody() {
           </motion.div>
 
           {/* CARDS */}
-          <div className="mt-20 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {/* <div className="mt-20 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
             {licenses.map((license, index) => (
               <motion.div
                 key={index}
@@ -130,33 +126,33 @@ export default function LicenseBody() {
                 whileHover={{ y: -4 }}
                 className="group relative flex min-h-[400px] flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-card p-8 shadow-md transition-shadow duration-200 hover:shadow-lg"
               >
-                <div className="relative flex flex-1 flex-col">
+                <div className="relative flex flex-1 flex-col"> */}
                   {/* ICON */}
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand transition duration-300 group-hover:bg-brand/15">
+                  {/* <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand transition duration-300 group-hover:bg-brand/15">
                     <FontAwesomeIcon
                       icon={license.icon}
                       className="text-2xl"
                     />
-                  </div>
+                  </div> */}
 
                   {/* TITLE */}
-                  <h3 className="mt-8 text-2xl font-bold text-foreground">
+                  {/* <h3 className="mt-8 text-2xl font-bold text-foreground">
                     {license.title}
-                  </h3>
+                  </h3> */}
 
                   {/* DESCRIPTION */}
-                  <p className="mt-5 flex-1 leading-relaxed text-foreground/70">
+                  {/* <p className="mt-5 flex-1 leading-relaxed text-foreground/70">
                     {license.desc}
-                  </p>
+                  </p> */}
 
                   {/* SUPPORT */}
-                  <div className="mt-6 flex items-center gap-3 text-sm font-semibold text-brand">
+                  {/* <div className="mt-6 flex items-center gap-3 text-sm font-semibold text-brand">
                     <FontAwesomeIcon icon={faCheck} />
                     Genuine & verified licence
-                  </div>
+                  </div> */}
 
                   {/* BUTTONS */}
-                  <div className="mt-auto flex flex-col gap-3 pt-10">
+                  {/* <div className="mt-auto flex flex-col gap-3 pt-10">
                     <button
                       type="button"
                       onClick={() => openLicenseModal(license.title)}
@@ -191,7 +187,7 @@ export default function LicenseBody() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </div> */}
         </div>
       </section>
 
