@@ -21,7 +21,7 @@ export default function HeroSection() {
   const { openQuotation } = useEnquiryModal();
 
   return (
-    <section className="relative overflow-hidden bg-section text-foreground">
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-section pb-14 pt-24 text-foreground sm:pb-10 sm:pt-28 lg:pb-0">
 
       {/* BACKGROUND */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -34,9 +34,9 @@ export default function HeroSection() {
 
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-14 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pb-24 lg:pt-36">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-12">
 
-        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
 
           {/* LEFT */}
           <motion.div
@@ -66,7 +66,7 @@ export default function HeroSection() {
             </div>
 
             {/* HEADING */}
-            <h1 className="max-w-2xl text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-[4rem]">
+            <h1 className="text-[2rem] font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-[2.65rem]">
 
               {site.brandName}
 
@@ -77,7 +77,7 @@ export default function HeroSection() {
             </h1>
 
             {/* DESCRIPTION */}
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-foreground/70 sm:text-lg">
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-foreground/70 sm:text-base lg:text-lg">
 
               Workshop and on-site support for laptops, desktops,
               networking, CCTV, IP PBX, rentals, attendance systems,
@@ -86,7 +86,7 @@ export default function HeroSection() {
             </p>
 
             {/* BUTTONS */}
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
 
               <motion.button
                 type="button"
@@ -133,7 +133,7 @@ export default function HeroSection() {
             </p>
 
             {/* FEATURES */}
-            <div className="mt-10 grid gap-6 border-t border-foreground/10 pt-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 grid grid-cols-1 gap-4 border-t border-foreground/10 pt-8 sm:grid-cols-2 lg:grid-cols-3">
 
               {[
                 [
@@ -196,7 +196,7 @@ export default function HeroSection() {
                 height={900}
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="h-[280px] w-full object-cover sm:h-[420px] md:h-[500px] lg:h-[620px]"
+                className="h-[260px] w-full object-cover sm:h-[420px] lg:h-[520px]"
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -208,10 +208,10 @@ export default function HeroSection() {
                 transition={{
                   delay: 0.4,
                 }}
-                className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6"
+                className="absolute bottom-2 left-2 right-2 sm:bottom-6 sm:left-6 sm:right-6"
               >
 
-                <div className="rounded-2xl border border-white/10 bg-card/90 p-4 shadow-xl backdrop-blur-lg sm:p-5">
+                <div className="rounded-2xl border border-white/10 bg-card/90 p-3 shadow-xl backdrop-blur-lg sm:p-5">
 
                   <div className="flex items-start gap-3">
 
