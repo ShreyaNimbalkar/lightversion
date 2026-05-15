@@ -13,7 +13,7 @@ export const site = {
   establishedYear: 2012,
   proprietor: "Nagesh Salunke",
   serviceArea:
-    "Pune, Pimpri-Chinchwad (PCMC), and nearby industrial corridors — workshop and on-site visits by appointment.",
+    "Pune, Pimpri-Chinchwad (PCMC), and surrounding industrial areas — workshop service and scheduled on-site visits.",
   phones: [
     { tel: "+919881099456", display: "+91 98810 99456" },
     { tel: "+918007500737", display: "+91 80075 00737" },
@@ -22,7 +22,8 @@ export const site = {
   phoneLine: "+91 98810 99456 · +91 80075 00737",
   /** Corrected domain spelling (live site historically showed a typo). */
   email: "info@softlinkcomputers.co.in",
-  workingHours: "Monday – Saturday · 9:30 AM – 7:00 PM (IST). Sunday closed — call ahead for emergency workshop drops.",
+  workingHours:
+    "Monday – Saturday · 9:30 AM – 7:00 PM (IST). Sunday closed. Call ahead for urgent workshop drop-offs.",
   locations: [
     {
       label: "Registered office · Vadgaon (Manikbaug)",

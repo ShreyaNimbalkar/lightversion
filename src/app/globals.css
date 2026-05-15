@@ -3,31 +3,39 @@
 /* Manual dark mode (next-themes adds .dark on <html>) */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Light / dark design tokens */
+/* Light / dark design tokens — slate + orange + amber */
 :root {
-  --section: #f0f4ff;
+  /* Section BG (off white), cards / body text surfaces */
+  --section: #f5f7fa;
   --card: #ffffff;
-  --background: #f0f4ff;
-  --foreground: #0a1628;
-  --brand-deep: #1a3a6b;
-  --surface-nav: #1a3a6b;
-  --surface-deep: #0a1628;
-  --primary-cta: #0057ff;
-  --primary-cta-hover: #0046d6;
-  --accent-sky: #4da6ff;
+  --background: #f5f7fa;
+  /* Primary copy on light surfaces */
+  --foreground: #1e2a3b;
+  /* Deep slate for gradients, imagery overlays, badge labels */
+  --brand-deep: #1e2a3b;
+  /* Header / nav */
+  --surface-nav: #2c3e58;
+  /* Background / deep panels */
+  --surface-deep: #1e2a3b;
+  /* Primary CTA */
+  --primary-cta: #ff6b35;
+  --primary-cta-hover: #e85a2a;
+  /* Highlights / links */
+  --accent-sky: #ffb347;
 }
 
 .dark {
-  --section: #0c1222;
-  --card: #141c2e;
-  --background: #0a0f1a;
-  --foreground: #e8eef7;
-  --brand-deep: #93c5fd;
-  --surface-nav: #152a4d;
-  --surface-deep: #050a12;
-  --primary-cta: #3b82f6;
-  --primary-cta-hover: #60a5fa;
-  --accent-sky: #38bdf8;
+  --section: #243142;
+  --card: #2c3e58;
+  --background: #1e2a3b;
+  --foreground: #f5f7fa;
+  /* Amber pairs with CTA in gradients and light accent text on dark UI */
+  --brand-deep: #ffb347;
+  --surface-nav: #2c3e58;
+  --surface-deep: #1e2a3b;
+  --primary-cta: #ff6b35;
+  --primary-cta-hover: #ff8654;
+  --accent-sky: #ffb347;
 }
 
 @theme inline {

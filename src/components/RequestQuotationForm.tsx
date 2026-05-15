@@ -10,6 +10,7 @@ const interests = [
   "Networking & cabling",
   "Software licences",
   "CCTV / security",
+  "WFH service",
   "Other",
 ] as const;
 

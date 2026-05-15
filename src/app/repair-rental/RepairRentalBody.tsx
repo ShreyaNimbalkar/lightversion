@@ -94,18 +94,17 @@ export default function RepairRentalBody() {
             className="max-w-7xl"
           >
             <div className="inline-flex items-center rounded-full border border-brand/20 bg-brand/10 px-5 py-2 text-sm font-semibold text-brand">
-              Our Solutions
+              Repair & rental
             </div>
 
-            <h2 className="mt-6 text-4xl md:text-5xl font-bold text-foreground leading-tight">
-              Complete repair &
-              <span className="text-brand"> rental infrastructure</span>
+            <h2 className="mt-6 text-4xl font-bold leading-tight text-foreground md:text-5xl">
+              Workshop expertise &
+              <span className="text-brand"> flexible hardware rental</span>
             </h2>
 
             <p className="mt-6 text-lg leading-relaxed text-foreground/70">
-              We provide professional repair, maintenance, rental, and IT
-              infrastructure support services for businesses, offices,
-              institutes, and organizations.
+              Keep your team online with component-level repairs, fleet upgrades, and short-term device rental. Browse the
+              catalogue below or send an enquiry for a tailored quotation.
             </p>
           </motion.div>
 

@@ -37,6 +37,14 @@ const navLinks = [
         href: "/networking",
       },
       {
+        name: "CCTV Services",
+        href: "/cctv-services",
+      },
+      {
+        name: "WFH Service",
+        href: "/wfh-service",
+      },
+      {
         name: "Software Licenses",
         href: "/licenses",
       },

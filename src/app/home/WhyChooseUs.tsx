@@ -148,7 +148,7 @@ export default function WhyChooseUs() {
           <div
             className="pointer-events-none absolute inset-y-0 right-0 w-[min(42%,20rem)] rounded-r-2xl opacity-[0.04]"
             style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M32 2l10 17h19l-15 11 6 19-20-12-20 12 6-19-15-11h19z' fill='none' stroke='%231a3a6b' stroke-width='1'/%3E%3C/svg%3E")`,
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M32 2l10 17h19l-15 11 6 19-20-12-20 12 6-19-15-11h19z' fill='none' stroke='%231e2a3b' stroke-width='1'/%3E%3C/svg%3E")`,
               backgroundSize: "64px 64px",
             }}
           />

@@ -15,15 +15,16 @@ export const metadata: Metadata = {
     template: `%s | ${site.brandName}`,
   },
   description:
-    "Pune-based IT partner since 2012: laptop & desktop workshop, rentals, structured cabling, Wi‑Fi, CCTV, IP PBX, attendance systems, and Microsoft / Tally / security licensing — with GST-ready estimates and documented site work.",
+    "Soft Link Computers — Pune IT services since 2012: repair & rental, networking, CCTV, WFH kits, and genuine software licensing. GST-ready quotes and documented project handovers.",
   keywords: [
     "Soft Link Computers Pune",
     "laptop repair Pune",
     "computer rental Pune",
-    "networking cabling Pune",
-    "Microsoft 365 license Pune",
-    "Tally license Pune",
+    "networking company Pune",
     "CCTV installation Pune",
+    "work from home IT Pune",
+    "Microsoft 365 Pune",
+    "Tally Prime dealer Pune",
   ],
 };
 
@@ -33,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body className="min-h-screen antialiased">
         <ThemeProviderWrapper>
           <Navbar />

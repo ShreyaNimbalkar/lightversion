@@ -112,18 +112,17 @@ export default function NetworkingBody() {
             </div> */}
 
             <div className="inline-flex items-center rounded-full border border-brand/25 bg-brand/10 px-5 py-2 text-sm font-semibold tracking-wide text-brand backdrop-blur-xl">
-              Networking & on-site installs
+              Networking & infrastructure
             </div>
 
             <h2 className="mt-6 text-3xl font-bold leading-tight text-foreground md:text-4xl lg:text-5xl">
-              Complete business
-              <span className="text-brand"> networking infrastructure</span>
+              Enterprise-grade
+              <span className="text-brand"> connectivity</span>
             </h2>
 
-            <p className="mt-6 max-w-7xl text-base leading-relaxed text-foreground/70">
-              Cabling, switching, Wi‑Fi, CCTV, and PBX — documented with photos and
-              port maps so the next engineer (us or yours) is not guessing in the
-              ceiling void.
+            <p className="mt-6 max-w-3xl text-base leading-relaxed text-foreground/70">
+              From copper and fibre plant to Wi‑Fi, NAS, IP PBX, and attendance — we engineer, install, and document systems
+              that remain serviceable long after go-live.
             </p>
           </motion.div>
 

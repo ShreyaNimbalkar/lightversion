@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, type ReactNode } from "react";
 
 import { motion, Variants } from "framer-motion";
@@ -45,14 +46,23 @@ function ProductCard({
         imageAlt={card.imageAlt}
         eyebrow={categoryTitle}
         title={card.name}
+        description={card.summary}
         footer={
-          <button
-            type="button"
-            onClick={() => onEnquiry(card.enquiryTag, card.defaultInterest)}
-            className="mt-4 w-full rounded-xl bg-brand py-2.5 text-center text-sm font-semibold text-white shadow-md shadow-brand/20 transition hover:bg-brand-hover"
-          >
-            Enquiry
-          </button>
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            <Link
+              href={`/products/${card.slug}`}
+              className="inline-flex min-h-[2.65rem] items-center justify-center rounded-xl border border-foreground/15 bg-card px-2 text-center text-xs font-semibold text-foreground shadow-sm transition hover:border-brand/35 hover:text-brand sm:px-3 sm:text-sm"
+            >
+              View details
+            </Link>
+            <button
+              type="button"
+              onClick={() => onEnquiry(card.enquiryTag, card.defaultInterest)}
+              className="inline-flex min-h-[2.65rem] items-center justify-center rounded-xl bg-brand px-2 text-center text-xs font-semibold text-white shadow-md shadow-brand/20 transition hover:bg-brand-hover sm:px-3 sm:text-sm"
+            >
+              Enquiry
+            </button>
+          </div>
         }
       />
     </motion.div>
@@ -83,7 +93,7 @@ function CategoryBlock({ category }: { category: ServiceCatalogCategory }) {
       >
         {visibleItems.map((c) => (
           <ProductCard
-            key={c.enquiryTag}
+            key={c.slug}
             card={c}
             categoryTitle={category.title}
             onEnquiry={(tag, interest) => openEnquiry(`${tag} — enquiry`, interest)}

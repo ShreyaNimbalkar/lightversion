@@ -21,6 +21,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 import { site, siteTelHref } from "@/data/site";
+import { siteContent } from "@/data/siteContent";
 
 const quickLinks = [
   { name: "Home", href: "/" },
@@ -28,6 +29,8 @@ const quickLinks = [
   { name: "Contact", href: "/contact" },
   { name: "Repair & rental", href: "/repair-rental" },
   { name: "Networking", href: "/networking" },
+  { name: "CCTV services", href: "/cctv-services" },
+  { name: "WFH service", href: "/wfh-service" },
   { name: "Software licences", href: "/licenses" },
 ];
 
@@ -54,14 +57,13 @@ export default function Footer() {
                   className="object-contain p-2"
                 />
               </div>
-              <div>
+              {/* <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent/90">Pune · Since {site.establishedYear}</p>
                 <p className="mt-0.5 text-lg font-bold tracking-tight sm:text-xl">{site.brandName}</p>
-              </div>
+              </div> */}
             </Link>
             <p className="mt-5 max-w-md text-sm leading-relaxed text-white/70">
-              Workshop and on-site IT led by {site.proprietor}: repairs, rentals, networking, CCTV, voice, attendance, and
-              genuine software licences — with GST-ready paperwork.
+              {siteContent.footer.blurb} Led by {site.proprietor}.
             </p>
             <p className="mt-3 text-xs leading-relaxed text-white/55">{site.serviceArea}</p>
 

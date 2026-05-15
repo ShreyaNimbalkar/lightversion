@@ -69,7 +69,7 @@ export default function ContactBody() {
             </p>
 
             {/* FEATURES */}
-            <div className="mt-10 flex flex-col gap-4">
+            {/* <div className="mt-10 flex flex-col gap-4">
               {[
                 "Two verified Pune locations (Manikbaug + Navi Peth)",
                 "GST-ready quotations before billable site time",
@@ -89,7 +89,7 @@ export default function ContactBody() {
                   </p>
                 </div>
               ))}
-            </div>
+            </div> */}
 
             {/* CONTACT INFO */}
             <div className="mt-10 grid gap-5">
