@@ -102,16 +102,16 @@ function CategoryBlock({ category }: { category: ServiceCatalogCategory }) {
       </motion.div>
 
       {hasMore ? (
-        <div className="mt-6 flex justify-end">
-          <button
-            type="button"
-            onClick={() => setExpanded((e) => !e)}
-            className="inline-flex items-center gap-2 rounded-full border border-foreground/12 bg-card px-5 py-2.5 text-sm font-semibold text-foreground shadow-sm transition hover:border-brand/30 hover:text-brand"
-          >
-            {expanded ? "See less" : "See more"}
-          </button>
-        </div>
-      ) : null}
+  <div className="mt-20 flex justify-center">
+    <button
+      type="button"
+      onClick={() => setExpanded((e) => !e)}
+      className="inline-flex items-center gap-2 rounded-xl bg-brand px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-brand/25 transition-all duration-300 hover:scale-105 hover:bg-brand/90 hover:shadow-xl hover:shadow-brand/30"
+    >
+      {expanded ? "See less" : "See more"}
+    </button>
+  </div>
+) : null}
     </div>
   );
 }
