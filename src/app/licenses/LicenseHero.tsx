@@ -9,7 +9,7 @@ export default function LicenseHero() {
       description="Microsoft 365, Windows, Tally Prime, Quick Heal, and enterprise software licences with proper billing, verified keys, and smooth renewal support."
       breadcrumbs={[
         { label: "Home", href: "/" },
-        { label: "Services", href: "/#services" },
+        { label: "Services"},
         { label: "Software licences" },
       ]}
     />

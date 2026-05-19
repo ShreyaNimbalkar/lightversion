@@ -9,7 +9,7 @@ export default function WfhServiceHero() {
       description="Deploy consistent home-office technology across your organisation — hardware, connectivity, collaboration tools, and support documentation from a single Pune-based partner."
       breadcrumbs={[
         { label: "Home", href: "/" },
-        { label: "Services", href: "/#services" },
+        { label: "Services"},
         { label: "WFH service" },
       ]}
     />

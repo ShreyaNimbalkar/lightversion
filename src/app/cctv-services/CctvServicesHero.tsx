@@ -9,7 +9,7 @@ export default function CctvServicesHero() {
       description="Professional surveillance for offices, retail, healthcare, and industrial sites in Pune and PCMC — engineered for image quality, storage retention, and secure access without compromising your corporate network."
       breadcrumbs={[
         { label: "Home", href: "/" },
-        { label: "Services", href: "/#services" },
+        { label: "Services"},
         { label: "CCTV services" },
       ]}
     />
