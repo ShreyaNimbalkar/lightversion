@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import CatalogIcon from "@/components/CatalogIcon";
 import ProductDetailActions from "@/app/products/[slug]/ProductDetailActions";
+import ProductFeatureCards from "@/components/ProductFeatureCards";
 import PageServiceHero from "@/components/PageServiceHero";
 
 import { getProductPageContent } from "@/data/productPageContent";
@@ -17,26 +18,6 @@ function SpecCheckIcon({ className }: { className?: string }) {
       <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.998-9.997 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.998 9.997 9.998 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.206 9.997-36.204-.001z" />
     </svg>
   );
-}
-
-/** Turn highlight copy into centred “spec line” rows like a rental menu card. */
-function highlightFeatureLines(body: string): string[] {
-  const sentences = body
-    .split(/\.\s+/)
-    .map((s) => s.trim())
-    .filter(Boolean)
-    .map((s) => (s.endsWith(".") ? s : `${s}.`));
-  if (sentences.length >= 2) {
-    return sentences;
-  }
-  const clauses = body
-    .split(/[,;]\s+/)
-    .map((s) => s.trim())
-    .filter(Boolean);
-  if (clauses.length >= 2) {
-    return clauses;
-  }
-  return [body.trim()].filter(Boolean);
 }
 
 type Props = {
@@ -67,7 +48,7 @@ export default async function ProductDetailPage({ params }: Props) {
   }
 
   const { item, categoryTitle } = found;
-  const content = getProductPageContent(item);
+  const content = getProductPageContent(item, categoryTitle);
   const productLabel = `${categoryTitle}: ${item.name}`;
   const related = getRelatedCatalogItems(slug, 4);
   const heroDescription =
@@ -77,14 +58,32 @@ export default async function ProductDetailPage({ params }: Props) {
   return (
     <>
       <PageServiceHero
-        title={item.name}
-        description={heroDescription}
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Services", href: "/#services" },
-          { label: item.name },
-        ]}
-      />
+  title={item.name}
+  description={heroDescription}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/#services" },
+
+    // ADD THIS NEW BREADCRUMB
+    {
+      label: item.defaultInterest,
+      href:
+        item.defaultInterest === "Repair & rental"
+          ? "/services/repair-rental"
+          : item.defaultInterest === "Networking & cabling"
+          ? "/services/networking-solutions"
+          : item.defaultInterest === "CCTV / security"
+          ? "/services/cctv-services"
+          : item.defaultInterest === "Software licences"
+          ? "/services/software-licenses"
+          : item.defaultInterest === "WFH service"
+          ? "/services/wfh-service"
+          : "/services",
+    },
+
+    { label: item.name },
+  ]}
+/>
 
       <article className="relative min-w-0 overflow-hidden bg-section pb-16 pt-10 text-foreground sm:pb-20 sm:pt-12">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -142,52 +141,11 @@ export default async function ProductDetailPage({ params }: Props) {
           </div>
         </div>
 
-        <section className="mt-14 sm:mt-16" aria-labelledby="service-feature-cards-heading">
-          <h2 id="service-feature-cards-heading" className="sr-only">
-            Service feature highlights
-          </h2>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-            {content.highlights.map((card) => {
-              const lines = highlightFeatureLines(card.body);
-              return (
-                <div
-                  key={card.title}
-                  className="flex min-h-full flex-col overflow-hidden border border-foreground/10 bg-card shadow-md"
-                >
-                  <div className="h-2 shrink-0 bg-surface-nav" aria-hidden />
-                  <div className="relative flex flex-1 flex-col px-5 pb-6 pt-7 sm:px-7 sm:pb-7 sm:pt-8">
-                    <div
-                      className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand/20 via-transparent to-transparent opacity-80"
-                      aria-hidden
-                    />
-                    <h3 className="relative text-center text-lg font-bold leading-snug text-surface-nav sm:text-xl">
-                      {card.title}
-                    </h3>
-                    <ul className="relative mt-6 divide-y divide-brand/25 border-y border-brand/20">
-                      {lines.map((line) => (
-                        <li
-                          key={line}
-                          className="px-1 py-3 text-center text-sm leading-relaxed text-foreground/85 sm:py-3.5 sm:text-[0.9375rem]"
-                        >
-                          {line}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="relative mt-7 flex justify-center">
-                      <Link
-                        href="/contact"
-                        className="inline-flex min-h-[2.75rem] items-center justify-center border-2 border-brand bg-transparent px-6 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-brand transition hover:bg-brand/10 sm:px-8"
-                      >
-                        Request a quote
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
+        <ProductFeatureCards
+          productName={item.name}
+          defaultInterest={item.defaultInterest}
+          highlights={content.highlights}
+        />
 
         {related.length > 0 ? (
           <section className="mt-14 border-t border-foreground/10 pt-12 sm:mt-16 sm:pt-14" aria-labelledby="related-products-heading">

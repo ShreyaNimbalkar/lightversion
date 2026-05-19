@@ -1,5 +1,6 @@
 "use client";
 
+
 import { motion } from "framer-motion";
 
 import ServiceProductCatalog from "@/components/ServiceProductCatalog";
@@ -9,7 +10,7 @@ import { cctvCatalog } from "@/data/serviceProductLists";
 export default function CctvServicesBody() {
   return (
     <>
-      <section className="relative overflow-hidden bg-section py-24 sm:py-28">
+      {/* <section className="relative overflow-hidden bg-section py-24 sm:py-28">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-0 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
 
@@ -39,7 +40,7 @@ export default function CctvServicesBody() {
             </p>
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
       <ServiceProductCatalog
         id="product-catalog"
@@ -47,10 +48,10 @@ export default function CctvServicesBody() {
         title={
           <>
             Product catalogue
-            <span className="text-brand"> by category</span>
+            <span className="text-brand"> — all items</span>
           </>
         }
-        subtitle="Three cards per row on large screens: title, icon, and photo with an Enquiry button. Categories with more than three items use See more / See less."
+        subtitle="Cameras, recorders, door entry, and infrastructure — one list with pagination for larger catalogues."
         categories={cctvCatalog}
       />
     </>

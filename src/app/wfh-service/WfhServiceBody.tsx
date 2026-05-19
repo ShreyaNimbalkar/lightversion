@@ -1,5 +1,6 @@
 "use client";
 
+
 import { motion } from "framer-motion";
 
 import ServiceProductCatalog from "@/components/ServiceProductCatalog";
@@ -9,7 +10,7 @@ import { wfhCatalog } from "@/data/serviceProductLists";
 export default function WfhServiceBody() {
   return (
     <>
-      <section className="relative overflow-hidden bg-section py-24 sm:py-28">
+      {/* <section className="relative overflow-hidden bg-section py-24 sm:py-28">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-0 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:80px_80px]" />
@@ -38,7 +39,7 @@ export default function WfhServiceBody() {
             </p>
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
       <ServiceProductCatalog
         id="product-catalog"
@@ -46,10 +47,10 @@ export default function WfhServiceBody() {
         title={
           <>
             Product catalogue
-            <span className="text-brand"> by category</span>
+            <span className="text-brand"> — all items</span>
           </>
         }
-        subtitle="Browse kits for remote work. Each item includes specifications on its detail page and routes enquiries to our WFH team."
+        subtitle="Remote-work laptops, connectivity, and collaboration gear in a single grid."
         categories={wfhCatalog}
       />
     </>

@@ -20,6 +20,8 @@ export type EnquiryModalPayload = {
   mode: "quotation" | "enquiry";
   productContext?: string;
   defaultInterest?: string;
+  /** Opened from a plan card “Request a quote” on a product page */
+  fromPlanCard?: boolean;
 };
 
 type EnquiryModalContextValue = {
@@ -27,6 +29,7 @@ type EnquiryModalContextValue = {
   payload: EnquiryModalPayload;
   openQuotation: () => void;
   openEnquiry: (productContext: string, defaultInterest?: string) => void;
+  openProductQuote: (productContext: string, defaultInterest?: string) => void;
   close: () => void;
 };
 
@@ -54,13 +57,17 @@ function EnquiryModalShell() {
     };
   }, [open]);
 
-  const title =
-    payload.mode === "quotation"
+  const isPlanQuote = Boolean(payload.fromPlanCard && payload.productContext);
+
+  const title = isPlanQuote
+    ? "Request a quote"
+    : payload.mode === "quotation"
       ? "Request a quotation"
       : "Product enquiry";
 
-  const subtitle =
-    payload.mode === "quotation"
+  const subtitle = isPlanQuote
+    ? "Fill in your details for this plan. We confirm quantity, timeline, and GST before sending your quote."
+    : payload.mode === "quotation"
       ? "Same fields as our on-page form — we reply with scope questions and a GST-ready estimate."
       : "Tell us what you need for this product line. We route your enquiry to the right engineer.";
 
@@ -113,10 +120,11 @@ function EnquiryModalShell() {
 
               <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-6 sm:py-6">
                 <RequestQuotationForm
-                  key={`${payload.mode}-${payload.productContext ?? ""}`}
+                  key={`${payload.mode}-${payload.productContext ?? ""}-${payload.fromPlanCard ?? false}`}
                   mode={payload.mode}
                   productContext={payload.productContext}
                   defaultInterest={payload.defaultInterest}
+                  fromPlanCard={payload.fromPlanCard}
                 />
               </div>
             </div>
@@ -148,6 +156,20 @@ export function EnquiryModalProvider({
         mode: "enquiry",
         productContext,
         defaultInterest,
+        fromPlanCard: false,
+      });
+      setOpen(true);
+    },
+    []
+  );
+
+  const openProductQuote = useCallback(
+    (productContext: string, defaultInterest?: string) => {
+      setPayload({
+        mode: "enquiry",
+        productContext,
+        defaultInterest,
+        fromPlanCard: true,
       });
       setOpen(true);
     },
@@ -162,9 +184,10 @@ export function EnquiryModalProvider({
       payload,
       openQuotation,
       openEnquiry,
+      openProductQuote,
       close,
     }),
-    [open, payload, openQuotation, openEnquiry, close]
+    [open, payload, openQuotation, openEnquiry, openProductQuote, close]
   );
 
   return (

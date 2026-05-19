@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useState } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -76,17 +77,17 @@ export default function RepairRentalBody() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-section py-28 text-foreground">
+      {/* <section className="relative overflow-hidden bg-section py-28 text-foreground"> */}
         {/* GLOW */}
-        <div className="absolute inset-0 overflow-hidden">
+        {/* <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-0 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
 
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:80px_80px]" />
-        </div>
+        </div> */}
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> */}
           {/* HEADING */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -106,7 +107,7 @@ export default function RepairRentalBody() {
               Keep your team online with component-level repairs, fleet upgrades, and short-term device rental. Browse the
               catalogue below or send an enquiry for a tailored quotation.
             </p>
-          </motion.div>
+          </motion.div> */}
 
           {/* CARDS */}
           {/* <div className="mt-20 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
@@ -186,8 +187,8 @@ export default function RepairRentalBody() {
               </motion.div>
             ))}
           </div> */}
-        </div>
-      </section>
+        {/* </div> */}
+      {/* </section> */}
 
       <ServiceProductCatalog
         id="product-catalog"
@@ -195,10 +196,10 @@ export default function RepairRentalBody() {
         title={
           <>
             Product catalogue
-            <span className="text-brand"> by category</span>
+            <span className="text-brand"> — all items</span>
           </>
         }
-        subtitle="Three cards per row on large screens: title, icon, and photo with an Enquiry button. Categories with more than three items use See more / See less."
+        subtitle="Every repair and rental product in one grid. Pagination appears when there are more than twelve items."
         categories={repairRentalCatalog}
       />
 

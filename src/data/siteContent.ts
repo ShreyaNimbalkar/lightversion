@@ -1,4 +1,6 @@
-
+/**
+ * Marketing and page copy — import here to keep tone consistent sitewide.
+ */
 
 import { site } from "@/data/site";
 

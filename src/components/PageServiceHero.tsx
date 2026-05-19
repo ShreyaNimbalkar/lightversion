@@ -8,7 +8,7 @@ import PageHeroBreadcrumbs, { type PageHeroBreadcrumb } from "@/components/PageH
 
 export type { PageHeroBreadcrumb as PageServiceHeroBreadcrumb };
 
-export const PAGE_HERO_BACKGROUND = "/images/page-hero-bg.png";
+export const PAGE_HERO_BACKGROUND = "/header.jpg";
 
 export type PageServiceHeroProps = {
   title: string;

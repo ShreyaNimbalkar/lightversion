@@ -18,12 +18,14 @@ export type RequestQuotationFormProps = {
   mode?: "quotation" | "enquiry";
   defaultInterest?: string;
   productContext?: string;
+  fromPlanCard?: boolean;
 };
 
 export default function RequestQuotationForm({
   mode = "quotation",
   defaultInterest,
   productContext,
+  fromPlanCard = false,
 }: RequestQuotationFormProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -45,18 +47,24 @@ export default function RequestQuotationForm({
   useEffect(() => {
     if (productContext && mode === "enquiry" && !productSeedDone.current) {
       productSeedDone.current = true;
-      setMessage(`Enquiry regarding: ${productContext}\n\n`);
+      setMessage(
+        fromPlanCard
+          ? `Quote request for: ${productContext}\n\nQuantity / seats:\nDuration or timeline:\nSite location (Pune / PCMC):\n\n`
+          : `Enquiry regarding: ${productContext}\n\n`,
+      );
     }
-  }, [productContext, mode]);
+  }, [productContext, mode, fromPlanCard]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !phone.trim()) return;
 
     const subject =
-      mode === "enquiry" && productContext
-        ? encodeURIComponent(`Product enquiry — ${productContext}`)
-        : encodeURIComponent(`Quotation request — ${company || "Individual"}`);
+      fromPlanCard && productContext
+        ? encodeURIComponent(`Quote request — ${productContext}`)
+        : mode === "enquiry" && productContext
+          ? encodeURIComponent(`Product enquiry — ${productContext}`)
+          : encodeURIComponent(`Quotation request — ${company || "Individual"}`);
 
     const bodyLines = [
       `Name: ${name}`,
@@ -186,7 +194,7 @@ export default function RequestQuotationForm({
           htmlFor="rq-message"
           className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-foreground/70"
         >
-          {mode === "enquiry" ? "Your enquiry" : "Project details"}
+          {fromPlanCard ? "Quote details" : mode === "enquiry" ? "Your enquiry" : "Project details"}
         </label>
         <textarea
           id="rq-message"
@@ -195,9 +203,11 @@ export default function RequestQuotationForm({
           onChange={(e) => setMessage(e.target.value)}
           className="w-full resize-y rounded-lg border border-foreground/15 bg-card px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
           placeholder={
-            mode === "enquiry"
-              ? "Quantity, timeline, site location, or part numbers if known."
-              : "Sites, timelines, brands, approximate seats — helps us respond with a realistic estimate."
+            fromPlanCard
+              ? "Number of units, rental period, delivery address, or any add-ons needed."
+              : mode === "enquiry"
+                ? "Quantity, timeline, site location, or part numbers if known."
+                : "Sites, timelines, brands, approximate seats — helps us respond with a realistic estimate."
           }
         />
       </div>
@@ -211,7 +221,13 @@ export default function RequestQuotationForm({
           type="submit"
           className="inline-flex h-11 shrink-0 items-center justify-center rounded-lg bg-brand px-8 text-sm font-semibold text-white shadow-md transition-colors duration-200 hover:bg-brand-hover"
         >
-          {sent ? "Open email client again" : mode === "enquiry" ? "Submit enquiry" : "Submit request"}
+          {sent
+            ? "Open email client again"
+            : fromPlanCard
+              ? "Send quote request"
+              : mode === "enquiry"
+                ? "Submit enquiry"
+                : "Submit request"}
         </button>
       </div>
 

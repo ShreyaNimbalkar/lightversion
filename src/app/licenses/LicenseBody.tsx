@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useState } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,6 +10,7 @@ import { useEnquiryModal } from "@/components/EnquiryModalProvider";
 import ServiceProductCatalog from "@/components/ServiceProductCatalog";
 
 import { licenseCatalog } from "@/data/serviceProductLists";
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -77,17 +79,17 @@ export default function LicenseBody() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-section py-28">
+      {/* <section className="relative overflow-hidden bg-section py-28"> */}
         {/* GLOW */}
-        <div className="absolute inset-0 overflow-hidden">
+        {/* <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-0 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
 
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:80px_80px]" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> */}
           {/* HEADING */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 35 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -109,7 +111,7 @@ export default function LicenseBody() {
               IT lead see the same paper trail. We only quote SKUs we can fulfil through
               proper distribution.
             </p>
-          </motion.div>
+          </motion.div> */}
 
           {/* CARDS */}
           {/* <div className="mt-20 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
@@ -188,8 +190,8 @@ export default function LicenseBody() {
               </motion.div>
             ))}
           </div> */}
-        </div>
-      </section>
+        {/* </div>
+      </section> */}
 
       <ServiceProductCatalog
         id="product-catalog"
@@ -197,10 +199,10 @@ export default function LicenseBody() {
         title={
           <>
             Product catalogue
-            <span className="text-brand"> by product</span>
+            <span className="text-brand"> — all items</span>
           </>
         }
-        subtitle="Three cards per row on large screens: title, icon, and photo with an Enquiry button. Extra licence lines use See more / See less like repair and networking."
+        subtitle="Microsoft, Tally, endpoint security, and Adobe lines in one place."
         categories={licenseCatalog}
       />
 

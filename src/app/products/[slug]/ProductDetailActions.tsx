@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function ProductDetailActions({ item, productLabel }: Props) {
-  const { openEnquiry, openQuotation } = useEnquiryModal();
+  const { openEnquiry, openProductQuote } = useEnquiryModal();
 
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -28,7 +28,7 @@ export default function ProductDetailActions({ item, productLabel }: Props) {
 
       <button
         type="button"
-        onClick={() => openQuotation()}
+        onClick={() => openProductQuote(productLabel, item.defaultInterest)}
         className="inline-flex min-h-[2.75rem] flex-1 items-center justify-center rounded-xl border border-foreground/15 bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition hover:border-brand hover:text-brand sm:min-w-[10rem] sm:flex-none"
       >
         Request quotation
