@@ -5,11 +5,16 @@ import PageServiceHero from "@/components/PageServiceHero";
 export default function CctvServicesHero() {
   return (
     <PageServiceHero
+      variant="immersive"
+      accent="slate"
+      showEnquiryCta
+      ctaLabel="Browse categories"
+      ctaHref="#product-catalog"
       title="CCTV services designed for accountability."
-      description="Professional surveillance for offices, retail, healthcare, and industrial sites in Pune and PCMC — engineered for image quality, storage retention, and secure access without compromising your corporate network."
+      description="Surveillance for offices, retail, healthcare, and industrial sites in Pune and PCMC — image quality, retention, and secure access without compromising your network."
       breadcrumbs={[
         { label: "Home", href: "/" },
-        { label: "Services"},
+        { label: "Services", href: "/#services" },
         { label: "CCTV services" },
       ]}
     />

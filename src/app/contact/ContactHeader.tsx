@@ -7,11 +7,15 @@ import { site } from "@/data/site";
 export default function ContactHeader() {
   return (
     <PageServiceHero
+      variant="immersive"
+      accent="brand"
+      showEnquiryCta
+      ctaLabel="View locations"
+      ctaHref="#locations"
       title="Call, email, or visit either Pune location."
-      description={`Use ${site.phoneLine} for the fastest triage, or write to ${site.email}. Prefer to walk in? Navi Peth is suited for sales and quick drops; Manikbaug handles dispatch and workshop intake. ${site.workingHours}`}
+      description={`${site.phoneLine} · ${site.email}. Navi Peth for walk-in sales; Manikbaug for workshop and repairs. ${site.workingHours}`}
       breadcrumbs={[
         { label: "Home", href: "/" },
-        // { label: "Services", href: "/#services" },
         { label: "Contact" },
       ]}
     />

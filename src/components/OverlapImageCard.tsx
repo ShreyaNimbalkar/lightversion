@@ -7,9 +7,8 @@ import type { ReactNode } from "react";
 type Props = {
   image: string;
   imageAlt: string;
-  eyebrow: string;
   title: string;
-  description?: string;
+  description?: ReactNode;
   footer: ReactNode;
   className?: string;
 };
@@ -20,7 +19,6 @@ type Props = {
 export default function OverlapImageCard({
   image,
   imageAlt,
-  // eyebrow,
   title,
   description,
   footer,
@@ -41,19 +39,14 @@ export default function OverlapImageCard({
         </div>
       </div>
 
-      <div className="relative z-10 -mt-11 mx-2 flex h-[240px] flex-col rounded-2xl border border-foreground/10 bg-card px-4 pb-4 pt-3 shadow-[0_18px_40px_-12px_rgba(30,42,59,0.25)] dark:shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)] sm:-mt-12 sm:mx-3 sm:h-[180px] sm:rounded-[1.35rem] sm:px-5 sm:pb-5 sm:pt-4">
-        {/* <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand sm:text-[11px]">{eyebrow}</p> */}
-        <h3 className="mt-4 line-clamp-2 min-h-[2.5rem] break-words text-base font-bold leading-snug tracking-tight text-foreground sm:min-h-[1rem] sm:text-lg">
+      <div className="relative z-10 -mt-9 mx-1.5 flex flex-col rounded-xl border border-foreground/10 bg-card px-3.5 pb-3.5 pt-2.5 shadow-[0_18px_40px_-12px_rgba(30,42,59,0.25)] dark:shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)] sm:-mt-12 sm:mx-3 sm:rounded-[1.35rem] sm:px-5 sm:pb-5 sm:pt-4">
+        <h3 className="line-clamp-2 break-words text-sm font-bold leading-snug tracking-tight text-foreground sm:text-lg">
           {title}
         </h3>
-        {/* {description ? (
-          <p className="mt-2 line-clamp-3 min-h-[3.75rem] text-xs leading-relaxed text-foreground/65 sm:min-h-[1rem] sm:text-sm">
-            {description}
-          </p>
-        ) : (
-          <div className="mt-2 min-h-[3.75rem] sm:min-h-[4rem]" aria-hidden />
-        )} */}
-        <div className="mt-auto pt-4">{footer}</div>
+        {description ? (
+          <div className="mt-2 text-xs leading-relaxed text-foreground/65 sm:text-sm">{description}</div>
+        ) : null}
+        <div className="mt-3">{footer}</div>
       </div>
     </article>
   );

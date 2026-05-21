@@ -5,11 +5,16 @@ import PageServiceHero from "@/components/PageServiceHero";
 export default function NetworkingHero() {
   return (
     <PageServiceHero
+      variant="immersive"
+      accent="sky"
+      showEnquiryCta
+      ctaLabel="Browse categories"
+      ctaHref="#product-catalog"
       title="Networking solutions built for reliability."
-      description="End-to-end infrastructure for Pune offices: cabling, switching, Wi‑Fi, storage, voice, and access control — with labelled ports, test records, and as-built documentation your IT team can maintain."
+      description="Cabling, switching, Wi‑Fi, NAS, voice, and access control for Pune offices — labelled ports, test records, and documentation your IT team can maintain."
       breadcrumbs={[
         { label: "Home", href: "/" },
-        { label: "Services"},
+        { label: "Services", href: "/#services" },
         { label: "Networking" },
       ]}
     />

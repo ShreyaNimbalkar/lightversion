@@ -1,12 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
-import FloatingThemeToggle from "@/components/FloatingThemeToggle";
+import SiteChrome from "@/components/SiteChrome";
 
 import { site } from "@/data/site";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -15,7 +19,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.brandName}`,
   },
   description:
-    "Soft Link Computers — Pune IT services since 2012: repair & rental, networking, CCTV, WFH kits, and genuine software licensing. GST-ready quotes and documented project handovers.",
+    "Soft Link Computers Pune — laptop & computer repair, rental, networking, CCTV, WFH setups, and genuine software licences. 1,000+ customers since 2012. Two Pune locations. GST-ready quotes.",
   keywords: [
     "Soft Link Computers Pune",
     "laptop repair Pune",
@@ -37,15 +41,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body className="min-h-screen antialiased">
         <ThemeProviderWrapper>
-          <Navbar />
-
-          <FloatingThemeToggle />
-
-          <main className="min-w-0 overflow-x-hidden bg-section pt-[4.25rem] text-foreground transition-colors sm:pt-20">
-            {children}
-          </main>
-
-          <Footer />
+          <SiteChrome>{children}</SiteChrome>
         </ThemeProviderWrapper>
       </body>
     </html>

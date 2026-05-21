@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,11 +11,13 @@ import {
   faKey,
   faLaptop,
   faNetworkWired,
+  faPhone,
   faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+
 import { useEnquiryModal } from "@/components/EnquiryModalProvider";
-import { site } from "@/data/site";
+import { site, siteTelHref } from "@/data/site";
 import { siteContent } from "@/data/siteContent";
 
 const OFFERING_ICONS: IconDefinition[] = [
@@ -24,161 +28,227 @@ const OFFERING_ICONS: IconDefinition[] = [
   faKey,
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
+const HERO_IMAGE = "/images/services/header.jpg";
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: -28 },
+  show: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.55, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, scale: 0.96 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
+const cardStagger = {
+  hidden: { opacity: 0, y: 32 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.45, delay: 0.35 + i * 0.07, ease: [0.22, 1, 0.36, 1] as const },
   }),
 };
+
+/** Middle card highlighted by default — core repair line */
+const DEFAULT_FEATURED = 0;
 
 export default function HeroSection() {
   const { openQuotation } = useEnquiryModal();
   const { hero } = siteContent;
+  const [featured, setFeatured] = useState(DEFAULT_FEATURED);
 
   return (
-    <section className="relative overflow-hidden border-b border-foreground/8 bg-section">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="pointer-events-none absolute inset-0"
-        aria-hidden
-      >
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,color-mix(in_srgb,var(--surface-nav)_6%,transparent)_0%,transparent_42%)]" />
-        <div className="absolute -right-32 top-0 h-[420px] w-[420px] rounded-full bg-brand/[0.07] blur-3xl" />
-        <div className="absolute -left-24 bottom-0 h-[320px] w-[320px] rounded-full bg-accent/[0.08] blur-3xl" />
-      </motion.div>
+    <section className="relative border-b border-foreground/10 bg-section pb-6 pt-3 sm:pb-12 sm:pt-6 lg:pb-16">
+      <div className="page-container">
+        {/* Dark rounded panel — SoluTek-style hero shell */}
+        <div className="relative overflow-hidden rounded-2xl bg-[#0a1220] shadow-2xl shadow-surface-deep/30 sm:rounded-[2.25rem] lg:overflow-visible lg:rounded-[3rem]">
+          {/* Circuit / tech pattern */}
+          <div
+            className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-[0.14]"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.5'%3E%3Cpath d='M0 30h20M40 30h20M30 0v20M30 40v20'/%3E%3Ccircle cx='30' cy='30' r='2' fill='%23ffffff'/%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+            aria-hidden
+          />
+          <div className="pointer-events-none absolute -right-24 top-0 h-96 w-96 rounded-full bg-brand/20 blur-3xl" aria-hidden />
+          <div className="pointer-events-none absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-accent/10 blur-3xl" aria-hidden />
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 lg:px-8 lg:pb-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <motion.p
-            custom={0}
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            className="inline-flex items-center rounded-full border border-foreground/10 bg-card px-4 py-1.5 text-xs font-semibold tracking-wide text-foreground/80 shadow-sm"
-          >
-            {hero.badge}
-          </motion.p>
-
-          <motion.h1
-            custom={1}
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            className="mt-6 text-3xl font-bold leading-[1.12] tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-[3.25rem]"
-          >
-            {hero.headline}
-            <span className="mt-2 block text-brand">{hero.titleAccent}</span>
-          </motion.h1>
-
-          <motion.p
-            custom={2}
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-foreground/70 sm:text-lg"
-          >
-            {hero.description}
-          </motion.p>
-
-          <motion.div
-            custom={3}
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
-          >
-            <button
-              type="button"
-              onClick={() => openQuotation()}
-              className="inline-flex h-12 min-w-[11rem] items-center justify-center gap-2 rounded-lg bg-brand px-7 text-sm font-semibold text-white shadow-md shadow-brand/25 transition hover:bg-brand-hover"
+          <div className="relative grid min-h-0 items-center gap-6 px-4 pb-6 pt-8 max-lg:grid-cols-1 sm:min-h-[400px] sm:gap-8 sm:px-10 sm:pb-8 sm:pt-12 lg:min-h-[460px] lg:grid-cols-2 lg:gap-4 lg:px-12 lg:pb-36 lg:pt-14">
+            {/* Left — copy */}
+            <motion.div
+              initial="hidden"
+              animate="show"
+              variants={{ show: { transition: { staggerChildren: 0.06 } } }}
+              className="relative z-10 max-w-xl"
             >
-              {hero.ctaPrimary}
-              <FontAwesomeIcon icon={faArrowRight} className="text-xs" aria-hidden />
-            </button>
-            <Link
-              href="#services"
-              className="inline-flex h-12 min-w-[11rem] items-center justify-center rounded-lg border border-foreground/15 bg-card px-7 text-sm font-semibold text-foreground transition hover:border-brand/40 hover:text-brand"
+              <motion.span
+                custom={0}
+                variants={fadeLeft}
+                className="inline-flex items-center gap-2 rounded-full border border-brand/50 bg-brand/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-brand"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden />
+                {site.brandName}
+              </motion.span>
+
+              <motion.h1
+                custom={1}
+                variants={fadeLeft}
+                className="mt-4 text-[1.65rem] font-bold leading-[1.15] tracking-tight text-white sm:mt-6 sm:text-3xl md:text-[2.65rem] lg:text-5xl"
+              >
+                The expertise behind
+                <span className="mt-1 block text-white/95">IT services in Pune.</span>
+              </motion.h1>
+
+              <motion.p custom={2} variants={fadeLeft} className="mt-5 max-w-md text-sm leading-relaxed text-white/75 sm:text-base">
+                {hero.description}
+              </motion.p>
+
+              <motion.div custom={3} variants={fadeLeft} className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+                <button
+                  type="button"
+                  onClick={() => openQuotation()}
+                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-brand/30 transition hover:bg-brand-hover sm:w-auto sm:px-8"
+                >
+                  {hero.ctaPrimary}
+                  <FontAwesomeIcon icon={faArrowRight} className="text-xs" aria-hidden />
+                </button>
+                <a
+                  href={siteTelHref(site.phones[0].tel)}
+                  className="group inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-wide text-white/90 transition hover:text-white"
+                >
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-brand text-white shadow-md transition group-hover:scale-105">
+                    <FontAwesomeIcon icon={faPhone} className="text-sm" aria-hidden />
+                  </span>
+                  Call now
+                </a>
+              </motion.div>
+
+            </motion.div>
+
+            {/* Right — image + decorative scallop */}
+            <motion.div
+              variants={fadeRight}
+              initial="hidden"
+              animate="show"
+              className="relative z-10 mx-auto flex w-full max-w-[220px] items-end justify-center sm:max-w-[280px] lg:mx-0 lg:max-w-[380px] lg:justify-end"
             >
-              {hero.ctaSecondary}
-            </Link>
-          </motion.div>
+              {/* Scalloped / flower outline */}
+              <div
+                className="pointer-events-none absolute left-1/2 top-1/2 h-[min(100%,420px)] w-[min(90%,380px)] -translate-x-1/2 -translate-y-[45%] opacity-[0.12]"
+                aria-hidden
+              >
+                <svg viewBox="0 0 200 200" className="h-full w-full text-white" fill="currentColor">
+                  <path d="M100 8c8 28 28 48 56 56-28 8-48 28-56 56-8-28-28-48-56-56 28-8 48-28 56-56 8 28 28 48 56 56 28 8 48-28 56-56-28-8-48-28-56-56z" />
+                </svg>
+              </div>
+
+              <div className="relative aspect-[4/5] w-full">
+                <Image
+                  src={HERO_IMAGE}
+                  alt={`${site.brandName} engineer supporting business IT`}
+                  fill
+                  priority
+                  className="object-cover object-top"
+                  sizes="(max-width: 1024px) 60vw, 380px"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a1220] via-transparent to-transparent lg:bg-gradient-to-l lg:from-[#0a1220] lg:via-transparent lg:to-transparent" />
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Service cards — stacked on mobile, overlapping on large screens */}
+          <div
+            id="services"
+            className="scroll-mt-28 border-t border-white/10 px-4 py-5 sm:px-8 sm:py-6 lg:absolute lg:bottom-0 lg:left-0 lg:right-0 lg:z-20 lg:translate-y-[42%] lg:border-t-0 lg:px-10 lg:py-0"
+          >
+            <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
+              {hero.offerings.map((item, index) => {
+                const isFeatured = featured === index;
+                const Icon = OFFERING_ICONS[index];
+
+                return (
+                  <motion.div
+                    key={item.href}
+                    custom={index}
+                    variants={cardStagger}
+                    initial="hidden"
+                    animate="show"
+                    className="min-w-0"
+                    onMouseEnter={() => setFeatured(index)}
+                    onFocus={() => setFeatured(index)}
+                  >
+                    <Link
+                      href={item.href}
+                      className={`group flex h-full min-h-[120px] flex-col rounded-xl border p-3 shadow-lg transition-all duration-300 sm:min-h-[140px] sm:rounded-2xl sm:p-4 lg:min-h-[155px] lg:p-5 ${
+                        isFeatured
+                          ? "border-brand bg-brand text-white shadow-brand/25"
+                          : "border-foreground/10 bg-card text-foreground hover:border-brand/30 hover:shadow-xl"
+                      }`}
+                    >
+                      <div
+                        className={`flex h-11 w-11 items-center justify-center rounded-xl transition ${
+                          isFeatured
+                            ? "bg-white/15 text-white"
+                            : "bg-brand/10 text-brand group-hover:bg-brand group-hover:text-white"
+                        }`}
+                      >
+                        <FontAwesomeIcon icon={Icon} className="text-lg" aria-hidden />
+                      </div>
+                      <h3
+                        className={`mt-4 text-sm font-bold leading-snug sm:text-base ${
+                          isFeatured ? "text-white" : "text-foreground"
+                        }`}
+                      >
+                        {item.title}
+                      </h3>
+                      <p
+                        className={`mt-2 line-clamp-2 flex-1 text-xs leading-relaxed ${
+                          isFeatured ? "text-white/85" : "text-foreground/60"
+                        }`}
+                      >
+                        {item.desc}
+                      </p>
+                      <span
+                        className={`mt-3 inline-flex items-center gap-1 text-xs font-semibold ${
+                          isFeatured ? "text-white" : "text-brand"
+                        }`}
+                      >
+                        Explore
+                        <FontAwesomeIcon icon={faArrowRight} className="text-[10px]" />
+                      </span>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
-        <motion.div
-          custom={4}
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          className="mt-14 sm:mt-16"
-        >
-          <div className="flex flex-col items-center gap-2 text-center sm:flex-row sm:justify-between sm:text-left">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">What we do</p>
-              <h2 className="mt-1 text-xl font-bold text-foreground sm:text-2xl">{hero.offeringsLabel}</h2>
-            </div>
-            <p className="max-w-md text-sm text-foreground/60">
-              Five dedicated practices — each with a product catalogue and specialist engineers.
-            </p>
-          </div>
-
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
-            {hero.offerings.map((item, index) => (
-              <motion.div
-                key={item.href}
-                custom={5 + index}
-                variants={fadeUp}
-                initial="hidden"
-                animate="show"
-              >
-                <Link
-                  href={item.href}
-                  className="group flex h-full flex-col rounded-xl border border-foreground/10 bg-card p-5 shadow-sm transition hover:border-brand/35 hover:shadow-md"
-                >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand/10 text-brand transition group-hover:bg-brand group-hover:text-white">
-                    <FontAwesomeIcon icon={OFFERING_ICONS[index]} className="text-base" aria-hidden />
-                  </div>
-                  <h3 className="mt-4 text-sm font-bold text-foreground">{item.title}</h3>
-                  <p className="mt-1.5 flex-1 text-xs leading-relaxed text-foreground/65">{item.desc}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-brand">
-                    Learn more
-                    <FontAwesomeIcon
-                      icon={faArrowRight}
-                      className="text-[10px] transition group-hover:translate-x-0.5"
-                      aria-hidden
-                    />
-                  </span>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div
-          custom={11}
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          className="mt-12 rounded-xl border border-foreground/10 bg-card/80 px-4 py-6 backdrop-blur-sm sm:px-8"
-        >
-          <div className="grid gap-6 sm:grid-cols-3 sm:gap-4">
-            {hero.trustStats.map((stat) => (
+        {/* Trust strip — extra top margin on lg for overlapping cards */}
+        <div className="mt-6 sm:mt-8 lg:mt-[9rem]">
+          <div className="grid grid-cols-2 gap-2 rounded-2xl border border-foreground/10 bg-card p-3 sm:grid-cols-4 sm:gap-3 sm:p-5">
+            {hero.trustStats.map((stat, i) => (
               <div
                 key={stat.label}
-                className="text-center sm:border-r sm:border-foreground/10 sm:last:border-r-0"
+                className={`text-center ${i < hero.trustStats.length - 1 ? "sm:border-r sm:border-foreground/10" : ""}`}
               >
-                <p className="text-2xl font-bold tabular-nums text-brand sm:text-3xl">{stat.value}</p>
-                <p className="mt-1 text-xs font-medium leading-snug text-foreground/65 sm:text-sm">{stat.label}</p>
+                <p className="text-lg font-bold tabular-nums text-brand sm:text-xl">{stat.value}</p>
+                <p className="mt-0.5 text-[10px] font-medium leading-snug text-foreground/55 sm:text-xs">{stat.label}</p>
               </div>
             ))}
           </div>
-          <p className="mt-5 border-t border-foreground/10 pt-5 text-center text-xs text-foreground/55 sm:text-sm">
+          <p className="mt-3 text-center text-xs text-foreground/50">
             {site.brandName} · {site.serviceArea}
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

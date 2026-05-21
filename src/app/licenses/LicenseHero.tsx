@@ -5,11 +5,16 @@ import PageServiceHero from "@/components/PageServiceHero";
 export default function LicenseHero() {
   return (
     <PageServiceHero
+      variant="immersive"
+      accent="sky"
+      showEnquiryCta
+      ctaLabel="Browse categories"
+      ctaHref="#product-catalog"
       title="Software licensing made simple for businesses."
-      description="Microsoft 365, Windows, Tally Prime, Quick Heal, and enterprise software licences with proper billing, verified keys, and smooth renewal support."
+      description="Microsoft, Adobe, Autodesk, Oracle, Corel, Apple, JetBrains, IBM, and antivirus suites — authorised licensing, GST-ready quotes, activation help, and renewal tracking."
       breadcrumbs={[
         { label: "Home", href: "/" },
-        { label: "Services"},
+        { label: "Services", href: "/#services" },
         { label: "Software licences" },
       ]}
     />

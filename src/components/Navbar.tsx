@@ -241,10 +241,20 @@ export default function Navbar() {
             </div>
 
             {/* ================= MOBILE ACTIONS ================= */}
-            <div className="flex lg:hidden items-center gap-3 relative z-50">
+            <div className="flex lg:hidden items-center gap-2 relative z-50 sm:gap-3">
+              <a
+                href={siteTelHref(site.phones[0].tel)}
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-brand/90 text-white shadow-sm transition hover:bg-brand"
+                aria-label={`Call ${site.phones[0].display}`}
+              >
+                <FontAwesomeIcon icon={faPhone} className="text-sm" />
+              </a>
               <button
+                type="button"
                 onClick={() => setMobileMenu(!mobileMenu)}
                 className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-surface-deep/60 text-white shadow-sm"
+                aria-expanded={mobileMenu}
+                aria-label={mobileMenu ? "Close menu" : "Open menu"}
               >
                 <FontAwesomeIcon
                   icon={mobileMenu ? faXmark : faBars}
@@ -279,12 +289,12 @@ export default function Navbar() {
                 duration: 0.22,
                 ease: "easeOut",
               }}
-              className="fixed top-0 right-0 z-50 h-screen w-[88%] max-w-[380px] overflow-hidden lg:hidden"
+              className="fixed top-0 right-0 z-50 flex h-[100dvh] max-h-[100dvh] w-[min(100%,20rem)] max-w-[380px] flex-col overflow-hidden lg:hidden"
             >
-              <div className="relative flex h-full flex-col bg-surface-deep text-white border-l border-white/10 shadow-2xl">
+              <div className="relative flex h-full min-h-0 flex-col bg-surface-deep text-white border-l border-white/10 shadow-2xl safe-top">
                 
                 {/* TOP SECTION */}
-                <div className="relative px-6 pt-7 pb-6 border-b border-white/10 bg-gradient-to-br from-brand/10 to-transparent">
+                <div className="relative shrink-0 px-5 pt-6 pb-5 border-b border-white/10 bg-gradient-to-br from-brand/10 to-transparent sm:px-6 sm:pt-7 sm:pb-6">
                   <div className="flex items-center justify-between">
                     
                     <Link
@@ -323,7 +333,7 @@ export default function Navbar() {
                 </div>
 
                 {/* NAVIGATION */}
-                <div className="flex-1 overflow-y-auto px-6 py-6">
+                <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6 sm:py-6 safe-bottom">
                   <div className="flex flex-col gap-3">
                     {navLinks.map((link) => (
                       <div key={link.name}>

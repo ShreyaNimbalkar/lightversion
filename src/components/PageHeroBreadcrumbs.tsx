@@ -7,32 +7,42 @@ export type PageHeroBreadcrumb = { label: string; href?: string };
 type PageHeroBreadcrumbsProps = {
   items: PageHeroBreadcrumb[];
   className?: string;
+  /** No card bar — for editorial heroes */
+  bare?: boolean;
 };
 
 /** White bar breadcrumb row — Home > Services > Current page */
-export default function PageHeroBreadcrumbs({ items, className = "" }: PageHeroBreadcrumbsProps) {
+export default function PageHeroBreadcrumbs({ items, className = "", bare = false }: PageHeroBreadcrumbsProps) {
   return (
-    <div className={`border-b border-foreground/10 bg-card ${className}`.trim()}>
+    <div
+      className={
+        bare
+          ? className
+          : `border-b border-foreground/10 bg-card ${className}`.trim()
+      }
+    >
       <nav
         aria-label="Breadcrumb"
-        className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-2 gap-y-1 px-4 py-3 text-xs sm:px-6 sm:text-sm lg:px-8"
+        className="scroll-x-touch mx-auto flex max-w-7xl items-center gap-x-2 whitespace-nowrap px-4 py-2.5 text-[11px] sm:flex-wrap sm:whitespace-normal sm:px-6 sm:py-3 sm:text-sm lg:px-8"
       >
         {items.map((crumb, i) => (
           <Fragment key={`${crumb.label}-${i}`}>
             {i > 0 ? (
-              <span className="select-none font-medium text-foreground/35" aria-hidden>
+              <span className="shrink-0 select-none font-medium text-foreground/35" aria-hidden>
                 &gt;
               </span>
             ) : null}
             {crumb.href ? (
               <Link
                 href={crumb.href}
-                className="font-medium text-[#3d5a80] transition hover:text-brand dark:text-accent"
+                className="shrink-0 font-medium text-brand-deep/80 transition hover:text-brand sm:max-w-none"
               >
                 {crumb.label}
               </Link>
             ) : (
-              <span className="font-semibold text-[#2c3e58] dark:text-foreground">{crumb.label}</span>
+              <span className="max-w-[min(12rem,45vw)] truncate font-semibold text-foreground sm:max-w-none sm:whitespace-normal">
+                {crumb.label}
+              </span>
             )}
           </Fragment>
         ))}

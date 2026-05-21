@@ -21,6 +21,12 @@ import {
   faFile,
   faImage,
   faGlobe,
+  faDatabase,
+  faCompassDrafting,
+  faPaintbrush,
+  faAppleWhole,
+  faCode,
+  faBuilding,
 } from "@fortawesome/free-solid-svg-icons";
 
 import type { CatalogIconKey } from "@/data/serviceProductLists";
@@ -43,6 +49,12 @@ const ICON_MAP: Record<CatalogIconKey, IconDefinition> = {
   office: faFile,
   adobe: faImage,
   globe: faGlobe,
+  oracle: faDatabase,
+  autodesk: faCompassDrafting,
+  corel: faPaintbrush,
+  apple: faAppleWhole,
+  jetbrains: faCode,
+  ibm: faBuilding,
 };
 
 export default function CatalogIcon({

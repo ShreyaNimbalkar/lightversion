@@ -4,6 +4,8 @@ import type { ProductHighlightCard, ServiceCatalogItem } from "@/data/servicePro
 export const COMPUTER_RENTAL_HIGHLIGHTS: ProductHighlightCard[] = [
   {
     title: "Core i5 Computer on Rent",
+    price: "₹ 600 / day",
+    priceNote: "Weekly & monthly rates available · GST extra",
     features: [
       "Intel Core i5 Processor",
       "4 - 8 GB RAM",
@@ -15,6 +17,8 @@ export const COMPUTER_RENTAL_HIGHLIGHTS: ProductHighlightCard[] = [
   },
   {
     title: "Core i7 Computer on Rent",
+    price: "₹ 850 / day",
+    priceNote: "Graphics-ready builds · GST extra",
     features: [
       "Intel Core i7 Processor",
       "8 - 16 GB RAM",
@@ -26,6 +30,8 @@ export const COMPUTER_RENTAL_HIGHLIGHTS: ProductHighlightCard[] = [
   },
   {
     title: "Dual Core Computer on Rent",
+    price: "₹ 450 / day",
+    priceNote: "Training & backup desks · GST extra",
     features: [
       "Intel Dual Core Processor",
       "2 - 4 GB RAM",
@@ -37,6 +43,8 @@ export const COMPUTER_RENTAL_HIGHLIGHTS: ProductHighlightCard[] = [
   },
   {
     title: "Core i3 Computer on Rent",
+    price: "₹ 500 / day",
+    priceNote: "Bulk batches welcome · GST extra",
     features: [
       "Intel Core i3 Processor",
       "4 - 8 GB RAM",
@@ -51,6 +59,8 @@ export const COMPUTER_RENTAL_HIGHLIGHTS: ProductHighlightCard[] = [
 export const LAPTOP_RENTAL_HIGHLIGHTS: ProductHighlightCard[] = [
   {
     title: "Dell Latitude on Rent",
+    price: "₹ 800 / day",
+    priceNote: "Weekly ₹ 4,200 · monthly on request",
     features: [
       "Intel Core i5 / i7",
       "8 - 16 GB RAM",
@@ -62,6 +72,8 @@ export const LAPTOP_RENTAL_HIGHLIGHTS: ProductHighlightCard[] = [
   },
   {
     title: "HP ProBook on Rent",
+    price: "₹ 750 / day",
+    priceNote: "Imaging & dock optional · GST extra",
     features: [
       "Intel Core i5 / i7",
       "8 - 16 GB RAM",
@@ -73,6 +85,8 @@ export const LAPTOP_RENTAL_HIGHLIGHTS: ProductHighlightCard[] = [
   },
   {
     title: "Lenovo ThinkPad on Rent",
+    price: "₹ 850 / day",
+    priceNote: "Docking station optional · GST extra",
     features: [
       "Intel Core i5 / i7",
       "8 - 16 GB RAM",
@@ -84,6 +98,8 @@ export const LAPTOP_RENTAL_HIGHLIGHTS: ProductHighlightCard[] = [
   },
   {
     title: "Acer TravelMate on Rent",
+    price: "₹ 650 / day",
+    priceNote: "Ideal for training batches · GST extra",
     features: [
       "Intel Core i3 / i5",
       "4 - 8 GB RAM",
@@ -803,8 +819,8 @@ const CATEGORY_HIGHLIGHTS: Record<string, ProductHighlightCard[]> = {
       ],
     },
   ],
-  "Microsoft & productivity": M365_LICENSE_HIGHLIGHTS,
-  "Accounting & security software": TALLY_HIGHLIGHTS,
+  Microsoft: M365_LICENSE_HIGHLIGHTS,
+  Antivirus: QUICK_HEAL_HIGHLIGHTS,
 };
 
 const LAPTOP_RENTAL_SLUGS = new Set(["business-laptop-rental", "wfh-laptop-packages"]);
@@ -816,12 +832,28 @@ const SLUG_HIGHLIGHTS: Record<string, ProductHighlightCard[]> = {
   "wfh-desktop-setups": COMPUTER_RENTAL_HIGHLIGHTS,
   "microsoft-365": M365_LICENSE_HIGHLIGHTS,
   "microsoft-teams": M365_LICENSE_HIGHLIGHTS,
-  "microsoft-office": OFFICE_LICENSE_HIGHLIGHTS,
-  "windows-11-pro": WINDOWS_LICENSE_HIGHLIGHTS,
+  "windows-11": WINDOWS_LICENSE_HIGHLIGHTS,
   "quick-heal-total-security": QUICK_HEAL_HIGHLIGHTS,
-  "tally-prime": TALLY_HIGHLIGHTS,
-  "vmware-workstation-pro": VMWARE_HIGHLIGHTS,
-  "acronis-cyber-protect": ACRONIS_HIGHLIGHTS,
+  "adobe-creative-cloud": [
+    {
+      title: "Creative Cloud — All Apps (individual)",
+      price: "Quote on request",
+      priceNote: "(GST Extra · annual or monthly)",
+      features: ["Full desktop app suite", "100 GB cloud storage", "Adobe Fonts", "Portfolio website", "Priority support options"],
+    },
+    {
+      title: "Creative Cloud — Teams",
+      price: "Quote on request",
+      priceNote: "(GST Extra · per seat)",
+      features: ["Central admin console", "Shared libraries", "Version control integrations", "SSO-ready deployment", "True-up on seat growth"],
+    },
+    {
+      title: "Creative Cloud — Enterprise",
+      price: "Quote on request",
+      priceNote: "(GST Extra · ETLA-style)",
+      features: ["Custom contract terms", "Advanced security controls", "Dedicated success manager", "Deployment packages", "Audit-friendly reporting"],
+    },
+  ],
 };
 
 /** Build 3 tier cards from product specs when no preset exists */

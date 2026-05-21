@@ -11,51 +11,58 @@ export const siteContent = {
     headline: "Technology services",
     titleAccent: "your business can rely on",
     description:
-      "We repair and rent hardware, build office networks, deploy CCTV, equip remote teams, and supply genuine software — with written scope, GST-ready billing, and engineers who stay accountable through delivery.",
+      "Online solutions to boost your business — repair & rental, networking, CCTV, WFH setups, and genuine software licences. 1,000+ happy customers in Pune & PCMC since 2012, with GST-ready billing and direct access to our engineers.",
     offeringsLabel: "What we provide",
     offerings: [
       {
         title: "Repair & rental",
-        desc: "Workshop repairs, upgrades, and interim devices",
         href: "/repair-rental",
+        desc: "Laptop & desktop repair, upgrades, and short-term hardware rental.",
       },
       {
         title: "Networking",
-        desc: "Cabling, Wi‑Fi, NAS, voice, and access control",
         href: "/networking",
+        desc: "Cabling, switches, NAS, IP telephony, and access control.",
       },
       {
         title: "CCTV services",
-        desc: "Cameras, NVR, and secure remote viewing",
         href: "/cctv-services",
+        desc: "IP cameras, NVR, PoE switching, and guard-station monitoring.",
       },
       {
         title: "WFH service",
-        desc: "Home-office kits and connectivity",
         href: "/wfh-service",
+        desc: "Remote-work laptops, home connectivity, and meeting peripherals.",
       },
       {
         title: "Software licensing",
-        desc: "Microsoft, Tally, and endpoint security",
         href: "/licenses",
+        desc: "Microsoft, Adobe, Autodesk, antivirus, and other genuine software licences.",
       },
     ],
-    ctaPrimary: "Request quotation",
-    ctaSecondary: "View all services",
+    ctaPrimary: "Get free quote",
+    ctaSecondary: "Explore services",
+    journeyTitle: "How it works",
+    journeySteps: [
+      { step: "1", title: "Tell us your need", desc: "Repair, rental, network, CCTV, or licences — pick a service or call us." },
+      { step: "2", title: "Receive written scope", desc: "We share parts, labour, and timelines before work starts." },
+      { step: "3", title: "Delivery & support", desc: "Workshop or on-site handover with GST invoice and follow-up." },
+    ],
     trustStats: [
-      { value: String(site.establishedYear), label: "Serving Pune since" },
-      { value: "2", label: "Workshop & walk-in locations" },
+      { value: "1,000+", label: "Happy customers since 2012" },
+      { value: String(site.establishedYear), label: "Serving Pune & PCMC" },
+      { value: "2", label: "Workshop & walk-in shops" },
       { value: "GST", label: "Compliant invoicing" },
     ],
   },
   services: {
     sectionTitle: "Our service lines",
     sectionAccent: "Built for growing businesses",
-    sectionIntro: `Five focused practices — each with a published product catalogue, GST-ready documentation, and engineers who own the ticket from first call to sign-off. Serving Pune and PCMC since ${site.establishedYear}.`,
+    sectionIntro: `What we can do for your business — laptops, desktops, printers, routers, antivirus, CCTV, and licensed software. Browse by category, see indicative pricing, and request a written quotation. Serving Pune and PCMC since ${site.establishedYear}.`,
     cards: [
       {
         title: "Repair & rental",
-        eyebrow: "Workshop & interim hardware",
+        // eyebrow: "Workshop & interim hardware",
         desc: "Component-level laptop and desktop repair, performance upgrades, and short-term device rental with clear return terms and serial-tracked invoices.",
         link: "/repair-rental",
         image:
@@ -66,7 +73,7 @@ export const siteContent = {
       },
       {
         title: "Networking solutions",
-        eyebrow: "Infrastructure",
+        // eyebrow: "Infrastructure",
         desc: "Structured cabling, switching, business Wi‑Fi, NAS, IP telephony, and attendance integration — installed with labelled ports and handover documentation.",
         link: "/networking",
         image:
@@ -77,7 +84,7 @@ export const siteContent = {
       },
       {
         title: "CCTV services",
-        eyebrow: "Security & surveillance",
+        // eyebrow: "Security & surveillance",
         desc: "IP camera systems, NVR/DVR design, PoE switching, video door entry, and secure remote viewing — planned for coverage, retention, and network isolation.",
         link: "/cctv-services",
         image:
@@ -88,7 +95,7 @@ export const siteContent = {
       },
       {
         title: "WFH service",
-        eyebrow: "Remote workforce",
+        // eyebrow: "Remote workforce",
         desc: "Curated home-office kits: business laptops, connectivity, monitors, collaboration peripherals, and optional Microsoft 365 — deployed with imaging and support notes.",
         link: "/wfh-service",
         image:
@@ -99,8 +106,8 @@ export const siteContent = {
       },
       {
         title: "Software licensing",
-        eyebrow: "Authorised distribution",
-        desc: "Microsoft 365, Windows, Tally, endpoint security, and advisory on server/CAL requirements — supplied with correct editions, seats, and renewal tracking.",
+        // eyebrow: "Authorised distribution",
+        desc: "Microsoft, Adobe, Autodesk, Oracle, Corel, Apple, JetBrains, and IBM — supplied with correct editions, seats, activation, and renewal tracking.",
         link: "/licenses",
         image:
           "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000&auto=format&fit=crop",
@@ -111,6 +118,8 @@ export const siteContent = {
     ],
   },
   about: {
+    storyLead: `${site.brandName} has provided technical support, hardware, and networking in Pune since ${site.establishedYear}. Owned and operated by ${site.proprietor} — when you call, you speak to people who know your job, not an offshore call centre.`,
+    storyDetail: `Repairs are handled at our Manikbaug workshop; walk in at Navi Peth for sales, licences, and enquiries. We supply new and rental laptops, desktops, networking hardware, CCTV, attendance systems, and Microsoft / Tally / Quick Heal licensing at competitive rates with GST documentation.`,
     features: [
       "Written estimates before billable workshop labour or on-site deployment",
       "Common parts stocked to reduce turnaround on laptop and desktop repairs",

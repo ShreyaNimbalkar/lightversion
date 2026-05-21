@@ -1,6 +1,7 @@
 "use client";
 
 import { useEnquiryModal } from "@/components/EnquiryModalProvider";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 import type { ProductHighlightCard, ServiceProductInterest } from "@/data/serviceProductLists";
 
@@ -37,16 +38,17 @@ export default function ProductFeatureCards({
   const { openProductQuote } = useEnquiryModal();
 
   return (
-    <section className="mt-14 sm:mt-16" aria-labelledby="service-feature-cards-heading">
-      <h2 id="service-feature-cards-heading" className="text-center text-2xl font-bold text-foreground sm:text-3xl">
-        Plans &amp; options
-      </h2>
-      <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-foreground/65 sm:text-base">
-        Pick a plan and submit the enquiry form — we confirm availability, scope, and GST on your quote.
-      </p>
+    <section aria-labelledby="service-feature-cards-heading">
+      <SectionHeader
+        id="service-feature-cards-heading"
+        align="left"
+        eyebrow="Plans & pricing"
+        title="Choose a configuration"
+        description="Compare options below — select a plan and request a quote. We confirm availability, scope, and GST on your estimate."
+      />
 
       <div
-        className={`mt-10 grid gap-6 sm:grid-cols-2 lg:gap-8 ${
+        className={`mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:gap-6 ${
           highlights.length >= 4 ? "xl:grid-cols-4" : "lg:grid-cols-3"
         }`}
       >
@@ -62,15 +64,14 @@ export default function ProductFeatureCards({
           return (
             <div
               key={card.title}
-              className="flex min-h-full flex-col overflow-hidden border border-foreground/10 bg-card shadow-md"
+              className="card-elevated flex h-full flex-col overflow-hidden"
             >
-              <div className="h-2 shrink-0 bg-surface-nav" aria-hidden />
-              <div className="relative flex flex-1 flex-col px-5 pb-6 pt-7 sm:px-7 sm:pb-7 sm:pt-8">
+              <div className="relative flex h-full flex-1 flex-col px-5 pb-6 pt-6 sm:px-6 sm:pb-7 sm:pt-7">
                 <div
                   className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand/20 via-transparent to-transparent opacity-80"
                   aria-hidden
                 />
-                <h3 className="relative text-center text-lg font-bold leading-snug text-surface-nav sm:text-xl">
+                <h3 className="relative text-center text-lg font-bold leading-snug text-foreground sm:text-xl">
                   {card.title}
                 </h3>
                 {card.subtitle ? (
@@ -85,7 +86,7 @@ export default function ProductFeatureCards({
                 {card.body && card.features?.length ? (
                   <p className="relative mt-4 text-center text-sm leading-relaxed text-foreground/70">{card.body}</p>
                 ) : null}
-                <ul className="relative mt-6 divide-y divide-brand/25 border-y border-brand/20">
+                <ul className="relative mt-6 flex-1 divide-y divide-brand/25 border-y border-brand/20">
                   {lines.map((line) => (
                     <li
                       key={line}
@@ -95,7 +96,7 @@ export default function ProductFeatureCards({
                     </li>
                   ))}
                 </ul>
-                <div className="relative mt-7 flex justify-center">
+                <div className="relative mt-auto flex shrink-0 justify-center pt-7">
                   <button
                     type="button"
                     onClick={() => openProductQuote(planLabel, defaultInterest)}

@@ -94,9 +94,9 @@ function EnquiryModalShell() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.98 }}
             transition={{ type: "spring", damping: 26, stiffness: 320 }}
-            className="fixed inset-x-3 top-[max(0.75rem,env(safe-area-inset-top,0px)+0.5rem)] z-[301] mx-auto max-h-[min(92dvh,92vh)] w-full max-w-[min(32rem,calc(100vw-1.5rem))] overflow-hidden rounded-2xl border border-foreground/10 bg-card shadow-2xl sm:inset-x-auto sm:left-1/2 sm:top-[5vh] sm:max-h-[90vh] sm:w-full sm:max-w-lg sm:-translate-x-1/2"
+            className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom,0px))] top-[max(3.5rem,env(safe-area-inset-top,0px)+3.25rem)] z-[301] mx-auto flex max-h-none w-full max-w-[min(32rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-card shadow-2xl sm:inset-x-auto sm:bottom-auto sm:left-1/2 sm:top-[5vh] sm:max-h-[90vh] sm:w-full sm:max-w-lg sm:-translate-x-1/2"
           >
-            <div className="flex max-h-[90vh] flex-col">
+            <div className="flex min-h-0 flex-1 flex-col">
               <div className="flex shrink-0 items-start justify-between gap-4 border-b border-foreground/10 bg-section px-5 py-4 sm:px-6">
                 <div>
                   <h2

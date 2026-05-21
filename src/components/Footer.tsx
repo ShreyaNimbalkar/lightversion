@@ -45,20 +45,23 @@ export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-surface-nav text-white">
       <div className="mx-auto max-w-7xl min-w-0 px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
-        <div className="grid min-w-0 gap-10 lg:grid-cols-12 lg:gap-8">
+        <div className="grid min-w-0 grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-4">
-            <Link href="/" className="inline-flex items-center">
-  <div className="relative h-24 w-40 sm:h-28 sm:w-52">
-    <Image
-      src="/softlink_logowht.png"
-      alt={`${site.brandName} logo`}
-      fill
-      priority
-      className="object-contain"
-    />
-  </div>
-</Link>
+            <Link href="/" className="inline-flex items-center gap-4">
+              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl bg-brand shadow-lg shadow-black/20 sm:h-[4.5rem] sm:w-[4.5rem]">
+                <Image
+                  src="/softlink_logowht.png"
+                  alt={`${site.brandName} logo`}
+                  fill
+                  className="object-contain p-2"
+                />
+              </div>
+              {/* <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent/90">Pune · Since {site.establishedYear}</p>
+                <p className="mt-0.5 text-lg font-bold tracking-tight sm:text-xl">{site.brandName}</p>
+              </div> */}
+            </Link>
             <p className="mt-5 max-w-md text-sm leading-relaxed text-white/70">
               {siteContent.footer.blurb} Led by {site.proprietor}.
             </p>
@@ -83,7 +86,7 @@ export default function Footer() {
           {/* Quick links */}
           <div className="lg:col-span-2">
             <h3 className="text-sm font-bold uppercase tracking-wide text-white">Quick links</h3>
-            <ul className="mt-4 flex flex-col gap-2.5">
+            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 sm:flex sm:flex-col">
               {quickLinks.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="text-sm text-white/70 transition hover:text-accent">

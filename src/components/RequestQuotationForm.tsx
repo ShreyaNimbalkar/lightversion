@@ -31,9 +31,9 @@ export default function RequestQuotationForm({
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [company, setCompany] = useState("");
-  const [interest, setInterest] = useState<(typeof interests)[number]>(
-  interests[0]
-);
+  const [address, setAddress] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
   const productSeedDone = useRef(false);
@@ -41,7 +41,7 @@ export default function RequestQuotationForm({
   useEffect(() => {
     if (!defaultInterest) return;
     const match = interests.find((i) => i === defaultInterest);
-    if (match) setInterest(match);
+    if (match) setSelectedInterests([match]);
   }, [defaultInterest]);
 
   useEffect(() => {
@@ -49,11 +49,17 @@ export default function RequestQuotationForm({
       productSeedDone.current = true;
       setMessage(
         fromPlanCard
-          ? `Quote request for: ${productContext}\n\nQuantity / seats:\nDuration or timeline:\nSite location (Pune / PCMC):\n\n`
+          ? `Quote request for: ${productContext}\n\nQuantity / seats:\nDuration or timeline:\n\n`
           : `Enquiry regarding: ${productContext}\n\n`,
       );
     }
   }, [productContext, mode, fromPlanCard]);
+
+  const toggleInterest = (opt: string) => {
+    setSelectedInterests((prev) =>
+      prev.includes(opt) ? prev.filter((i) => i !== opt) : [...prev, opt],
+    );
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -66,13 +72,18 @@ export default function RequestQuotationForm({
           ? encodeURIComponent(`Product enquiry — ${productContext}`)
           : encodeURIComponent(`Quotation request — ${company || "Individual"}`);
 
+    const serviceLine =
+      selectedInterests.length > 0 ? selectedInterests.join(", ") : "Not specified";
+
     const bodyLines = [
       `Name: ${name}`,
       `Email: ${email}`,
       `Phone: ${phone}`,
       `Company: ${company}`,
+      `Address: ${address || "(not provided)"}`,
+      `Pincode: ${pincode || "(not provided)"}`,
       productContext ? `Product / service: ${productContext}` : null,
-      `Service area: ${interest}`,
+      `Service area(s): ${serviceLine}`,
       "",
       "Requirement:",
       message || "(none)",
@@ -168,25 +179,69 @@ export default function RequestQuotationForm({
 
       <div className="sm:col-span-2">
         <label
-          htmlFor="rq-interest"
+          htmlFor="rq-address"
           className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-foreground/70"
         >
-          Service area
+          Address
         </label>
-        <select
-          id="rq-interest"
-          value={interest}
-          onChange={(e) =>
-  setInterest(e.target.value as (typeof interests)[number])
-}
+        <input
+          id="rq-address"
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
           className="h-11 w-full rounded-lg border border-foreground/15 bg-card px-3 text-sm text-foreground outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
+          placeholder="Building, street, area"
+        />
+      </div>
+
+      <div className="sm:col-span-1">
+        <label
+          htmlFor="rq-pincode"
+          className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-foreground/70"
         >
-          {interests.map((opt) => (
-            <option key={opt} value={opt}>
-              {opt}
-            </option>
-          ))}
-        </select>
+          Pincode
+        </label>
+        <input
+          id="rq-pincode"
+          type="text"
+          inputMode="numeric"
+          maxLength={6}
+          value={pincode}
+          onChange={(e) => setPincode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+          className="h-11 w-full rounded-lg border border-foreground/15 bg-card px-3 text-sm text-foreground outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
+          placeholder="e.g. 411001"
+        />
+      </div>
+
+      <div className="sm:col-span-2">
+        <fieldset>
+          <legend className="mb-2 block text-xs font-semibold uppercase tracking-wide text-foreground/70">
+            Service area <span className="font-normal normal-case text-foreground/50">(select all that apply)</span>
+          </legend>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {interests.map((opt) => {
+              const checked = selectedInterests.includes(opt);
+              return (
+                <label
+                  key={opt}
+                  className={`flex cursor-pointer items-center gap-2.5 rounded-lg border px-3 py-2.5 text-sm transition ${
+                    checked
+                      ? "border-brand/40 bg-brand/10 text-foreground"
+                      : "border-foreground/12 bg-card text-foreground/80 hover:border-brand/25"
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={() => toggleInterest(opt)}
+                    className="h-4 w-4 shrink-0 rounded border-foreground/20 text-brand focus:ring-brand/30"
+                  />
+                  {opt}
+                </label>
+              );
+            })}
+          </div>
+        </fieldset>
       </div>
 
       <div className="sm:col-span-2">
@@ -214,12 +269,12 @@ export default function RequestQuotationForm({
 
       <div className="sm:col-span-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-foreground/55">
-          By submitting, you agree we may contact you regarding this enquiry. GST-ready
-          quotes are issued after scope confirmation.
+          By submitting, you agree we may contact you regarding this enquiry. GST-ready quotes are issued after scope
+          confirmation.
         </p>
         <button
           type="submit"
-          className="inline-flex h-11 shrink-0 items-center justify-center rounded-lg bg-brand px-8 text-sm font-semibold text-white shadow-md transition-colors duration-200 hover:bg-brand-hover"
+          className="inline-flex h-11 w-full shrink-0 items-center justify-center rounded-lg bg-brand px-8 text-sm font-semibold text-white shadow-md transition-colors duration-200 hover:bg-brand-hover sm:w-auto"
         >
           {sent
             ? "Open email client again"
@@ -246,4 +301,3 @@ export default function RequestQuotationForm({
     </form>
   );
 }
- 

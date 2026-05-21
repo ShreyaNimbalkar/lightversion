@@ -2,15 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import CatalogIcon from "@/components/CatalogIcon";
-import ProductDetailActions from "@/app/products/[slug]/ProductDetailActions";
+import ProductDetailNav from "@/app/products/[slug]/ProductDetailNav";
+import ProductDetailSummary from "@/app/products/[slug]/ProductDetailSummary";
 import ProductFeatureCards from "@/components/ProductFeatureCards";
-import PageServiceHero from "@/components/PageServiceHero";
+import PageHero from "@/components/PageHero";
+import PageSection from "@/components/ui/PageSection";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 import { getProductPageContent } from "@/data/productPageContent";
+import { getServicePathForInterest } from "@/data/serviceCatalogRoutes";
 import { getAllCatalogEntries, getProductBySlug, getRelatedCatalogItems } from "@/data/serviceProductLists";
-
-import { site } from "@/data/site";
 
 function SpecCheckIcon({ className }: { className?: string }) {
   return (
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: Props) {
     return { title: "Product" };
   }
   return {
-    title: `${found.item.name} — product details`,
+    title: `${found.item.name} — ${found.categoryTitle}`,
     description: found.item.summary,
   };
 }
@@ -47,162 +48,138 @@ export default async function ProductDetailPage({ params }: Props) {
     notFound();
   }
 
-  const { item, categoryTitle } = found;
+  const { item, categoryTitle, categorySlug } = found;
   const content = getProductPageContent(item, categoryTitle);
   const productLabel = `${categoryTitle}: ${item.name}`;
+  const servicePath = getServicePathForInterest(item.defaultInterest);
   const related = getRelatedCatalogItems(slug, 4);
-  const heroDescription =
-    item.summary ??
-    `Supply, sizing, and support from ${site.brandName} — structured like a product sheet so procurement and IT see the same facts.`;
+  const hasPlans = content.highlights.length > 0;
 
   return (
     <>
-      <PageServiceHero
-  title={item.name}
-  description={heroDescription}
-  breadcrumbs={[
-    { label: "Home", href: "/" },
-    { label: "Services", href: "/#services" },
+      <PageHero
+        variant="immersive"
+        accent="brand"
+        title={item.name}
+        description={item.summary}
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: item.defaultInterest, href: `/${servicePath}` },
+          { label: categoryTitle, href: `/${servicePath}/${categorySlug}` },
+          { label: item.name },
+        ]}
+      />
 
-    // ADD THIS NEW BREADCRUMB
-    {
-      label: item.defaultInterest,
-      href:
-        item.defaultInterest === "Repair & rental"
-          ? "/services/repair-rental"
-          : item.defaultInterest === "Networking & cabling"
-          ? "/services/networking-solutions"
-          : item.defaultInterest === "CCTV / security"
-          ? "/services/cctv-services"
-          : item.defaultInterest === "Software licences"
-          ? "/services/software-licenses"
-          : item.defaultInterest === "WFH service"
-          ? "/services/wfh-service"
-          : "/services",
-    },
+      <article className="bg-section text-foreground">
+        <div className="page-container pb-16 pt-6 sm:pb-20 sm:pt-8">
+          <ProductDetailSummary item={item} categoryTitle={categoryTitle} productLabel={productLabel} />
 
-    { label: item.name },
-  ]}
-/>
+          <ProductDetailNav showPlans={hasPlans} showRelated={related.length > 0} />
 
-      <article className="relative min-w-0 overflow-hidden bg-section pb-16 pt-10 text-foreground sm:pb-20 sm:pt-12">
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute right-0 top-24 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
-        <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
-      </div>
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-brand">
-          {categoryTitle}
-        </p>
-
-        <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-5">
-            <div className="relative overflow-hidden rounded-[1.75rem] border border-foreground/10 bg-card shadow-lg">
-              <div className="relative aspect-[4/3] w-full">
-                <Image
-                  src={item.image}
-                  alt={item.imageAlt}
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 42vw"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface-deep/40 via-transparent to-transparent" />
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-6 lg:col-span-7">
-            <section className="rounded-2xl border border-foreground/10 bg-card p-6 shadow-sm sm:p-8">
-              <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-brand/20 bg-brand/10 text-brand">
-                  <CatalogIcon iconKey={item.iconKey} className="text-lg" />
-                </div>
-                <div>
-                  <h2 className="text-lg font-bold text-foreground sm:text-xl">Key specifications</h2>
-                  <p className="text-sm text-foreground/60">Typical delivery checklist — final scope is confirmed on quote.</p>
+          {/* 1 — Overview */}
+          <PageSection id="overview" border="none" className="scroll-mt-28 !py-8 sm:scroll-mt-36 sm:!py-12">
+            <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
+              <div className="lg:col-span-5">
+                <div className="overflow-hidden rounded-2xl border border-foreground/10 shadow-lg">
+                  <div className="relative aspect-[4/3] w-full">
+                    <Image
+                      src={item.image}
+                      alt={item.imageAlt}
+                      fill
+                      priority
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                    />
+                  </div>
                 </div>
               </div>
-              <ul className="mt-6 space-y-3.5">
-                {content.specs.map((line) => (
-                  <li key={line} className="flex gap-3 text-sm leading-relaxed text-foreground/80 sm:text-base">
-                    <SpecCheckIcon className="mt-1 h-4 w-4 shrink-0 text-brand" />
-                    <span>{line}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            <section className="rounded-2xl border border-foreground/10 bg-card/80 p-6 backdrop-blur-sm sm:p-8">
-              <h2 className="text-lg font-bold text-foreground sm:text-xl">Overview</h2>
-              <p className="mt-3 text-sm leading-relaxed text-foreground/75 sm:text-base">{content.intro}</p>
-            </section>
-          </div>
-        </div>
-
-        <ProductFeatureCards
-          productName={item.name}
-          defaultInterest={item.defaultInterest}
-          highlights={content.highlights}
-        />
-
-        {related.length > 0 ? (
-          <section className="mt-14 border-t border-foreground/10 pt-12 sm:mt-16 sm:pt-14" aria-labelledby="related-products-heading">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-              <h2 id="related-products-heading" className="text-2xl font-bold text-foreground sm:text-3xl">
-                Related products
-              </h2>
-              <p className="max-w-xl text-sm text-foreground/65">
-                Same category first, then other lines that share your enquiry route — quick jumps without returning to the full
-                catalogue.
-              </p>
+              <div className="lg:col-span-7">
+                <h2 className="text-lg font-bold text-foreground sm:text-xl">Overview</h2>
+                <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">{content.intro}</p>
+              </div>
             </div>
+          </PageSection>
 
-            <ul className="mt-8 grid list-none gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-              {related.map(({ item: rel, categoryTitle: relCat }) => (
-                <li key={rel.slug} className="min-w-0">
-                  <Link
-                    href={`/products/${rel.slug}`}
-                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-card shadow-sm transition hover:border-brand/30 hover:shadow-md"
-                  >
-                    <div className="relative aspect-[4/3] w-full overflow-hidden">
-                      <Image
-                        src={rel.image}
-                        alt={rel.imageAlt}
-                        fill
-                        className="object-cover transition duration-500 group-hover:scale-[1.04]"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      />
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface-deep/30 via-transparent to-transparent" />
-                    </div>
-                    <div className="flex flex-1 flex-col p-4 sm:p-5">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand sm:text-[11px]">{relCat}</p>
-                      <p className="mt-2 line-clamp-2 text-sm font-bold leading-snug text-foreground sm:text-base">{rel.name}</p>
-                      <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-brand transition group-hover:gap-2">
-                        View details
-                        <span aria-hidden className="translate-y-px">
-                          →
-                        </span>
-                      </span>
-                    </div>
-                  </Link>
+          {/* 2 — Specifications */}
+          <PageSection id="specifications" border="top" tone="muted" className="scroll-mt-28 !py-8 sm:scroll-mt-36 sm:!py-12">
+            <SectionHeader
+              align="left"
+              eyebrow="Specifications"
+              title="Key specifications"
+              description="Typical inclusions for this line — your quote may add or adjust items based on site and quantity."
+            />
+            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+              {content.specs.map((line) => (
+                <li
+                  key={line}
+                  className="card-elevated flex gap-3 p-4 text-sm leading-relaxed text-foreground/85 sm:text-base"
+                >
+                  <SpecCheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                  <span>{line}</span>
                 </li>
               ))}
             </ul>
-          </section>
-        ) : null}
+          </PageSection>
 
-        <section className="mt-14 rounded-2xl border border-brand/20 bg-gradient-to-br from-brand/10 via-card to-card p-6 shadow-lg sm:mt-16 sm:p-10">
-          <h2 className="text-xl font-bold text-foreground sm:text-2xl">Next step</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-foreground/70 sm:text-base">
-            Send a SKU‑level enquiry, ask for a bundled quotation, or speak with the team — reference{" "}
-            <span className="font-semibold text-foreground">{item.name}</span> so routing stays fast.
-          </p>
-          <div className="mt-6 max-w-xl">
-            <ProductDetailActions item={item} productLabel={productLabel} />
-          </div>
-        </section>
+          {/* 3 — Plans & pricing */}
+          {hasPlans ? (
+            <div id="plans" className="scroll-mt-28 border-t border-foreground/10 sm:scroll-mt-36">
+              <PageSection border="none" className="!py-8 sm:!py-12">
+                <ProductFeatureCards
+                  productName={item.name}
+                  defaultInterest={item.defaultInterest}
+                  highlights={content.highlights}
+                />
+              </PageSection>
+            </div>
+          ) : null}
+
+          {/* 4 — Related */}
+          {related.length > 0 ? (
+            <PageSection id="related" border="top" tone="muted" className="scroll-mt-28 !py-8 sm:scroll-mt-36 sm:!py-12">
+              <SectionHeader
+                align="left"
+                eyebrow="Related"
+                title="Similar products"
+                description={
+                  <>
+                    More items in <span className="font-semibold text-foreground">{categoryTitle}</span> and related
+                    lines — or{" "}
+                    <Link href={`/${servicePath}/${categorySlug}`} className="font-semibold text-brand hover:underline">
+                      browse the full {categoryTitle} category
+                    </Link>
+                    .
+                  </>
+                }
+              />
+              <ul className="mt-8 grid list-none gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+                {related.map(({ item: rel, categoryTitle: relCat }) => (
+                  <li key={rel.slug}>
+                    <Link
+                      href={`/products/${rel.slug}`}
+                      className="group card-elevated flex h-full flex-col overflow-hidden transition hover:border-brand/30"
+                    >
+                      <div className="relative aspect-[4/3] w-full overflow-hidden">
+                        <Image
+                          src={rel.image}
+                          alt={rel.imageAlt}
+                          fill
+                          className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                          sizes="25vw"
+                        />
+                      </div>
+                      <div className="flex flex-1 flex-col p-4">
+                        <p className="text-[10px] font-bold uppercase tracking-wide text-brand">{relCat}</p>
+                        <p className="mt-1 text-xs font-semibold text-brand">{rel.priceFrom}</p>
+                        <p className="mt-2 line-clamp-2 text-sm font-bold text-foreground">{rel.name}</p>
+                        <span className="mt-3 text-xs font-semibold text-brand">View details →</span>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </PageSection>
+          ) : null}
         </div>
       </article>
     </>

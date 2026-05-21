@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 
+import RequestQuotationForm from "@/components/RequestQuotationForm";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { site, siteTelHref } from "@/data/site";
@@ -16,20 +18,6 @@ import {
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 
-const services = [
-  "Laptop / desktop repair & upgrade",
-  "Rental & interim devices",
-  "Structured cabling & Wi‑Fi",
-  "Switches, routers & firewalls",
-  "NAS / server setup",
-  "CCTV & NVR",
-  "IP PBX & attendance terminals",
-  "Microsoft 365 / Windows licensing",
-  "Tally Prime & renewals",
-  "Quick Heal / endpoint security",
-  "AMC & on-site support",
-];
-
 export default function ContactBody() {
   const handlePhoneClick = (phone: string) => {
     void navigator.clipboard.writeText(phone);
@@ -37,7 +25,7 @@ export default function ContactBody() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-section py-28">
+    <section className="relative overflow-hidden bg-section section-padding">
       {/* BACKGROUND */}
       <div className="absolute inset-0 overflow-hidden">
         {/* GLOW */}
@@ -49,8 +37,8 @@ export default function ContactBody() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:80px_80px]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-14 lg:grid-cols-2">
+      <div className="page-container relative">
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
           {/* LEFT */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -152,6 +140,7 @@ export default function ContactBody() {
                 </div>
               </motion.div>
 
+              <div id="locations" className="contents">
               {site.locations.map((loc) => (
                 <motion.div
                   key={loc.label}
@@ -183,6 +172,7 @@ export default function ContactBody() {
                   </div>
                 </motion.div>
               ))}
+              </div>
 
               <motion.div
                 whileHover={{ y: -5 }}
@@ -208,99 +198,35 @@ export default function ContactBody() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="relative overflow-hidden rounded-[36px] border border-foreground/10 bg-card shadow-xl">
+            <div className="relative overflow-hidden rounded-2xl border border-foreground/10 bg-card shadow-xl sm:rounded-3xl">
               {/* HOVER EFFECT */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-transparent" />
 
               {/* HEADER */}
-              <div className="relative border-b border-foreground/10 px-8 py-6">
-                <div className="flex items-center gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand/10 text-brand">
+              <div className="relative border-b border-foreground/10 px-5 py-5 sm:px-8 sm:py-6">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand/10 text-brand sm:h-14 sm:w-14">
                     <FontAwesomeIcon
                       icon={faHeadset}
-                      className="text-2xl"
+                      className="text-xl sm:text-2xl"
                     />
                   </div>
 
-                  <div>
-                    <p className="text-sm font-semibold text-brand">
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold text-brand sm:text-sm">
                       Send Message
                     </p>
 
-                    <h3 className="mt-1 text-3xl font-black text-foreground">
+                    <h3 className="mt-0.5 text-xl font-black text-foreground sm:mt-1 sm:text-3xl">
                       Request Consultation
                     </h3>
                   </div>
                 </div>
               </div>
 
-              {/* FORM */}
-              <form className="relative grid gap-5 p-8">
-                <div className="grid gap-5 md:grid-cols-2">
-                  <input
-                    type="text"
-                    placeholder="Full Name"
-                    className="h-14 rounded-2xl border border-foreground/15 bg-section px-5 text-foreground outline-none transition-all duration-300 placeholder:text-foreground/45 focus:border-brand"
-                  />
-
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    className="h-14 rounded-2xl border border-foreground/15 bg-section px-5 text-foreground outline-none transition-all duration-300 placeholder:text-foreground/45 focus:border-brand"
-                  />
-                </div>
-
-                <div className="grid gap-5 md:grid-cols-2">
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    className="h-14 rounded-2xl border border-foreground/15 bg-section px-5 text-foreground outline-none transition-all duration-300 placeholder:text-foreground/45 focus:border-brand"
-                  />
-
-                  <input
-                    type="text"
-                    placeholder="Company Name"
-                    className="h-14 rounded-2xl border border-foreground/15 bg-section px-5 text-foreground outline-none transition-all duration-300 placeholder:text-foreground/45 focus:border-brand"
-                  />
-                </div>
-
-                {/* SERVICE DROPDOWN */}
-                <select
-                  className="h-14 rounded-2xl border border-foreground/15 bg-section px-5 text-foreground outline-none transition-all duration-300 focus:border-brand"
-                >
-                  <option value="" className="bg-card text-foreground/60">
-                    Select Service
-                  </option>
-
-                  {services.map((service, index) => (
-                    <option
-                      key={index}
-                      value={service}
-                      className="bg-card text-foreground"
-                    >
-                      {service}
-                    </option>
-                  ))}
-                </select>
-
-                <textarea
-                  rows={6}
-                  placeholder="Tell us about your requirement..."
-                  className="rounded-2xl border border-foreground/15 bg-section p-5 text-foreground outline-none transition-all duration-300 placeholder:text-foreground/45 focus:border-brand"
-                />
-
-                <button
-                  type="submit"
-                  className="group inline-flex h-14 items-center justify-center gap-3 rounded-2xl bg-brand px-6 font-semibold text-white shadow-xl shadow-brand/25 transition-all duration-300 hover:scale-[1.02] hover:bg-brand-hover"
-                >
-                  Send Message
-
-                  <FontAwesomeIcon
-                    icon={faPaperPlane}
-                    className="text-sm transition-transform duration-300 group-hover:translate-x-1"
-                  />
-                </button>
-              </form>
+              <div className="relative p-4 sm:p-8">
+                <RequestQuotationForm mode="enquiry" />
+              </div>
             </div>
           </motion.div>
         </div>
