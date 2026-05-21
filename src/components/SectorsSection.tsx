@@ -69,14 +69,14 @@ export default function SectorsSection({ variant = "about" }: Props) {
                   </li>
                 ))}
               </ul>
-              <button
+              {/* <button
                 type="button"
                 onClick={() => openEnquiry(item.enquiryContext, item.defaultInterest)}
                 className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-brand/30 bg-brand/5 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white"
               >
                 Discuss your {item.title.toLowerCase()} project
                 <FontAwesomeIcon icon={faArrowRight} className="text-xs" />
-              </button>
+              </button> */}
             </div>
           </motion.article>
         ))}
