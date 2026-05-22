@@ -8,7 +8,9 @@ import MultiSelectDropdown, {
 import {
   buildCatalogServiceGroups,
   catalogLineDescription,
+  CATALOG_OTHER_SLUG,
   findCatalogProduct,
+  isCatalogOtherSlug,
   parseIndicativeRate,
 } from "@/lib/quotation-catalog-options";
 import {
@@ -24,7 +26,7 @@ type Props = {
 
 export default function QuotationCatalogPicker({ form, onChange }: Props) {
   const catalogGroups = useMemo((): MultiSelectOptionGroup[] => {
-    return buildCatalogServiceGroups().map((service) => ({
+    const fromCatalog = buildCatalogServiceGroups().map((service) => ({
       id: service.servicePath,
       label: service.serviceLabel,
       options: service.categories.flatMap((category) =>
@@ -35,17 +37,38 @@ export default function QuotationCatalogPicker({ form, onChange }: Props) {
         })),
       ),
     }));
+
+    return [
+      {
+        id: "other",
+        label: "Not in catalogue",
+        options: [
+          {
+            value: CATALOG_OTHER_SLUG,
+            label: "Other",
+            hint: "Custom item or service — describe below",
+          },
+        ],
+      },
+      ...fromCatalog,
+    ];
   }, []);
+
+  const hasOther = form.selectedCatalogSlugs.includes(CATALOG_OTHER_SLUG);
+  const productSlugCount = form.selectedCatalogSlugs.filter((s) => !isCatalogOtherSlug(s)).length;
+  const selectedCount = productSlugCount + (hasOther ? 1 : 0);
 
   function applySelection(nextSlugs: string[]) {
     const prevSet = new Set(form.selectedCatalogSlugs);
     const nextSet = new Set(nextSlugs);
+    const includesOther = nextSet.has(CATALOG_OTHER_SLUG);
+    const productSlugs = nextSlugs.filter((s) => !isCatalogOtherSlug(s));
 
     let lineItems = form.lineItems.filter(
       (row) => !row.catalogSlug || nextSet.has(row.catalogSlug),
     );
 
-    for (const slug of nextSlugs) {
+    for (const slug of productSlugs) {
       if (prevSet.has(slug)) continue;
       const product = findCatalogProduct(slug);
       if (!product) continue;
@@ -69,20 +92,27 @@ export default function QuotationCatalogPicker({ form, onChange }: Props) {
       lineItems = [createEmptyLineItem()];
     }
 
+    const subjectParts = productSlugs
+      .map((slug) => findCatalogProduct(slug)?.productName)
+      .filter(Boolean) as string[];
+    if (includesOther && form.otherServiceDetail.trim()) {
+      subjectParts.push("Other");
+    }
+
     const subject =
       form.subject.trim() ||
-      (nextSlugs.length > 0
-        ? `Quotation — ${nextSlugs
-            .map((slug) => findCatalogProduct(slug)?.productName)
-            .filter(Boolean)
-            .slice(0, 3)
-            .join(", ")}${nextSlugs.length > 3 ? "…" : ""}`
+      (subjectParts.length > 0
+        ? `Quotation — ${subjectParts.slice(0, 3).join(", ")}${subjectParts.length > 3 ? "…" : ""}`
         : "");
 
-    onChange({ ...form, selectedCatalogSlugs: nextSlugs, lineItems, subject });
+    onChange({
+      ...form,
+      selectedCatalogSlugs: nextSlugs,
+      otherServiceDetail: includesOther ? form.otherServiceDetail : "",
+      lineItems,
+      subject,
+    });
   }
-
-  const selectedCount = form.selectedCatalogSlugs.length;
 
   return (
     <section className="card-elevated p-4 sm:p-6">
@@ -90,8 +120,8 @@ export default function QuotationCatalogPicker({ form, onChange }: Props) {
         <div>
           <h2 className="text-sm font-bold text-foreground">Service & product catalogue</h2>
           <p className="mt-1 max-w-xl text-xs leading-relaxed text-foreground/60 sm:text-sm">
-            Pick products by service group. Each selection adds a line item below — you can edit
-            quantity, rate, and GST per row.
+            Pick products by service group, or choose <strong className="font-semibold text-foreground">Other</strong>{" "}
+            for custom scope. Catalogue picks add line items below — edit quantity, rate, and GST per row.
           </p>
         </div>
         {selectedCount > 0 ? (
@@ -106,13 +136,24 @@ export default function QuotationCatalogPicker({ form, onChange }: Props) {
           label="Products & services"
           hint="(search and select)"
           placeholder="Search catalogue…"
-          countNoun="products"
+          countNoun="selected"
           groups={catalogGroups}
           value={form.selectedCatalogSlugs}
           onChange={applySelection}
           searchable
           searchPlaceholder="Search by product, category, or service…"
           maxVisiblePills={2}
+          expandableOption={{
+            value: CATALOG_OTHER_SLUG,
+            detail: form.otherServiceDetail,
+            onDetailChange: (detail) => onChange({ ...form, otherServiceDetail: detail }),
+            detailLabel: "Describe other product or service",
+            detailPlaceholder:
+              "e.g. Biometric attendance, printer AMC, mixed hardware + licence bundle…",
+            detailHint:
+              "This appears on the PDF under catalogue items. Add matching line items in the table below if you need pricing.",
+            required: false,
+          }}
         />
       </div>
     </section>

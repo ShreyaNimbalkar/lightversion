@@ -25,6 +25,8 @@ export type QuotationFormData = {
   clientGstin: string;
   /** Product slugs selected in the service catalogue section */
   selectedCatalogSlugs: string[];
+  /** Manual detail when "Other" is selected in the catalogue picker */
+  otherServiceDetail: string;
   subject: string;
   lineItems: QuotationLineItem[];
   /** Default GST % for newly added line items */
@@ -62,6 +64,7 @@ export function defaultQuotationForm(): QuotationFormData {
     clientPincode: "",
     clientGstin: "",
     selectedCatalogSlugs: [],
+    otherServiceDetail: "",
     subject: "",
     lineItems: [createEmptyLineItem()],
     defaultGstPercent: DEFAULT_GST_PERCENT,

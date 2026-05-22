@@ -138,27 +138,19 @@ export default function MultiSelectDropdown({
   }, [open]);
 
   function toggleOption(optValue: string) {
-    const next = valueSet.has(optValue)
-      ? value.filter((v) => v !== optValue)
-      : [...value, optValue];
-    onChange(next);
-    if (expandableOption && optValue === expandableOption.value && valueSet.has(optValue)) {
-      expandableOption.onDetailChange("");
-    }
+    onChange(
+      valueSet.has(optValue) ? value.filter((v) => v !== optValue) : [...value, optValue],
+    );
   }
 
   function removePill(optValue: string, e: React.MouseEvent) {
     e.stopPropagation();
     onChange(value.filter((v) => v !== optValue));
-    if (expandableOption && optValue === expandableOption.value) {
-      expandableOption.onDetailChange("");
-    }
   }
 
   function clearAll(e: React.MouseEvent) {
     e.stopPropagation();
     onChange([]);
-    if (expandableOption) expandableOption.onDetailChange("");
   }
 
   function renderOption(opt: MultiSelectOption) {

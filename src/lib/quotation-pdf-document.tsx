@@ -8,7 +8,11 @@ import {
 } from "@react-pdf/renderer";
 
 import { site } from "@/data/site";
-import { findCatalogProduct } from "@/lib/quotation-catalog-options";
+import {
+  CATALOG_OTHER_SLUG,
+  findCatalogProduct,
+  isCatalogOtherSlug,
+} from "@/lib/quotation-catalog-options";
 import {
   formatInr,
   activeLineItems,
@@ -528,23 +532,40 @@ export function QuotationPdfDocument({ data, logoUrl }: Props) {
           </View>
         ) : null}
 
-        {data.selectedCatalogSlugs.length > 0 ? (
+        {data.selectedCatalogSlugs.some((s) => !isCatalogOtherSlug(s)) ||
+        data.selectedCatalogSlugs.includes(CATALOG_OTHER_SLUG) ? (
           <View style={styles.catalogBox}>
             <Text style={styles.sectionTitle}>Services & products requested</Text>
-            {data.selectedCatalogSlugs.map((slug, index) => {
-              const product = findCatalogProduct(slug);
-              if (!product) return null;
-              return (
-                <View key={slug} style={styles.catalogItem}>
-                  <Text style={styles.catalogBullet}>{index + 1}.</Text>
-                  <Text style={styles.catalogText}>
-                    {product.serviceLabel} › {product.categoryTitle} › {product.productName}
-                    {"  ·  "}
-                    {product.priceFrom}
-                  </Text>
-                </View>
-              );
-            })}
+            {data.selectedCatalogSlugs
+              .filter((slug) => !isCatalogOtherSlug(slug))
+              .map((slug, index) => {
+                const product = findCatalogProduct(slug);
+                if (!product) return null;
+                return (
+                  <View key={slug} style={styles.catalogItem}>
+                    <Text style={styles.catalogBullet}>{index + 1}.</Text>
+                    <Text style={styles.catalogText}>
+                      {product.serviceLabel} › {product.categoryTitle} › {product.productName}
+                      {"  ·  "}
+                      {product.priceFrom}
+                    </Text>
+                  </View>
+                );
+              })}
+            {data.selectedCatalogSlugs.includes(CATALOG_OTHER_SLUG) &&
+            data.otherServiceDetail.trim() ? (
+              <View style={styles.catalogItem}>
+                <Text style={styles.catalogBullet}>•</Text>
+                <Text style={styles.catalogText}>
+                  Other: {data.otherServiceDetail.trim()}
+                </Text>
+              </View>
+            ) : data.selectedCatalogSlugs.includes(CATALOG_OTHER_SLUG) ? (
+              <View style={styles.catalogItem}>
+                <Text style={styles.catalogBullet}>•</Text>
+                <Text style={styles.catalogText}>Other (see line items)</Text>
+              </View>
+            ) : null}
           </View>
         ) : null}
 

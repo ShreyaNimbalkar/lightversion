@@ -1,5 +1,12 @@
 import { SERVICE_CATALOG_ROUTES } from "@/data/serviceCatalogRoutes";
 
+/** Sentinel slug for catalogue "Other" (not a real product) */
+export const CATALOG_OTHER_SLUG = "__catalog_other__";
+
+export function isCatalogOtherSlug(slug: string): boolean {
+  return slug === CATALOG_OTHER_SLUG;
+}
+
 export type CatalogProductOption = {
   productSlug: string;
   productName: string;
