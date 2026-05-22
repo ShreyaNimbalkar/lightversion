@@ -80,7 +80,7 @@ export default function ProcessSection() {
             </div>
             <h3 className="mt-4 text-base font-bold text-foreground">{item.title}</h3>
             <p className="mt-2 flex-1 text-sm leading-relaxed text-foreground/65">{item.desc}</p>
-            <span className="mt-4 text-xs font-semibold text-brand">Start here →</span>
+            {/* <span className="mt-4 text-xs font-semibold text-brand">Start here →</span> */}
           </motion.button>
         ))}
       </div>

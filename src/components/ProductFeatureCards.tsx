@@ -100,7 +100,7 @@ export default function ProductFeatureCards({
                   <button
                     type="button"
                     onClick={() => openProductQuote(planLabel, defaultInterest)}
-                    className="inline-flex min-h-[2.75rem] items-center justify-center border-2 border-brand bg-transparent px-6 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-brand transition hover:bg-brand/10 sm:px-8"
+                    className="btn-outline-brand"
                   >
                     Request a quote
                   </button>

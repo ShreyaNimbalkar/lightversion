@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, FormEvent, useEffect, useRef } from "react";
+import { useState, FormEvent, useEffect, useMemo, useRef } from "react";
 
+import MultiSelectDropdown from "@/components/ui/MultiSelectDropdown";
 import { site } from "@/data/site";
 
 const interests = [
@@ -55,11 +56,10 @@ export default function RequestQuotationForm({
     }
   }, [productContext, mode, fromPlanCard]);
 
-  const toggleInterest = (opt: string) => {
-    setSelectedInterests((prev) =>
-      prev.includes(opt) ? prev.filter((i) => i !== opt) : [...prev, opt],
-    );
-  };
+  const interestOptions = useMemo(
+    () => interests.map((opt) => ({ value: opt, label: opt })),
+    [],
+  );
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -214,34 +214,17 @@ export default function RequestQuotationForm({
       </div>
 
       <div className="sm:col-span-2">
-        <fieldset>
-          <legend className="mb-2 block text-xs font-semibold uppercase tracking-wide text-foreground/70">
-            Service area <span className="font-normal normal-case text-foreground/50">(select all that apply)</span>
-          </legend>
-          <div className="grid gap-2 sm:grid-cols-2">
-            {interests.map((opt) => {
-              const checked = selectedInterests.includes(opt);
-              return (
-                <label
-                  key={opt}
-                  className={`flex cursor-pointer items-center gap-2.5 rounded-lg border px-3 py-2.5 text-sm transition ${
-                    checked
-                      ? "border-brand/40 bg-brand/10 text-foreground"
-                      : "border-foreground/12 bg-card text-foreground/80 hover:border-brand/25"
-                  }`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={checked}
-                    onChange={() => toggleInterest(opt)}
-                    className="h-4 w-4 shrink-0 rounded border-foreground/20 text-brand focus:ring-brand/30"
-                  />
-                  {opt}
-                </label>
-              );
-            })}
-          </div>
-        </fieldset>
+        <MultiSelectDropdown
+          label="Service area"
+          hint="(select all that apply)"
+          placeholder="Select service areas…"
+          countNoun="service areas"
+          options={interestOptions}
+          value={selectedInterests}
+          onChange={setSelectedInterests}
+          searchable
+          searchPlaceholder="Search"
+        />
       </div>
 
       <div className="sm:col-span-2">
@@ -272,10 +255,7 @@ export default function RequestQuotationForm({
           By submitting, you agree we may contact you regarding this enquiry. GST-ready quotes are issued after scope
           confirmation.
         </p>
-        <button
-          type="submit"
-          className="inline-flex h-11 w-full shrink-0 items-center justify-center rounded-lg bg-brand px-8 text-sm font-semibold text-white shadow-md transition-colors duration-200 hover:bg-brand-hover sm:w-auto"
-        >
+        <button type="submit" className="btn-primary btn-block sm:w-auto sm:shrink-0">
           {sent
             ? "Open email client again"
             : fromPlanCard

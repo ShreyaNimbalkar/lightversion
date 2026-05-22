@@ -57,10 +57,7 @@ export default function HomeAboutTeaser() {
             ))}
           </ul>
 
-          <Link
-            href="/about"
-            className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand transition hover:gap-3"
-          >
+          <Link href="/about" className="btn-link mt-8">
             Full story, sectors &amp; locations
             <FontAwesomeIcon icon={faArrowRight} className="text-xs" />
           </Link>

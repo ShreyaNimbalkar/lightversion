@@ -172,7 +172,7 @@ export default async function ProductDetailPage({ params }: Props) {
                         <p className="text-[10px] font-bold uppercase tracking-wide text-brand">{relCat}</p>
                         <p className="mt-1 text-xs font-semibold text-brand">{rel.priceFrom}</p>
                         <p className="mt-2 line-clamp-2 text-sm font-bold text-foreground">{rel.name}</p>
-                        <span className="mt-3 text-xs font-semibold text-brand">View details →</span>
+                        <span className="btn-link mt-auto pt-3 text-xs">View details →</span>
                       </div>
                     </Link>
                   </li>

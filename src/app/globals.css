@@ -178,6 +178,7 @@ body {
   }
 }
 
+/* Shared button system — use these classes site-wide */
 .btn-primary {
   display: inline-flex;
   min-height: 2.75rem;
@@ -191,11 +192,16 @@ body {
   font-weight: 600;
   color: #fff;
   box-shadow: 0 4px 14px color-mix(in srgb, var(--primary-cta) 35%, transparent);
-  transition: background-color 0.2s ease, transform 0.15s ease;
+  transition: background-color 0.2s ease;
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   background: var(--primary-cta-hover);
+}
+
+.btn-primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .btn-secondary {
@@ -211,12 +217,171 @@ body {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--foreground);
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--primary-cta) 40%, transparent);
+  color: var(--primary-cta);
+}
+
+.btn-outline-brand {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--primary-cta) 30%, transparent);
+  background: color-mix(in srgb, var(--primary-cta) 5%, transparent);
+  padding: 0.625rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-cta);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-outline-brand:hover:not(:disabled) {
+  background: var(--primary-cta);
+  color: #fff;
+}
+
+.btn-primary-sm {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 0.75rem;
+  background: var(--primary-cta);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--primary-cta) 25%, transparent);
+  transition: background-color 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .btn-primary-sm {
+    font-size: 0.875rem;
+  }
+}
+
+.btn-primary-sm:hover:not(:disabled) {
+  background: var(--primary-cta-hover);
+}
+
+.btn-secondary-sm {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);
+  background: var(--card);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--foreground);
+  text-align: center;
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-.btn-secondary:hover {
-  border-color: color-mix(in srgb, var(--primary-cta) 40%, transparent);
+@media (min-width: 640px) {
+  .btn-secondary-sm {
+    font-size: 0.875rem;
+  }
+}
+
+.btn-secondary-sm:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--primary-cta) 35%, transparent);
   color: var(--primary-cta);
+}
+
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-cta);
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.btn-link:hover {
+  color: var(--primary-cta-hover);
+}
+
+.group:hover .btn-link {
+  gap: 0.5rem;
+}
+
+.btn-on-dark {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  background: rgb(255 255 255 / 0.1);
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  backdrop-filter: blur(4px);
+  transition: background-color 0.2s ease;
+}
+
+.btn-on-dark:hover {
+  background: rgb(255 255 255 / 0.2);
+}
+
+.btn-call {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 0.75rem;
+  background: var(--surface-nav);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.btn-call:hover {
+  background: var(--surface-deep);
+}
+
+.btn-inverse {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  background: #fff;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-cta);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.12);
+  transition: background-color 0.2s ease;
+}
+
+.btn-inverse:hover:not(:disabled) {
+  background: var(--section);
+}
+
+.btn-block {
+  width: 100%;
 }
 
 .card-elevated {

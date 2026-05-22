@@ -72,16 +72,13 @@ export default function ServiceCategoryProductList({
               }
               footer={
                 <div className="grid grid-cols-1 gap-2 min-[400px]:grid-cols-2">
-                  <Link
-                    href={`/products/${item.slug}`}
-                    className="inline-flex min-h-11 items-center justify-center rounded-xl border border-foreground/15 bg-card px-3 text-center text-xs font-semibold text-foreground transition hover:border-brand/35 hover:text-brand sm:min-h-[2.65rem] sm:text-sm"
-                  >
+                  <Link href={`/products/${item.slug}`} className="btn-secondary-sm">
                     View details
                   </Link>
                   <button
                     type="button"
                     onClick={() => openEnquiry(`${item.enquiryTag} — enquiry`, defaultInterest)}
-                    className="inline-flex min-h-11 items-center justify-center rounded-xl bg-brand px-3 text-center text-xs font-semibold text-white shadow-md shadow-brand/20 transition hover:bg-brand-hover sm:min-h-[2.65rem] sm:text-sm"
+                    className="btn-primary-sm"
                   >
                     Enquiry
                   </button>

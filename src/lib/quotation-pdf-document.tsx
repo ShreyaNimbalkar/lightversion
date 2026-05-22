@@ -11,7 +11,9 @@ import { site } from "@/data/site";
 import { findCatalogProduct } from "@/lib/quotation-catalog-options";
 import {
   formatInr,
+  activeLineItems,
   lineAmount,
+  lineGstAmount,
   quotationTotals,
   type QuotationFormData,
   type QuotationLineItem,
@@ -255,13 +257,15 @@ const styles = StyleSheet.create({
     color: SLATE,
     textAlign: "right",
   },
-  colSr: { width: "5%" },
-  colDesc: { width: "33%" },
-  colHsn: { width: "11%" },
-  colQty: { width: "9%" },
-  colUnit: { width: "9%" },
-  colRate: { width: "15%" },
-  colAmt: { width: "18%" },
+  colSr: { width: "4%" },
+  colDesc: { width: "28%" },
+  colHsn: { width: "10%" },
+  colQty: { width: "8%" },
+  colUnit: { width: "8%" },
+  colRate: { width: "13%" },
+  colGst: { width: "7%" },
+  colAmt: { width: "14%" },
+  colAmtGst: { width: "8%" },
   totalsCard: {
     alignSelf: "flex-end",
     width: 220,
@@ -437,15 +441,17 @@ function TableRow({ item, index }: { item: QuotationLineItem; index: number }) {
       <Text style={[styles.tableCellRight, styles.colQty]}>{item.qty}</Text>
       <Text style={[styles.tableCell, styles.colUnit]}>{item.unit}</Text>
       <Text style={[styles.tableCellRight, styles.colRate]}>{formatInr(item.rate)}</Text>
+      <Text style={[styles.tableCellRight, styles.colGst]}>{item.gstPercent ?? 18}%</Text>
       <Text style={[styles.tableCellBold, styles.colAmt]}>{formatInr(lineAmount(item))}</Text>
+      <Text style={[styles.tableCellRight, styles.colAmtGst]}>{formatInr(lineGstAmount(item))}</Text>
     </View>
   );
 }
 
 export function QuotationPdfDocument({ data, logoUrl }: Props) {
-  const { subtotal, gstAmount, grandTotal } = quotationTotals(data.lineItems, data.gstPercent);
+  const { subtotal, gstAmount, grandTotal, gstBreakdown } = quotationTotals(data.lineItems);
   const office = site.locations[0];
-  const lineItems = data.lineItems.filter((row) => row.description.trim() || row.rate > 0);
+  const lineItems = activeLineItems(data.lineItems);
 
   return (
     <Document
@@ -551,7 +557,9 @@ export function QuotationPdfDocument({ data, logoUrl }: Props) {
             <Text style={[styles.tableHeadCell, styles.colQty]}>Qty</Text>
             <Text style={[styles.tableHeadCell, styles.colUnit]}>Unit</Text>
             <Text style={[styles.tableHeadCell, styles.colRate]}>Rate (₹)</Text>
-            <Text style={[styles.tableHeadCell, styles.colAmt]}>Amount (₹)</Text>
+            <Text style={[styles.tableHeadCell, styles.colGst]}>GST %</Text>
+            <Text style={[styles.tableHeadCell, styles.colAmt]}>Taxable (₹)</Text>
+            <Text style={[styles.tableHeadCell, styles.colAmtGst]}>GST (₹)</Text>
           </View>
           {lineItems.map((item, index) => (
             <TableRow key={item.id} item={item} index={index} />
@@ -563,10 +571,20 @@ export function QuotationPdfDocument({ data, logoUrl }: Props) {
             <Text style={styles.totalLabel}>Subtotal</Text>
             <Text style={styles.totalValue}>{formatInr(subtotal)}</Text>
           </View>
-          <View style={styles.totalRow}>
-            <Text style={styles.totalLabel}>GST @ {data.gstPercent}%</Text>
-            <Text style={styles.totalValue}>{formatInr(gstAmount)}</Text>
-          </View>
+          {gstBreakdown.map((row) => (
+            <View key={row.rate} style={styles.totalRow}>
+              <Text style={styles.totalLabel}>
+                GST @ {row.rate}% on {formatInr(row.taxable)}
+              </Text>
+              <Text style={styles.totalValue}>{formatInr(row.gst)}</Text>
+            </View>
+          ))}
+          {gstBreakdown.length > 1 ? (
+            <View style={styles.totalRow}>
+              <Text style={styles.totalLabel}>Total GST</Text>
+              <Text style={styles.totalValue}>{formatInr(gstAmount)}</Text>
+            </View>
+          ) : null}
           <View style={styles.grandTotalRow}>
             <Text style={styles.grandTotalLabel}>Grand total</Text>
             <Text style={styles.grandTotalValue}>{formatInr(grandTotal)}</Text>

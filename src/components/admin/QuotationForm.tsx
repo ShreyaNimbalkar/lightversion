@@ -7,6 +7,7 @@ import {
   defaultQuotationForm,
   formatInr,
   generateQuotationNumber,
+  lineGstAmount,
   lineAmount,
   quotationTotals,
   type QuotationFormData,
@@ -31,10 +32,7 @@ export default function QuotationForm() {
   const [downloading, setDownloading] = useState(false);
   const [pdfError, setPdfError] = useState("");
 
-  const totals = useMemo(
-    () => quotationTotals(form.lineItems, form.gstPercent),
-    [form.lineItems, form.gstPercent],
-  );
+  const totals = useMemo(() => quotationTotals(form.lineItems), [form.lineItems]);
 
   function update<K extends keyof QuotationFormData>(key: K, value: QuotationFormData[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -50,7 +48,7 @@ export default function QuotationForm() {
   function addLine() {
     setForm((prev) => ({
       ...prev,
-      lineItems: [...prev.lineItems, createEmptyLineItem()],
+      lineItems: [...prev.lineItems, createEmptyLineItem(prev.defaultGstPercent)],
     }));
   }
 
@@ -226,19 +224,37 @@ export default function QuotationForm() {
         <QuotationCatalogPicker form={form} onChange={setForm} />
 
         <section className="card-elevated overflow-hidden p-4 sm:p-6">
-          <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-end justify-between gap-3">
             <h2 className="text-sm font-bold text-foreground">Line items</h2>
-            <button
-              type="button"
-              onClick={addLine}
-              className="rounded-lg border border-brand/30 bg-brand/5 px-3 py-2 text-xs font-semibold text-brand hover:bg-brand/10"
-            >
-              + Add row
-            </button>
+            <div className="flex flex-wrap items-end gap-3">
+              <div className="w-24">
+                <FieldLabel>Default GST %</FieldLabel>
+                <input
+                  type="number"
+                  min={0}
+                  max={28}
+                  step={0.01}
+                  className={inputClass}
+                  value={form.defaultGstPercent}
+                  onChange={(e) => update("defaultGstPercent", Number(e.target.value) || 0)}
+                  title="Applied to new rows and catalogue picks"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={addLine}
+                className="rounded-lg border border-brand/30 bg-brand/5 px-3 py-2 text-xs font-semibold text-brand hover:bg-brand/10"
+              >
+                + Add row
+              </button>
+            </div>
           </div>
+          <p className="mt-2 text-xs text-foreground/55">
+            Set GST % per product below — mixed rates (e.g. 18% hardware, 5% some services) are supported.
+          </p>
 
           <div className="mt-4 hidden overflow-x-auto md:block">
-            <table className="w-full min-w-[640px] text-left text-sm">
+            <table className="w-full min-w-[720px] text-left text-sm">
               <thead>
                 <tr className="border-b border-foreground/10 text-xs uppercase tracking-wide text-foreground/55">
                   <th className="py-2 pr-2">Description</th>
@@ -246,7 +262,8 @@ export default function QuotationForm() {
                   <th className="py-2 pr-2 w-16 text-right">Qty</th>
                   <th className="py-2 pr-2 w-20">Unit</th>
                   <th className="py-2 pr-2 w-24 text-right">Rate</th>
-                  <th className="py-2 pr-2 w-24 text-right">Amount</th>
+                  <th className="py-2 pr-2 w-16 text-right">GST %</th>
+                  <th className="py-2 pr-2 w-28 text-right">Amount</th>
                   <th className="py-2 w-10" />
                 </tr>
               </thead>
@@ -295,8 +312,26 @@ export default function QuotationForm() {
                         onChange={(e) => updateLine(row.id, { rate: Number(e.target.value) || 0 })}
                       />
                     </td>
-                    <td className="py-2 pr-2 text-right font-semibold tabular-nums text-foreground">
-                      {formatInr(lineAmount(row))}
+                    <td className="py-2 pr-2">
+                      <input
+                        type="number"
+                        min={0}
+                        max={28}
+                        step={0.01}
+                        className={`${inputClass} text-right`}
+                        value={row.gstPercent ?? ""}
+                        onChange={(e) =>
+                          updateLine(row.id, { gstPercent: Number(e.target.value) || 0 })
+                        }
+                      />
+                    </td>
+                    <td className="py-2 pr-2 text-right">
+                      <span className="block font-semibold tabular-nums text-foreground">
+                        {formatInr(lineAmount(row))}
+                      </span>
+                      <span className="block text-[10px] tabular-nums text-foreground/50">
+                        +GST {formatInr(lineGstAmount(row))}
+                      </span>
                     </td>
                     <td className="py-2">
                       <button
@@ -362,9 +397,27 @@ export default function QuotationForm() {
                         onChange={(e) => updateLine(row.id, { rate: Number(e.target.value) || 0 })}
                       />
                     </div>
+                    <div>
+                      <FieldLabel>GST %</FieldLabel>
+                      <input
+                        type="number"
+                        min={0}
+                        max={28}
+                        step={0.01}
+                        className={inputClass}
+                        value={row.gstPercent ?? ""}
+                        onChange={(e) =>
+                          updateLine(row.id, { gstPercent: Number(e.target.value) || 0 })
+                        }
+                      />
+                    </div>
                   </div>
                   <p className="text-sm font-semibold text-foreground">
-                    Amount: {formatInr(lineAmount(row))}
+                    Taxable: {formatInr(lineAmount(row))}
+                    <span className="text-foreground/55">
+                      {" "}
+                      · GST ({row.gstPercent}%): {formatInr(lineGstAmount(row))}
+                    </span>
                   </p>
                   <button
                     type="button"
@@ -378,19 +431,6 @@ export default function QuotationForm() {
             ))}
           </div>
 
-          <div className="mt-4 flex flex-wrap items-end gap-4">
-            <div className="w-28">
-              <FieldLabel>GST %</FieldLabel>
-              <input
-                type="number"
-                min={0}
-                max={28}
-                className={inputClass}
-                value={form.gstPercent}
-                onChange={(e) => update("gstPercent", Number(e.target.value) || 0)}
-              />
-            </div>
-          </div>
         </section>
 
         <section className="card-elevated p-4 sm:p-6">
@@ -440,10 +480,26 @@ export default function QuotationForm() {
               <dt className="text-foreground/65">Subtotal</dt>
               <dd className="font-semibold tabular-nums">{formatInr(totals.subtotal)}</dd>
             </div>
-            <div className="flex justify-between">
-              <dt className="text-foreground/65">GST ({form.gstPercent}%)</dt>
-              <dd className="font-semibold tabular-nums">{formatInr(totals.gstAmount)}</dd>
-            </div>
+            {totals.gstBreakdown.map((row) => (
+              <div key={row.rate} className="flex justify-between text-xs sm:text-sm">
+                <dt className="text-foreground/65">
+                  GST @ {row.rate}%{" "}
+                  <span className="text-foreground/45">on {formatInr(row.taxable)}</span>
+                </dt>
+                <dd className="font-semibold tabular-nums">{formatInr(row.gst)}</dd>
+              </div>
+            ))}
+            {totals.gstBreakdown.length > 1 ? (
+              <div className="flex justify-between text-xs sm:text-sm">
+                <dt className="font-medium text-foreground/70">Total GST</dt>
+                <dd className="font-semibold tabular-nums">{formatInr(totals.gstAmount)}</dd>
+              </div>
+            ) : totals.gstBreakdown.length === 0 ? (
+              <div className="flex justify-between">
+                <dt className="text-foreground/65">GST</dt>
+                <dd className="font-semibold tabular-nums">{formatInr(0)}</dd>
+              </div>
+            ) : null}
             <div className="flex justify-between border-t border-foreground/10 pt-2 text-base">
               <dt className="font-bold">Grand total</dt>
               <dd className="font-bold tabular-nums text-brand">{formatInr(totals.grandTotal)}</dd>

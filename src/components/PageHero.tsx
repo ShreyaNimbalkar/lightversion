@@ -106,10 +106,7 @@ export default function PageHero({
                 </button>
               ) : null}
               {ctaHref && ctaLabel ? (
-                <Link
-                  href={ctaHref}
-                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/10 px-5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20"
-                >
+                <Link href={ctaHref} className="btn-on-dark">
                   {ctaLabel}
                 </Link>
               ) : null}

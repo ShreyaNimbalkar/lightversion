@@ -28,7 +28,7 @@ const OFFERING_ICONS: IconDefinition[] = [
   faKey,
 ];
 
-const HERO_IMAGE = "/images/services/header.jpg";
+const HERO_IMAGE = "/headersection.jpg";
 
 const fadeLeft = {
   hidden: { opacity: 0, x: -28 },
@@ -71,13 +71,13 @@ export default function HeroSection() {
         {/* Dark rounded panel — SoluTek-style hero shell */}
         <div className="relative overflow-hidden rounded-2xl bg-[#0a1220] shadow-2xl shadow-surface-deep/30 sm:rounded-[2.25rem] lg:overflow-visible lg:rounded-[3rem]">
           {/* Circuit / tech pattern */}
-          <div
+          {/* <div
             className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-[0.14]"
             style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.5'%3E%3Cpath d='M0 30h20M40 30h20M30 0v20M30 40v20'/%3E%3Ccircle cx='30' cy='30' r='2' fill='%23ffffff'/%3E%3C/g%3E%3C/svg%3E")`,
+              backgroundImage: `url("/header.jpg")`,
             }}
             aria-hidden
-          />
+          /> */}
           <div className="pointer-events-none absolute -right-24 top-0 h-96 w-96 rounded-full bg-brand/20 blur-3xl" aria-hidden />
           <div className="pointer-events-none absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-accent/10 blur-3xl" aria-hidden />
 
@@ -115,7 +115,7 @@ export default function HeroSection() {
                 <button
                   type="button"
                   onClick={() => openQuotation()}
-                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-brand/30 transition hover:bg-brand-hover sm:w-auto sm:px-8"
+                  className="btn-primary btn-block sm:w-auto"
                 >
                   {hero.ctaPrimary}
                   <FontAwesomeIcon icon={faArrowRight} className="text-xs" aria-hidden />

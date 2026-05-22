@@ -107,13 +107,13 @@ export default function AboutBody() {
                 </li>
               ))}
             </ul>
-            <Link
+            {/* <Link
               href="/#services"
               className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:gap-3"
             >
               View our services
               <FontAwesomeIcon icon={faArrowRight} className="text-xs" />
-            </Link>
+            </Link> */}
           </div>
         </div>
       </PageSection>
@@ -147,7 +147,7 @@ export default function AboutBody() {
                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.mapQuery)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-hover"
+                className="btn-link mt-4"
               >
                 Open in Maps
                 <FontAwesomeIcon icon={faArrowRight} className="text-xs" />

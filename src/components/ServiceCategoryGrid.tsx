@@ -8,6 +8,8 @@ import CatalogIcon from "@/components/CatalogIcon";
 import PageSection from "@/components/ui/PageSection";
 import SectionHeader from "@/components/ui/SectionHeader";
 import type { ServiceCatalogCategory } from "@/data/serviceProductLists";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const container: Variants = {
   hidden: { opacity: 0 },
@@ -84,9 +86,9 @@ export default function ServiceCategoryGrid({
                     </span>
                   ) : null}
                 </div>
-                <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-brand transition group-hover:gap-2">
+                <span className="btn-link mt-auto pt-6">
                   View {category.title.toLowerCase()}
-                  <span aria-hidden>→</span>
+                  <span aria-hidden><FontAwesomeIcon icon={faArrowRight} /></span>
                 </span>
               </Link>
             </motion.div>

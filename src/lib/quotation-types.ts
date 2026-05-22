@@ -1,3 +1,5 @@
+export const DEFAULT_GST_PERCENT = 18;
+
 export type QuotationLineItem = {
   id: string;
   description: string;
@@ -5,6 +7,8 @@ export type QuotationLineItem = {
   qty: number;
   unit: string;
   rate: number;
+  /** GST % applied to this line only */
+  gstPercent: number;
   /** Links row to a catalogue product when added from the picker */
   catalogSlug?: string;
 };
@@ -23,12 +27,13 @@ export type QuotationFormData = {
   selectedCatalogSlugs: string[];
   subject: string;
   lineItems: QuotationLineItem[];
-  gstPercent: number;
+  /** Default GST % for newly added line items */
+  defaultGstPercent: number;
   notes: string;
   paymentTerms: string;
 };
 
-export function createEmptyLineItem(): QuotationLineItem {
+export function createEmptyLineItem(gstPercent = DEFAULT_GST_PERCENT): QuotationLineItem {
   return {
     id: crypto.randomUUID(),
     description: "",
@@ -36,6 +41,7 @@ export function createEmptyLineItem(): QuotationLineItem {
     qty: 1,
     unit: "Nos",
     rate: 0,
+    gstPercent,
   };
 }
 
@@ -58,7 +64,7 @@ export function defaultQuotationForm(): QuotationFormData {
     selectedCatalogSlugs: [],
     subject: "",
     lineItems: [createEmptyLineItem()],
-    gstPercent: 18,
+    defaultGstPercent: DEFAULT_GST_PERCENT,
     notes: "Prices are indicative until site survey or inspection where applicable. GST extra as shown.",
     paymentTerms: "50% advance to confirm order · balance on delivery unless agreed otherwise.",
   };
@@ -77,11 +83,46 @@ export function lineAmount(item: QuotationLineItem): number {
   return Math.round(item.qty * item.rate * 100) / 100;
 }
 
-export function quotationTotals(items: QuotationLineItem[], gstPercent: number) {
-  const subtotal = items.reduce((sum, item) => sum + lineAmount(item), 0);
-  const gstAmount = Math.round(subtotal * (gstPercent / 100) * 100) / 100;
+export function lineGstAmount(item: QuotationLineItem): number {
+  const rate = item.gstPercent ?? DEFAULT_GST_PERCENT;
+  return Math.round(lineAmount(item) * (rate / 100) * 100) / 100;
+}
+
+export type GstBreakdownRow = {
+  rate: number;
+  taxable: number;
+  gst: number;
+};
+
+export function activeLineItems(items: QuotationLineItem[]): QuotationLineItem[] {
+  return items.filter((row) => row.description.trim() || row.rate > 0);
+}
+
+export function quotationTotals(items: QuotationLineItem[]) {
+  const lines = activeLineItems(items);
+  const subtotal = lines.reduce((sum, item) => sum + lineAmount(item), 0);
+
+  const byRate = new Map<number, { taxable: number; gst: number }>();
+  for (const item of lines) {
+    const rate = item.gstPercent ?? DEFAULT_GST_PERCENT;
+    const taxable = lineAmount(item);
+    const gst = lineGstAmount(item);
+    const prev = byRate.get(rate) ?? { taxable: 0, gst: 0 };
+    byRate.set(rate, { taxable: prev.taxable + taxable, gst: prev.gst + gst });
+  }
+
+  const gstBreakdown: GstBreakdownRow[] = Array.from(byRate.entries())
+    .sort((a, b) => b[0] - a[0])
+    .map(([rate, v]) => ({
+      rate,
+      taxable: Math.round(v.taxable * 100) / 100,
+      gst: Math.round(v.gst * 100) / 100,
+    }));
+
+  const gstAmount = Math.round(gstBreakdown.reduce((sum, row) => sum + row.gst, 0) * 100) / 100;
   const grandTotal = Math.round((subtotal + gstAmount) * 100) / 100;
-  return { subtotal, gstAmount, grandTotal };
+
+  return { subtotal, gstAmount, grandTotal, gstBreakdown };
 }
 
 export function formatInr(amount: number): string {

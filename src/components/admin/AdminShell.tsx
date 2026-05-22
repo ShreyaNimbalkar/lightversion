@@ -54,7 +54,7 @@ export default function AdminShell({
           <button
             type="button"
             onClick={() => void logout()}
-            className="shrink-0 rounded-lg border border-foreground/15 px-3 py-2 text-xs font-semibold text-foreground transition hover:border-brand hover:text-brand sm:text-sm"
+            className="btn-secondary shrink-0 px-3 py-2 text-xs sm:text-sm"
           >
             Logout
           </button>

@@ -31,10 +31,7 @@ export default function HomeCtaBand() {
               Request quotation
               <FontAwesomeIcon icon={faArrowRight} className="text-xs" />
             </button>
-            <Link
-              href="/contact"
-              className="inline-flex min-h-11 min-w-[11rem] items-center justify-center rounded-xl border border-white/25 bg-white/10 px-6 text-sm font-semibold text-white transition hover:bg-white/20"
-            >
+            <Link href="/contact" className="btn-on-dark min-w-[11rem]">
               Contact us
             </Link>
             <a

@@ -23,9 +23,7 @@ export default async function AdminDashboardPage() {
           <p className="mt-2 flex-1 text-sm text-foreground/65">
             Fill client details, line items, GST, and download a branded PDF with signature blocks.
           </p>
-          <span className="mt-4 text-sm font-semibold text-brand group-hover:underline">
-            Open form →
-          </span>
+          <span className="btn-link mt-4">Open form →</span>
         </Link>
 
         <a
@@ -39,7 +37,7 @@ export default async function AdminDashboardPage() {
           <p className="mt-2 flex-1 text-sm text-foreground/65">
             Open the customer-facing site in a new tab.
           </p>
-          <span className="mt-4 text-sm font-semibold text-brand">softlinkcomputers.co.in →</span>
+          <span className="btn-link mt-4">softlinkcomputers.co.in →</span>
         </a>
       </div>
     </AdminShell>

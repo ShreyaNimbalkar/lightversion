@@ -226,17 +226,9 @@ export default function Navbar() {
                 <span className="tabular-nums">{site.phones[0].display}</span>
               </a>
 
-              <button
-                type="button"
-                onClick={() => openQuotation()}
-                className="group inline-flex items-center gap-3 rounded-lg bg-brand hover:bg-brand-hover px-6 py-3 text-white font-semibold transition-colors duration-200 shadow-md shadow-black/20"
-              >
+              <button type="button" onClick={() => openQuotation()} className="btn-primary">
                 Request quotation
-
-                <FontAwesomeIcon
-                  icon={faArrowRight}
-                  className="text-sm opacity-90"
-                />
+                <FontAwesomeIcon icon={faArrowRight} className="text-sm opacity-90" />
               </button>
             </div>
 
@@ -460,7 +452,7 @@ export default function Navbar() {
                         setMobileMenu(false);
                         openQuotation();
                       }}
-                      className="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-brand shadow-md transition-colors hover:bg-section"
+                      className="btn-inverse mt-6"
                     >
                       Request quotation
 
