@@ -151,7 +151,7 @@ export default function ContactBody() {
                 </div>
 
                 {/* FEATURES */}
-                <div className="mt-8 space-y-3">
+                {/* <div className="mt-8 space-y-3">
                   {[
                     "GST-ready quotations",
                     "Local Pune support team",
@@ -171,7 +171,7 @@ export default function ContactBody() {
                       </p>
                     </div>
                   ))}
-                </div>
+                </div> */}
               </div>
             </div>
 

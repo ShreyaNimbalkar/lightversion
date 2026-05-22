@@ -49,12 +49,15 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-4">
             <Link href="/" className="inline-flex items-center gap-4">
-              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl bg-brand shadow-lg shadow-black/20 sm:h-[4.5rem] sm:w-[4.5rem]">
+              <div className="relative h-11 w-[8.75rem] max-w-[min(11rem,calc(100vw-9rem))] sm:h-14 sm:w-44 sm:max-w-none md:h-16 md:w-48 lg:h-[4.25rem] lg:w-[12.5rem]">
                 <Image
                   src="/softlink_logowht.png"
-                  alt={`${site.brandName} logo`}
+                  alt=""
                   fill
-                  className="object-contain p-2"
+                  priority
+                  className="object-contain object-left drop-shadow-[0_1px_3px_rgba(0,0,0,0.45)]"
+                  sizes="(max-width: 640px) 140px, (max-width: 768px) 176px, (max-width: 1024px) 192px, 200px"
+                  role="presentation"
                 />
               </div>
               {/* <div>
