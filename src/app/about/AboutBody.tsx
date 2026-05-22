@@ -61,7 +61,7 @@ export default function AboutBody() {
           <div className="relative">
             <div className="overflow-hidden rounded-2xl border border-foreground/10 shadow-lg">
               <Image
-                src="/images/services/header.jpg"
+                src="/header.jpg"
                 alt={`${site.brandName} workshop`}
                 width={1200}
                 height={800}

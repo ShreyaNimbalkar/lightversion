@@ -24,7 +24,7 @@ export default function HomeAboutTeaser() {
           className="relative overflow-hidden rounded-2xl border border-foreground/10 shadow-lg"
         >
           <Image
-            src="/images/services/header.jpg"
+            src="/header.jpg"
             alt={`${site.brandName} workshop`}
             width={800}
             height={600}

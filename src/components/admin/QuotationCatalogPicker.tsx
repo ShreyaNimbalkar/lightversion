@@ -2,7 +2,9 @@
 
 import { useMemo } from "react";
 
-import MultiSelectDropdown, { type MultiSelectOption } from "@/components/ui/MultiSelectDropdown";
+import MultiSelectDropdown, {
+  type MultiSelectOptionGroup,
+} from "@/components/ui/MultiSelectDropdown";
 import {
   buildCatalogServiceGroups,
   catalogLineDescription,
@@ -21,21 +23,18 @@ type Props = {
 };
 
 export default function QuotationCatalogPicker({ form, onChange }: Props) {
-  const catalogOptions = useMemo((): MultiSelectOption[] => {
-    const groups = buildCatalogServiceGroups();
-    const opts: MultiSelectOption[] = [];
-    for (const service of groups) {
-      for (const category of service.categories) {
-        for (const product of category.products) {
-          opts.push({
-            value: product.productSlug,
-            label: product.productName,
-            hint: `${product.serviceLabel} · ${product.categoryTitle} · ${product.priceFrom}`,
-          });
-        }
-      }
-    }
-    return opts;
+  const catalogGroups = useMemo((): MultiSelectOptionGroup[] => {
+    return buildCatalogServiceGroups().map((service) => ({
+      id: service.servicePath,
+      label: service.serviceLabel,
+      options: service.categories.flatMap((category) =>
+        category.products.map((product) => ({
+          value: product.productSlug,
+          label: product.productName,
+          hint: `${category.categoryTitle} · ${product.priceFrom}`,
+        })),
+      ),
+    }));
   }, []);
 
   function applySelection(nextSlugs: string[]) {
@@ -83,25 +82,37 @@ export default function QuotationCatalogPicker({ form, onChange }: Props) {
     onChange({ ...form, selectedCatalogSlugs: nextSlugs, lineItems, subject });
   }
 
+  const selectedCount = form.selectedCatalogSlugs.length;
+
   return (
     <section className="card-elevated p-4 sm:p-6">
-      <p className="mb-1 text-sm font-bold text-foreground">Service & product catalogue</p>
-      <p className="text-xs text-foreground/60 sm:text-sm">
-        Select services and products required. Selected items are added to line items below (you can edit
-        rates and quantities).
-      </p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h2 className="text-sm font-bold text-foreground">Service & product catalogue</h2>
+          <p className="mt-1 max-w-xl text-xs leading-relaxed text-foreground/60 sm:text-sm">
+            Pick products by service group. Each selection adds a line item below — you can edit
+            quantity, rate, and GST per row.
+          </p>
+        </div>
+        {selectedCount > 0 ? (
+          <span className="inline-flex items-center rounded-full border border-brand/25 bg-brand/10 px-3 py-1 text-xs font-semibold tabular-nums text-brand">
+            {selectedCount} in quote
+          </span>
+        ) : null}
+      </div>
 
-      <div className="mt-4">
+      <div className="mt-5">
         <MultiSelectDropdown
-          label="Catalogue items"
-          hint="(select all that apply)"
-          placeholder="Select products from catalogue…"
+          label="Products & services"
+          hint="(search and select)"
+          placeholder="Search catalogue…"
           countNoun="products"
-          options={catalogOptions}
+          groups={catalogGroups}
           value={form.selectedCatalogSlugs}
           onChange={applySelection}
           searchable
-          searchPlaceholder="Search"
+          searchPlaceholder="Search by product, category, or service…"
+          maxVisiblePills={2}
         />
       </div>
     </section>
