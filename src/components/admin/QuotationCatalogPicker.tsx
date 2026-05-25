@@ -143,17 +143,17 @@ export default function QuotationCatalogPicker({ form, onChange }: Props) {
           searchable
           searchPlaceholder="Search by product, category, or service…"
           maxVisiblePills={2}
-          expandableOption={{
-            value: CATALOG_OTHER_SLUG,
-            detail: form.otherServiceDetail,
-            onDetailChange: (detail) => onChange({ ...form, otherServiceDetail: detail }),
-            detailLabel: "Describe other product or service",
-            detailPlaceholder:
-              "e.g. Biometric attendance, printer AMC, mixed hardware + licence bundle…",
-            detailHint:
-              "This appears on the PDF under catalogue items. Add matching line items in the table below if you need pricing.",
-            required: false,
-          }}
+          // expandableOption={{
+          //   value: CATALOG_OTHER_SLUG,
+          //   detail: form.otherServiceDetail,
+          //   onDetailChange: (detail) => onChange({ ...form, otherServiceDetail: detail }),
+          //   detailLabel: "Describe other product or service",
+          //   detailPlaceholder:
+          //     "e.g. Biometric attendance, printer AMC, mixed hardware + licence bundle…",
+          //   detailHint:
+          //     "This appears on the PDF under catalogue items. Add matching line items in the table below if you need pricing.",
+          //   required: false,
+          // }}
         />
       </div>
     </section>

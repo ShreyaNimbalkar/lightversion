@@ -34,13 +34,13 @@ export default function HomeCtaBand() {
             <Link href="/contact" className="btn-on-dark min-w-[11rem]">
               Contact us
             </Link>
-            <a
+            {/* <a
               href={siteTelHref(site.phones[0].tel)}
               className="inline-flex min-h-11 items-center justify-center gap-2 px-4 text-sm font-semibold text-white/90 hover:text-white"
             >
               <FontAwesomeIcon icon={faPhone} />
               {site.phones[0].display}
-            </a>
+            </a> */}
           </div>
         </motion.div>
       </div>

@@ -220,7 +220,7 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-4">
               <a
                 href={siteTelHref(site.phones[0].tel)}
-                className="hidden items-center gap-2 rounded-lg border border-white/15 px-4 py-2.5 text-sm font-medium text-white/90 transition hover:border-accent/40 hover:text-accent xl:inline-flex"
+                className="hidden inline-flex min-h-[2.80rem] items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/10 px-7 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/15"
               >
                 <FontAwesomeIcon icon={faPhone} className="text-xs opacity-90" />
                 <span className="tabular-nums">{site.phones[0].display}</span>

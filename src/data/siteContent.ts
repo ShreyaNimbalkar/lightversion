@@ -7,11 +7,25 @@ import { site } from "@/data/site";
 export const siteContent = {
   tagline: "Trusted IT partner in Pune since 2012",
   hero: {
-    badge: `Trusted IT partner · Pune & PCMC · Since ${site.establishedYear}`,
-    headline: "Technology services",
-    titleAccent: "your business can rely on",
+    badge: `Trusted in Pune since ${site.establishedYear}`,
+    headlineLines: ["IT support your", "business can rely on"],
+    titleAccent: "in Pune & PCMC",
     description:
-      "Online solutions to boost your business — repair & rental, networking, CCTV, WFH setups, and genuine software licences. 1,000+ happy customers in Pune & PCMC since 2012, with GST-ready billing and direct access to our engineers.",
+      "Laptop repair, office networking, CCTV, and genuine software — with clear quotes and engineers you can speak with directly.",
+    highlights: [
+      {
+        title: `Since ${site.establishedYear}`,
+        desc: "Local workshop & on-site visits in Pune",
+      },
+      {
+        title: "1,000+",
+        desc: "Homes and businesses served",
+      },
+      {
+        title: "GST-ready",
+        desc: "Written scope before work starts",
+      },
+    ],
     offeringsLabel: "What we provide",
     offerings: [
       {
@@ -56,14 +70,15 @@ export const siteContent = {
     ],
   },
   services: {
-    sectionTitle: "Our service lines",
-    sectionAccent: "Built for growing businesses",
-    sectionIntro: `What we can do for your business — laptops, desktops, printers, routers, antivirus, CCTV, and licensed software. Browse by category, see indicative pricing, and request a written quotation. Serving Pune and PCMC since ${site.establishedYear}.`,
+    sectionTitle: "Our Core",
+    sectionAccent: "Expertise.",
+    sectionIntro:
+      "Comprehensive IT infrastructure and support services designed for growth — hardware, networking, security, remote work, and licensed software.",
     cards: [
       {
         title: "Repair & rental",
-        // eyebrow: "Workshop & interim hardware",
-        desc: "Component-level laptop and desktop repair, performance upgrades, and short-term device rental with clear return terms and serial-tracked invoices.",
+        // tags: ["HARDWARE", "SUPPORT"],
+        desc: "Expert maintenance for desktops and laptops.",
         link: "/repair-rental",
         image:
           "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?q=80&w=1000&auto=format&fit=crop",
@@ -73,8 +88,8 @@ export const siteContent = {
       },
       {
         title: "Networking solutions",
-        // eyebrow: "Infrastructure",
-        desc: "Structured cabling, switching, business Wi‑Fi, NAS, IP telephony, and attendance integration — installed with labelled ports and handover documentation.",
+        tags: ["INFRASTRUCTURE", "SECURITY"],
+        desc: "Networking, Wi-Fi, IP telephony & secure office connectivity.",
         link: "/networking",
         image:
           "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1000&auto=format&fit=crop",
@@ -84,8 +99,8 @@ export const siteContent = {
       },
       {
         title: "CCTV services",
-        // eyebrow: "Security & surveillance",
-        desc: "IP camera systems, NVR/DVR design, PoE switching, video door entry, and secure remote viewing — planned for coverage, retention, and network isolation.",
+        // tags: ["SECURITY", "INFRASTRUCTURE"],
+        desc: "CCTV surveillance, video door systems & secure remote monitoring.",
         link: "/cctv-services",
         image:
           "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1000&auto=format&fit=crop",
@@ -95,8 +110,8 @@ export const siteContent = {
       },
       {
         title: "WFH service",
-        // eyebrow: "Remote workforce",
-        desc: "Curated home-office kits: business laptops, connectivity, monitors, collaboration peripherals, and optional Microsoft 365 — deployed with imaging and support notes.",
+        // tags: ["REMOTE", "SUPPORT"],
+        desc: "WFH setups with laptops, monitors, connectivity & collaboration tools.",
         link: "/wfh-service",
         image:
           "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?q=80&w=1000&auto=format&fit=crop",
@@ -106,8 +121,8 @@ export const siteContent = {
       },
       {
         title: "Software licensing",
-        // eyebrow: "Authorised distribution",
-        desc: "Microsoft, Adobe, Autodesk, Oracle, Corel, Apple, JetBrains, and IBM — supplied with correct editions, seats, activation, and renewal tracking.",
+        // tags: ["COMPLIANCE", "SOFTWARE"],
+        desc: "Software licensing & activation support.",
         link: "/licenses",
         image:
           "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000&auto=format&fit=crop",
