@@ -1,20 +1,16 @@
-import type { Metadata } from "next";
+import {
+  createServiceCategoryMetadata,
+  createServiceCategoryPage,
+} from "@/lib/serviceCategoryPage";
+import { getServiceRouteByPath } from "@/data/serviceCatalogRoutes";
 
-import WfhServiceHero from "@/app/wfh-service/WfhServiceHero";
-import WfhServiceBody from "@/app/wfh-service/WfhServiceBody";
+const SERVICE_PATH = "wfh-service";
 
-import { site } from "@/data/site";
+export const generateMetadata = createServiceCategoryMetadata(SERVICE_PATH);
 
-export const metadata: Metadata = {
-  title: "WFH service",
-  description: `${site.brandName} — work-from-home kits in Pune & PCMC: laptops, home Wi‑Fi, monitors, headsets, and Microsoft 365 with GST-ready paperwork.`,
-};
-
-export default function WfhServicePage() {
-  return (
-    <>
-      <WfhServiceHero />
-      <WfhServiceBody />
-    </>
-  );
+export async function generateStaticParams() {
+  const route = getServiceRouteByPath(SERVICE_PATH);
+  return (route?.catalog ?? []).map((category) => ({ categorySlug: category.slug }));
 }
+
+export default createServiceCategoryPage(SERVICE_PATH);

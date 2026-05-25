@@ -120,7 +120,7 @@ export default function HeroSection() {
                   {hero.ctaPrimary}
                   <FontAwesomeIcon icon={faArrowRight} className="text-xs" aria-hidden />
                 </button>
-                <a
+                {/* <a
                   href={siteTelHref(site.phones[0].tel)}
                   className="group inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-wide text-white/90 transition hover:text-white"
                 >
@@ -128,7 +128,7 @@ export default function HeroSection() {
                     <FontAwesomeIcon icon={faPhone} className="text-sm" aria-hidden />
                   </span>
                   Call now
-                </a>
+                </a> */}
               </motion.div>
 
             </motion.div>

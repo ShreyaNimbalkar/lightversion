@@ -24,13 +24,13 @@ export default function ProductDetailActions({ item, productLabel }: Props) {
         Enquiry
       </button>
 
-      <button
+      {/* <button
         type="button"
         onClick={() => openProductQuote(productLabel, item.defaultInterest)}
         className="btn-secondary btn-block sm:w-auto sm:min-w-[10rem] sm:flex-none"
       >
         Request quotation
-      </button>
+      </button> */}
     </div>
   );
 }
