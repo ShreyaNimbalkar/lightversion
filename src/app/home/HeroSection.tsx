@@ -60,7 +60,7 @@ export default function HeroSection() {
         </AnimatePresence>
         <div className="absolute inset-0 bg-surface-deep/40" aria-hidden />
         <div
-          className="absolute inset-0 bg-gradient-to-r from-surface-deep/92 via-surface-deep/65 to-surface-deep/25"
+          className="absolute inset-0 bg-gradient-to-r from-surface-deep/72 via-surface-deep/25 to-surface-deep/10"
           aria-hidden
         />
         <div
@@ -77,7 +77,7 @@ export default function HeroSection() {
             transition={{ duration: 0.55 }}
             className="max-w-2xl"
           >
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white backdrop-blur-sm">
+            <p className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white backdrop-blur-sm">
               <span className="h-2 w-2 rounded-full bg-brand" aria-hidden />
               {hero.badge}
             </p>

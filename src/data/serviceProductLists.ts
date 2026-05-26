@@ -67,12 +67,23 @@ export type ServiceCatalogCategory = {
   slug: string;
   description?: string;
   iconKey: CatalogIconKey;
+  /** Category card image (defaults to first product image). */
+  image: string;
+  imageAlt: string;
+  /** Short feature pills on category catalogue cards. */
+  featureBadges: string[];
   items: ServiceCatalogItem[];
 };
 
-type ServiceCatalogCategoryInput = Omit<ServiceCatalogCategory, "slug" | "iconKey"> & {
+type ServiceCatalogCategoryInput = Omit<
+  ServiceCatalogCategory,
+  "slug" | "iconKey" | "image" | "imageAlt" | "featureBadges"
+> & {
   slug?: string;
   iconKey?: CatalogIconKey;
+  image?: string;
+  imageAlt?: string;
+  featureBadges?: string[];
 };
 
 function pubAsset(...pathParts: string[]): string {
@@ -190,13 +201,54 @@ function resolvePricing(slug: string): { from: string; note?: string } {
   return PRICE_BY_SLUG[slug] ?? DEFAULT_PRICE;
 }
 
+export function shortenFeatureLabel(text: string, max = 36): string {
+  const trimmed = text.trim();
+  if (trimmed.length <= max) return trimmed;
+  return `${trimmed.slice(0, max - 1).trim()}…`;
+}
+
+export function featureBadgesFromSpecs(specs: string[], limit = 3): string[] {
+  const badges: string[] = [];
+  for (const spec of specs) {
+    const label = shortenFeatureLabel(spec);
+    if (!badges.includes(label)) badges.push(label);
+    if (badges.length >= limit) break;
+  }
+  return badges;
+}
+
+function deriveCategoryFeatureBadges(category: ServiceCatalogCategoryInput): string[] {
+  if (category.featureBadges?.length) {
+    return category.featureBadges.slice(0, 4).map((b) => shortenFeatureLabel(b, 40));
+  }
+
+  const badges: string[] = [];
+  for (const item of category.items) {
+    for (const spec of item.specs) {
+      const label = shortenFeatureLabel(spec);
+      if (!badges.includes(label)) badges.push(label);
+      if (badges.length >= 3) return badges;
+    }
+  }
+
+  if (badges.length > 0) return badges;
+
+  return ["Written quotation", "GST invoicing", "Pune & PCMC"];
+}
+
 function finalizeCatalog(input: ServiceCatalogCategoryInput[]): ServiceCatalogCategory[] {
-  return input.map((category) => ({
-    ...category,
-    slug: category.slug ?? categorySlugFromTitle(category.title),
-    iconKey: category.iconKey ?? category.items[0]?.iconKey ?? "network",
-    items: category.items,
-  }));
+  return input.map((category) => {
+    const first = category.items[0];
+    return {
+      ...category,
+      slug: category.slug ?? categorySlugFromTitle(category.title),
+      iconKey: category.iconKey ?? first?.iconKey ?? "network",
+      image: category.image ?? first?.image ?? FALLBACK_PRODUCT_IMAGE,
+      imageAlt: category.imageAlt ?? first?.imageAlt ?? category.title,
+      featureBadges: deriveCategoryFeatureBadges(category),
+      items: category.items,
+    };
+  });
 }
 
 function productCopy(
@@ -272,7 +324,7 @@ const repairRentalCatalogInput: ServiceCatalogCategoryInput[] = [
     description:
       "Component-level repairs for business laptops — diagnosis, genuine or compatible parts, and warranty on workmanship.",
     items: [
-      card("Laptop display replacement", "laptop", "laptop", "Laptop LCD panel replacement", "Laptop display replacement", RR, "Laptop repair", RR_LINE, ["Panel matched to chassis and resolution", "Dead-pixel and hinge damage assessed before order", "Calibration and bezel fit checked on bench", "Old panel disposal documented where required", "Typical turnaround 2–5 working days subject to stock"]),
+      card("Laptop display replacement", "laptop", "laptop", "Laptop LCD panel replacement", "Laptop display replacement", RR, "Laptop repair", RR_LINE, ["Chip-Level Repair","Genuine Parts","Fast Diagnosis","Warranty Support","Business Laptops",]),
       card("Laptop battery service", "laptop", "laptop", "Laptop battery replacement", "Laptop battery service", RR, "Laptop repair", RR_LINE, ["OEM and high-grade compatible packs", "Cycle count and swelling inspection on intake", "Power profile test after installation", "Recycling advice for spent cells", "Invoice lists serial and capacity"]),
       card("Keyboard & trackpad repair", "laptop", "laptop", "Laptop keyboard repair", "Keyboard and trackpad repair", RR, "Laptop repair", RR_LINE, ["Individual keys or full palm-rest assemblies", "Liquid damage triage before parts commit", "Firmware and driver verification post-repair", "Spare keyboard stocked for common business models", "Cleaning included on completed jobs"]),
       card("SSD & storage upgrade", "laptop", "laptop", "Laptop SSD upgrade", "SSD and storage upgrade laptop", RR, "Laptop repair", RR_LINE, ["NVMe and SATA SSD options with clone or clean install", "Data migration scope agreed in writing", "TRIM and health check on delivery", "Old drive secure wipe or return on request", "Performance baseline shared with IT"]),
@@ -283,7 +335,7 @@ const repairRentalCatalogInput: ServiceCatalogCategoryInput[] = [
     title: "Desktop repair & upgrade",
     description: "Tower and SFF systems — power-safe component swaps, deep cleaning, and performance tuning.",
     items: [
-      card("Desktop memory upgrade", "desktop", "desktop", "Desktop RAM upgrade", "Desktop memory upgrade", RR, "Desktop repair & upgrade", RR_LINE, ["DDR4/DDR5 modules matched to board QVL where available", "ECC options for supported workstations", "MemTest pass before release", "Static-safe handling in workshop", "Invoice shows part serials"]),
+      card("Desktop memory upgrade", "desktop", "desktop", "Desktop RAM upgrade", "Desktop memory upgrade", RR, "Desktop repair & upgrade", RR_LINE, ["Hardware Upgrade","Deep Cleaning","SSD Installation","Performance Boost","Power-Safe Repair",]),
       card("SSD & HDD installation", "desktop", "desktop", "Desktop storage upgrade", "SSD and HDD installation desktop", RR, "Desktop repair & upgrade", RR_LINE, ["OS clone or fresh image per IT policy", "Separate data volumes configured on request", "SMART status report supplied", "Cable management and airflow check", "Backup reminder before destructive work"]),
       card("Motherboard & power repair", "desktop", "desktop", "Desktop motherboard service", "Motherboard and power repair", RR, "Desktop repair & upgrade", RR_LINE, ["No-power and random shutdown diagnosis", "PSU wattage sized to GPU and disk load", "Thermal paste renewal on CPU service", "Post-repair burn-in period", "Parts quote before order"]),
       card("Workstation GPU service", "desktop", "desktop", "Desktop graphics card service", "Workstation GPU service", RR, "Desktop repair & upgrade", RR_LINE, ["Driver clean-install and benchmark", "Power connector and riser inspection", "Dust removal on blower-style cards", "RMA coordination when under manufacturer warranty", "Loan card subject to availability"]),
