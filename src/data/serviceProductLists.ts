@@ -519,29 +519,62 @@ const wfhCatalogInput: ServiceCatalogCategoryInput[] = [
     title: "Computers for remote work",
     description: "Business-class laptops and desktops imaged for VPN, collaboration, and security baselines.",
     items: [
-      card("WFH laptop packages", "laptop", "laptop", "WFH laptop package", "WFH laptop packages", WFH, "Computers for remote work", WFH_LINE, ["Core i5/i7 with 16 GB RAM standard", "BitLocker or encryption per policy", "Dock and carry case options", "Loan or purchase pricing", "14–15\" lightweight chassis"]),
-      card("WFH desktop setups", "desktop", "desktop", "WFH desktop computer", "WFH desktop setups", WFH, "Computers for remote work", WFH_LINE, ["Quiet SFF chassis", "Dual-monitor ready GPU", "Wired keyboard and mouse", "On-site setup optional in PCMC", "Warranty registered to company"]),
-      card("Dual-monitor kits", "desk", "desk", "Dual monitor home office", "Dual-monitor kits", WFH, "Computers for remote work", WFH_LINE, ["Matched panel sizes", "VESA arms or stands", "USB-C and HDMI cables", "Colour calibration basic", "Cable clips included"]),
+      card("WFH laptop packages", "laptop", "laptop", "WFH laptop package", "WFH laptop packages", WFH, "Computers for remote work", WFH_LINE, ["Core i5/i7 with 16 GB RAM standard", "BitLocker or encryption per policy", "Dock and carry case options", "Loan or purchase pricing", "14–15\" lightweight chassis"],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("WFH desktop setups", "desktop", "desktop", "WFH desktop computer", "WFH desktop setups", WFH, "Computers for remote work", WFH_LINE, ["Quiet SFF chassis", "Dual-monitor ready GPU", "Wired keyboard and mouse", "On-site setup optional in PCMC", "Warranty registered to company"],{
+  priceFrom: "₹25,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Dual-monitor kits", "desk", "desk", "Dual monitor home office", "Dual-monitor kits", WFH, "Computers for remote work", WFH_LINE, ["Matched panel sizes", "VESA arms or stands", "USB-C and HDMI cables", "Colour calibration basic", "Cable clips included"],{
+  priceFrom: "₹26,999",
+  priceNote: "Starting Price + GST",
+}),
     ],
   },
   {
     title: "Home connectivity",
     description: "Routers, mesh Wi‑Fi, and backup links tuned for video meetings and corporate VPN.",
     items: [
-      card("Business home routers", "wifi", "wifi", "Business home router", "Business home routers", WFH, "Home connectivity", WFH_LINE, ["VLAN for work vs home when required", "VPN passthrough verified", "Guest network isolation", "Firmware update plan", "Remote admin with consent"]),
-      card("Mesh Wi‑Fi systems", "wifi", "wifi", "Mesh WiFi home office", "Mesh WiFi systems", WFH, "Home connectivity", WFH_LINE, ["Whole-home coverage survey", "Backhaul wired where possible", "QoS for Teams/Zoom", "Parental controls optional", "Speed test at handover"]),
-      card("VPN router configuration", "network", "network", "VPN router setup", "VPN router configuration", WFH, "Home connectivity", WFH_LINE, ["IPsec and SSL VPN profiles", "Split tunnel per security policy", "DNS leak checks", "Documentation for IT", "Rollback plan if issues"]),
-      card("Structured home cabling", "network", "network", "Home Ethernet cabling", "Structured home cabling", WFH, "Home connectivity", WFH_LINE, ["Cat6 home runs to study", "Faceplates and patch panel", "Neat trunking along skirting", "Test results on request", "Coordination with interior work"]),
+      card("Business home routers", "wifi", "wifi", "Business home router", "Business home routers", WFH, "Home connectivity", WFH_LINE, ["VLAN for work vs home when required", "VPN passthrough verified", "Guest network isolation", "Firmware update plan", "Remote admin with consent"],{
+  priceFrom: "₹27,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Mesh Wi‑Fi systems", "wifi", "wifi", "Mesh WiFi home office", "Mesh WiFi systems", WFH, "Home connectivity", WFH_LINE, ["Whole-home coverage survey", "Backhaul wired where possible", "QoS for Teams/Zoom", "Parental controls optional", "Speed test at handover"],{
+  priceFrom: "₹28,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("VPN router configuration", "network", "network", "VPN router setup", "VPN router configuration", WFH, "Home connectivity", WFH_LINE, ["IPsec and SSL VPN profiles", "Split tunnel per security policy", "DNS leak checks", "Documentation for IT", "Rollback plan if issues"],{
+  priceFrom: "₹29,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Structured home cabling", "network", "network", "Home Ethernet cabling", "Structured home cabling", WFH, "Home connectivity", WFH_LINE, ["Cat6 home runs to study", "Faceplates and patch panel", "Neat trunking along skirting", "Test results on request", "Coordination with interior work"],{
+  priceFrom: "₹30,999",
+  priceNote: "Starting Price + GST",
+}),
     ],
   },
   {
     title: "Collaboration peripherals",
     description: "Audio, video, and power accessories that make remote meetings professional.",
     items: [
-      card("HD webcams & lighting", "desk", "desk", "HD webcam kit", "HD webcams and lighting", WFH, "Collaboration peripherals", WFH_LINE, ["1080p minimum for corporate standards", "Ring light or key light kits", "Privacy shutter models", "Mount for monitor and tripod", "Quick start guide"]),
-      card("UC headsets", "phone", "phone", "Unified communications headset", "UC headsets", WFH, "Collaboration peripherals", WFH_LINE, ["Teams/Zoom certified models", "USB and Bluetooth options", "Noise-cancelling microphones", "Spare ear cushions quoted", "Warranty registration"]),
-      card("Speakerphones for home", "phone", "phone", "Home office speakerphone", "Speakerphones for home", WFH, "Collaboration peripherals", WFH_LINE, ["360° pickup for small rooms", "Bluetooth pairing to mobile", "Echo cancellation tuned", "Carry case for hybrid workers", "Firmware updates"]),
-      card("Desk power protection", "desk", "desk", "Home office UPS", "Desk power protection", WFH, "Collaboration peripherals", WFH_LINE, ["650–1500 VA typical sizing", "Runtime for safe shutdown", "Surge protection for broadband", "Wall-mount or tower", "Battery replacement service"]),
+      card("HD webcams & lighting", "desk", "desk", "HD webcam kit", "HD webcams and lighting", WFH, "Collaboration peripherals", WFH_LINE, ["1080p minimum for corporate standards", "Ring light or key light kits", "Privacy shutter models", "Mount for monitor and tripod", "Quick start guide"],{
+  priceFrom: "₹31,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("UC headsets", "phone", "phone", "Unified communications headset", "UC headsets", WFH, "Collaboration peripherals", WFH_LINE, ["Teams/Zoom certified models", "USB and Bluetooth options", "Noise-cancelling microphones", "Spare ear cushions quoted", "Warranty registration"],{
+  priceFrom: "₹32,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Speakerphones for home", "phone", "phone", "Home office speakerphone", "Speakerphones for home", WFH, "Collaboration peripherals", WFH_LINE, ["360° pickup for small rooms", "Bluetooth pairing to mobile", "Echo cancellation tuned", "Carry case for hybrid workers", "Firmware updates"],{
+  priceFrom: "₹33,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Desk power protection", "desk", "desk", "Home office UPS", "Desk power protection", WFH, "Collaboration peripherals", WFH_LINE, ["650–1500 VA typical sizing", "Runtime for safe shutdown", "Surge protection for broadband", "Wall-mount or tower", "Battery replacement service"],{
+  priceFrom: "₹34,999",
+  priceNote: "Starting Price + GST",
+}),
     ],
   },
 ];
@@ -743,49 +776,70 @@ const licenseCatalogInput: ServiceCatalogCategoryInput[] = [
         "Photography Plan for creators",
         "Team and enterprise seat packs",
         "Activation and admin console support",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("Adobe Illustrator", "adobe", "ai", "Adobe Illustrator licensing", "Adobe Illustrator", SL, "Adobe", SL_LINE, [
         "Adobe Illustrator — vector design",
         "Print, brand, and packaging workflows",
         "Bundled in Creative Cloud All Apps",
         "Version updates included on subscription",
         "Device deployment guidance",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("Adobe Premiere Pro", "adobe", "pr", "Adobe Premiere Pro licensing", "Adobe Premiere Pro", SL, "Adobe", SL_LINE, [
         "Adobe Premiere Pro — video editing",
         "Pro video and marketing teams",
         "Works with After Effects in All Apps plan",
         "GPU guidance for edit stations",
         "Team libraries and shared assets",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("Adobe XD", "adobe", "xd", "Adobe XD licensing", "Adobe XD", SL, "Adobe", SL_LINE, [
         "Adobe XD — UX and UI design",
         "Wireframes and interactive prototypes",
         "Included in Creative Cloud All Apps",
         "Handoff to development teams",
         "Co-editing for distributed design groups",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("Adobe Lightroom", "adobe", "lr", "Adobe Lightroom licensing", "Adobe Lightroom", SL, "Adobe", SL_LINE, [
         "Adobe Lightroom — photo workflow",
         "Lightroom and Lightroom Classic options",
         "Photography Plan bundles",
         "Cloud sync for studio archives",
         "Preset and catalog migration advice",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("Adobe Acrobat", "adobe", "acrobat", "Adobe Acrobat licensing", "Adobe Acrobat", SL, "Adobe", SL_LINE, [
         "Adobe Acrobat — PDF and e-sign",
         "Acrobat Standard and Pro tiers",
         "PDF editing, redaction, and forms",
         "Adobe Sign integrations quoted separately",
         "Volume packs for legal and finance teams",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("Adobe Creative Cloud", "adobe", "cc", "Adobe Creative Cloud licensing", "Adobe Creative Cloud", SL, "Adobe", SL_LINE, [
         "Adobe Creative Cloud — full app suite",
         "Photoshop, Illustrator, Premiere Pro, XD & more",
         "All Apps individual and team plans",
         "Admin console for IT-managed seats",
         "True-up and renewal management",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
     ],
   },
   {
@@ -800,70 +854,100 @@ const licenseCatalogInput: ServiceCatalogCategoryInput[] = [
         "Internet, email, and USB shield",
         "1, 3, 5, and 10-device packs",
         "Renewal reminders before expiry",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("Kaspersky Endpoint Security", "shield", "kaspersky", "Kaspersky Endpoint Security", "Kaspersky Endpoint Security", SL, "Antivirus", SL_LINE, [
         "Kaspersky — business endpoint protection",
         "Workstation and file-server coverage",
         "Central management console",
         "Exploit prevention and web control",
         "Volume licensing for SMEs",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("Norton 360", "shield", "norton", "Norton 360 antivirus", "Norton 360", SL, "Antivirus", SL_LINE, [
         "Norton 360 — device security suite",
         "Antivirus, firewall, and VPN options",
         "Individual and family subscriptions",
         "Cloud backup tiers on select plans",
         "Activation support on delivery",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("McAfee Total Protection", "shield", "mcafee", "McAfee Total Protection", "McAfee Total Protection", SL, "Antivirus", SL_LINE, [
         "McAfee — multi-device protection",
         "Windows, Mac, Android, and iOS",
         "Identity and privacy tools",
         "Annual subscription renewals",
         "GST documentation for IT records",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("Bitdefender Business Security", "shield", "bitdefender", "Bitdefender Business Security", "Bitdefender Business Security", SL, "Antivirus", SL_LINE, [
         "Bitdefender — business endpoint suite",
         "GravityZone cloud console",
         "Advanced threat defence",
         "Full disk encryption options",
         "Server and workstation bundles",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("ESET Endpoint Antivirus", "shield", "eset", "ESET Endpoint Antivirus", "ESET Endpoint Antivirus", SL, "Antivirus", SL_LINE, [
         "ESET — lightweight endpoint AV",
         "Low system impact on older PCs",
         "ESET PROTECT hub for IT teams",
         "Mail security add-ons available",
         "Renewal aligned to financial year",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("Avast Business Antivirus", "shield", "avast", "Avast Business Antivirus", "Avast Business Antivirus", SL, "Antivirus", SL_LINE, [
         "Avast — small-business antivirus",
         "Cloud-managed deployment",
         "Patch and device inventory options",
         "Premium remote control add-on",
         "Seat packs for growing teams",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("Sophos Endpoint", "shield", "sophos", "Sophos Endpoint protection", "Sophos Endpoint", SL, "Antivirus", SL_LINE, [
         "Sophos — enterprise-grade endpoint",
         "Intercept X advanced protection",
         "Synchronized security with firewall",
         "Central cloud administration",
         "MSP and volume programmes",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("Trend Micro Worry-Free", "shield", "trend", "Trend Micro Worry-Free", "Trend Micro Worry-Free", SL, "Antivirus", SL_LINE, [
         "Trend Micro — SMB security suite",
         "Worry-Free Services Advanced",
         "Ransomware and web threat protection",
         "Simple licensing for non-IT teams",
         "Renewal and true-up support",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
       card("Malwarebytes Teams", "shield", "malwarebytes", "Malwarebytes Teams", "Malwarebytes Teams", SL, "Antivirus", SL_LINE, [
         "Malwarebytes — anti-malware for teams",
         "Remediation-first scanning",
         "Windows and Mac endpoints",
         "Neighbourhood threat blocking",
         "Flexible seat counts",
-      ]),
+      ],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
     ],
   },
   {
