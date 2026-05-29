@@ -47,7 +47,7 @@ function ServiceCard({
         duration: 0.45,
         delay: index * 0.06,
       }}
-      className="group flex h-full flex-col overflow-hidden rounded-[26px] border border-slate-200/70 bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-brand/20 hover:shadow-[0_18px_50px_rgba(15,23,42,0.08)]"
+      className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200/70 bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-brand/20 hover:shadow-[0_18px_50px_rgba(15,23,42,0.08)]"
     >
       {/* IMAGE */}
       <div className="relative aspect-[16/10] overflow-hidden">
@@ -63,9 +63,9 @@ function ServiceCard({
         <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
 
         {/* ICON */}
-        <div className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-white backdrop-blur-md">
+        {/* <div className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-white backdrop-blur-md">
           <FontAwesomeIcon icon={icon} className="text-sm" />
-        </div>
+        </div> */}
       </div>
 
       {/* CONTENT */}
@@ -81,7 +81,7 @@ function ServiceCard({
         {/* BUTTON */}
         <Link
           href={service.link}
-          className="group/btn mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-brand px-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-brand-hover"
+          className="group/btn mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-brand px-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-brand-hover"
         >
           Know More
 
