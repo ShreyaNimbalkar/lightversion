@@ -41,7 +41,7 @@ export default function ServiceCategoryProductList({
     <PageSection border="none" className="!pt-6 !pb-16 sm:!pb-20">
       <p className="text-xs font-semibold uppercase tracking-wide text-brand">{serviceLabel}</p>
       <p className="mt-2 max-w-3xl text-sm text-foreground/65 sm:text-base">
-        Compare indicative pricing and key specs below — open a product or request a written quote.
+        Compare indicative pricing and key specs below — request a written quote from this page.
       </p>
 
       <motion.div

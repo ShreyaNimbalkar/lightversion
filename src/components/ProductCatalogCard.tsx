@@ -32,50 +32,80 @@ export default function ProductCatalogCard({
   onRequestQuote,
 }: ProductCatalogCardProps) {
   return (
-    <article className="card-elevated flex h-full flex-col overflow-hidden rounded-2xl transition hover:border-brand/30 hover:shadow-lg">
-      <div className="relative h-40 w-full shrink-0 overflow-hidden sm:h-44">
-        <Image
-          src={image}
-          alt={imageAlt}
-          fill
-          className="object-cover object-center"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-surface-deep/55 via-surface-deep/10 to-transparent" />
+    <article className="card-elevated group flex h-full flex-col overflow-hidden rounded-[28px] border border-black/5 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-brand/20 hover:shadow-xl">
+      
+      {/* ================= TOP SECTION ================= */}
+      <div className="relative flex items-start gap-4 p-5 sm:p-6">
+        
+        {/* SMALL IMAGE LEFT */}
+        <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-black/5 bg-muted">
+          <Image
+            src={image}
+            alt={imageAlt}
+            fill
+            className="object-cover transition duration-500 group-hover:scale-105"
+            sizes="80px"
+          />
+        </div>
 
-        <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full border border-white/20 bg-surface-deep/80 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur-sm">
-          <FontAwesomeIcon icon={faFileInvoice} className="text-[9px] text-accent" />
-          GST quote
-        </span>
-      </div>
+        {/* CONTENT */}
+        <div className="min-w-0 flex-1">
+          
+          {/* TOP BADGE */}
+          {/* <div className="mb-2 inline-flex items-center gap-1 rounded-full border border-brand/15 bg-brand/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
+            <FontAwesomeIcon
+              icon={faFileInvoice}
+              className="text-[9px]"
+            />
+            GST Quote
+          </div> */}
 
-      <div className="shrink-0 border-b border-brand/20 bg-gradient-to-br from-brand/15 via-brand/8 to-card px-4 py-4 sm:px-5 sm:py-5">
-        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand/90">
-          Indicative price
-        </p>
-        <p className="mt-1 font-extrabold leading-none tracking-tight text-brand tabular-nums text-3xl sm:text-4xl">
-          {priceFrom}
-        </p>
-        {priceNote ? (
-          <p className="mt-2 text-xs font-medium text-foreground/60">{priceNote}</p>
-        ) : (
-          <p className="mt-2 text-xs font-medium text-foreground/55">
-            Written quotation before work starts
+          {/* TITLE */}
+          <h3 className="line-clamp-2 text-lg font-bold leading-tight text-foreground sm:text-xl">
+            {title}
+          </h3>
+
+          {/* SUMMARY */}
+          <p className="mt-1 text-sm font-medium text-foreground/70">
+            {summary}
           </p>
-        )}
+        </div>
       </div>
 
-      <div className="flex min-h-0 flex-1 flex-col p-4 sm:p-5">
-        <h3 className="line-clamp-2 text-base font-bold leading-snug text-foreground sm:text-lg">
-          {title}
-        </h3>
+      {/* ================= PRICE SECTION ================= */}
+      <div className="mx-5 rounded-2xl border border-brand/10 bg-gradient-to-br from-brand/10 via-brand/[0.07] to-transparent p-4 sm:mx-6">
+        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-brand/80">
+          Starting From
+        </p>
 
-        <p className="mt-2 text-sm font-medium text-foreground/75">{summary}</p>
+        <div className="mt-1 flex items-end justify-between gap-3">
+          <div>
+            <p className="text-2xl font-bold leading-none tracking-tight text-brand sm:text-3xl">
+              {priceFrom}
+            </p>
 
-        <p className="mt-2 text-sm leading-relaxed text-foreground/65">{overview}</p>
+            <p className="mt-2 text-xs font-medium text-foreground/55">
+              {priceNote || "Written quotation before work starts"}
+            </p>
+          </div>
 
+          {/* <div className="rounded-full bg-white px-2.5 py-1 text-[10px] font-semibold text-brand shadow-sm">
+            GST Ready
+          </div> */}
+        </div>
+      </div>
+
+      {/* ================= BODY ================= */}
+      <div className="flex flex-1 flex-col px-5 pb-5 pt-4 sm:px-6 sm:pb-6">
+        
+        {/* OVERVIEW */}
+        <p className="text-sm leading-relaxed text-foreground/65">
+          {overview}
+        </p>
+
+        {/* FEATURES */}
         {features.length > 0 ? (
-          <ul className="mt-3 space-y-1.5 border-t border-foreground/8 pt-3">
+          <ul className="mt-5 space-y-2 border-t border-foreground/8 pt-4">
             {features.map((feature) => (
               <li
                 key={feature}
@@ -86,22 +116,28 @@ export default function ProductCatalogCard({
                   className="mt-0.5 shrink-0 text-brand"
                   aria-hidden
                 />
+
                 <span>{feature}</span>
               </li>
             ))}
           </ul>
         ) : null}
-      </div>
 
-      <div className="shrink-0 border-t border-foreground/10 p-4 sm:p-5">
-        <button
-          type="button"
-          onClick={onRequestQuote}
-          className="inline-flex min-h-12 w-full items-center justify-center gap-1.5 rounded-xl bg-brand px-4 text-sm font-bold uppercase tracking-wide text-white shadow-md shadow-brand/25 transition hover:bg-brand-hover"
-        >
-          Request quote
-          <FontAwesomeIcon icon={faArrowRight} className="text-xs" />
-        </button>
+        {/* BUTTON */}
+        <div className="mt-auto pt-6">
+          <button
+            type="button"
+            onClick={onRequestQuote}
+            className="btn-primary group/btn w-full"
+          >
+            Request Quote
+
+            <FontAwesomeIcon
+              icon={faArrowRight}
+              className="text-xs transition-transform duration-300 group-hover/btn:translate-x-1"
+            />
+          </button>
+        </div>
       </div>
     </article>
   );
