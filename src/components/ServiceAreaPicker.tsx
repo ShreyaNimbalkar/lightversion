@@ -23,6 +23,8 @@ export type ServiceAreaSelection = {
 type Props = {
   value: ServiceAreaSelection;
   onChange: (next: ServiceAreaSelection) => void;
+  /** When set, only this service line is shown (no other options). */
+  lockedInterest?: string;
 };
 
 export function formatServiceAreas({ presets, custom }: ServiceAreaSelection): string {
@@ -30,11 +32,28 @@ export function formatServiceAreas({ presets, custom }: ServiceAreaSelection): s
   return parts.length > 0 ? parts.join(", ") : "Not specified";
 }
 
-export default function ServiceAreaPicker({ value, onChange }: Props) {
+export default function ServiceAreaPicker({ value, onChange, lockedInterest }: Props) {
   const listId = useId();
   const otherPanelId = useId();
   const [open, setOpen] = useState(true);
   const [otherDraft, setOtherDraft] = useState("");
+
+  if (lockedInterest) {
+    return (
+      <div className="space-y-2">
+        <span className="text-xs font-semibold uppercase tracking-wide text-foreground/70">
+          Service line
+        </span>
+        <div className="rounded-xl border border-brand/30 bg-brand/10 px-4 py-3">
+          <p className="text-sm font-bold text-foreground">{lockedInterest}</p>
+          <p className="mt-1 text-xs text-foreground/55">
+            Locked to the product you selected — change it by closing this form and choosing another
+            item.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const otherSelected = value.presets.includes(SERVICE_AREA_OTHER);
 
@@ -95,14 +114,24 @@ export default function ServiceAreaPicker({ value, onChange }: Props) {
           <span className="font-normal normal-case text-foreground/50">(select all that apply)</span>
         </span>
         {selectedCount > 0 ? (
-          <button type="button" onClick={clearAll} className="shrink-0 text-xs font-semibold text-brand hover:text-brand-hover">
+          <button
+            type="button"
+            onClick={clearAll}
+            className="shrink-0 text-xs font-semibold text-brand hover:text-brand-hover"
+          >
             Clear all
           </button>
         ) : null}
       </div>
 
       <div className="overflow-hidden rounded-xl border-2 border-brand/35 bg-card">
-        <button type="button" onClick={() => setOpen((v) => !v)} className="flex w-full items-center justify-between gap-2 border-b border-brand/15 bg-brand/[0.04] px-3 py-2.5 text-left sm:px-4" aria-expanded={open} aria-controls={listId}>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="flex w-full items-center justify-between gap-2 border-b border-brand/15 bg-brand/[0.04] px-3 py-2.5 text-left sm:px-4"
+          aria-expanded={open}
+          aria-controls={listId}
+        >
           <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2">
             {pillLabels.length === 0 ? (
               <span className="text-sm text-foreground/45">Select service areas…</span>
@@ -113,7 +142,9 @@ export default function ServiceAreaPicker({ value, onChange }: Props) {
                   className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-brand/30 bg-brand/10 px-2.5 py-1 text-xs font-semibold text-brand"
                 >
                   <span className="truncate">{pill.label}</span>
-                  <button type="button" onClick={(e) => {
+                  <button
+                    type="button"
+                    onClick={(e) => {
                       e.stopPropagation();
                       removePill(pill.kind, pill.label);
                     }}

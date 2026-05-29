@@ -16,11 +16,19 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import RequestQuotationForm from "@/components/RequestQuotationForm";
 
+export type EnquiryOpenOptions = {
+  /** Display name shown on the form, e.g. Microsoft 365 Business Basic */
+  productLabel?: string;
+  /** Hide other service lines and lock to defaultInterest */
+  lockSelection?: boolean;
+};
+
 export type EnquiryModalPayload = {
   mode: "quotation" | "enquiry";
   productContext?: string;
+  productLabel?: string;
   defaultInterest?: string;
-  /** Opened from a plan card “Request a quote” on a product page */
+  lockSelection?: boolean;
   fromPlanCard?: boolean;
 };
 
@@ -28,8 +36,16 @@ type EnquiryModalContextValue = {
   open: boolean;
   payload: EnquiryModalPayload;
   openQuotation: () => void;
-  openEnquiry: (productContext: string, defaultInterest?: string) => void;
-  openProductQuote: (productContext: string, defaultInterest?: string) => void;
+  openEnquiry: (
+    productContext: string,
+    defaultInterest?: string,
+    options?: EnquiryOpenOptions,
+  ) => void;
+  openProductQuote: (
+    productContext: string,
+    defaultInterest?: string,
+    productLabel?: string,
+  ) => void;
   close: () => void;
 };
 
@@ -57,19 +73,22 @@ function EnquiryModalShell() {
     };
   }, [open]);
 
+  const isProductQuote = Boolean(payload.lockSelection && payload.productLabel);
   const isPlanQuote = Boolean(payload.fromPlanCard && payload.productContext);
 
-  const title = isPlanQuote
+  const title = isProductQuote || isPlanQuote
     ? "Request a quote"
     : payload.mode === "quotation"
       ? "Request a quotation"
       : "Product enquiry";
 
-  const subtitle = isPlanQuote
-    ? "Fill in your details for this plan. We confirm quantity, timeline, and GST before sending your quote."
-    : payload.mode === "quotation"
-      ? "Same fields as our on-page form — we reply with scope questions and a GST-ready estimate."
-      : "Tell us what you need for this product line. We route your enquiry to the right engineer.";
+  const subtitle = isProductQuote
+    ? `Quote for ${payload.productLabel}. Service line is pre-selected — add your contact details and requirements.`
+    : isPlanQuote
+      ? "Fill in your details for this plan. We confirm quantity, timeline, and GST before sending your quote."
+      : payload.mode === "quotation"
+        ? "Same fields as our on-page form — we reply with scope questions and a GST-ready estimate."
+        : "Tell us what you need for this product line. We route your enquiry to the right engineer.";
 
   return (
     <AnimatePresence>
@@ -120,10 +139,12 @@ function EnquiryModalShell() {
 
               <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-6 sm:py-6">
                 <RequestQuotationForm
-                  key={`${payload.mode}-${payload.productContext ?? ""}-${payload.fromPlanCard ?? false}`}
+                  key={`${payload.mode}-${payload.productContext ?? ""}-${payload.productLabel ?? ""}-${payload.lockSelection ?? false}-${payload.fromPlanCard ?? false}`}
                   mode={payload.mode}
                   productContext={payload.productContext}
+                  productLabel={payload.productLabel}
                   defaultInterest={payload.defaultInterest}
+                  lockSelection={payload.lockSelection}
                   fromPlanCard={payload.fromPlanCard}
                 />
               </div>
@@ -151,29 +172,36 @@ export function EnquiryModalProvider({
   }, []);
 
   const openEnquiry = useCallback(
-    (productContext: string, defaultInterest?: string) => {
+    (productContext: string, defaultInterest?: string, options?: EnquiryOpenOptions) => {
+      const lockSelection =
+        options?.lockSelection ?? Boolean(options?.productLabel && defaultInterest);
+
       setPayload({
-        mode: "enquiry",
+        mode: lockSelection ? "quotation" : "enquiry",
         productContext,
+        productLabel: options?.productLabel,
         defaultInterest,
+        lockSelection,
         fromPlanCard: false,
       });
       setOpen(true);
     },
-    []
+    [],
   );
 
   const openProductQuote = useCallback(
-    (productContext: string, defaultInterest?: string) => {
+    (productContext: string, defaultInterest?: string, productLabel?: string) => {
       setPayload({
-        mode: "enquiry",
+        mode: "quotation",
         productContext,
+        productLabel: productLabel ?? productContext,
         defaultInterest,
+        lockSelection: true,
         fromPlanCard: true,
       });
       setOpen(true);
     },
-    []
+    [],
   );
 
   const close = useCallback(() => setOpen(false), []);
@@ -187,7 +215,7 @@ export function EnquiryModalProvider({
       openProductQuote,
       close,
     }),
-    [open, payload, openQuotation, openEnquiry, openProductQuote, close]
+    [open, payload, openQuotation, openEnquiry, openProductQuote, close],
   );
 
   return (

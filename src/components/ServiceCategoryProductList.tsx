@@ -62,7 +62,10 @@ export default function ServiceCategoryProductList({
               priceNote={item.priceNote}
               features={item.specs}
               onRequestQuote={() =>
-                openEnquiry(`${item.enquiryTag} — quotation`, defaultInterest)
+                openEnquiry(`${item.enquiryTag} — quotation`, defaultInterest, {
+                  productLabel: item.name,
+                  lockSelection: true,
+                })
               }
             />
           </motion.div>

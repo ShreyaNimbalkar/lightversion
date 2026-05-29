@@ -19,8 +19,14 @@ export default function SectorsSection({ variant = "about" }: Props) {
   const { openEnquiry } = useEnquiryModal();
 
   return (
-    <PageSection border="top" tone="muted">
+    <PageSection
+      border="top"
+      tone="muted"
+      className={variant === "about" ? "" : ""}
+      aria-labelledby="sectors-served-heading"
+    >
       <SectionHeader
+        id="sectors-served-heading"
         eyebrow="Sectors served"
         title={
           <>
@@ -31,7 +37,7 @@ export default function SectorsSection({ variant = "about" }: Props) {
         description={`Since ${site.establishedYear}, ${site.brandName} has supported 1,000+ customers across these sectors — with written scope, GST-ready quotes, and direct engineer access.`}
       />
 
-      <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {sectorsServed.map((item, index) => (
           <motion.article
             key={item.title}
@@ -69,14 +75,19 @@ export default function SectorsSection({ variant = "about" }: Props) {
                   </li>
                 ))}
               </ul>
-              {/* <button
+              <button
                 type="button"
-                onClick={() => openEnquiry(item.enquiryContext, item.defaultInterest)}
-                className="btn-outline-brand btn-block mt-5"
+                onClick={() =>
+                  openEnquiry(item.enquiryContext, item.defaultInterest, {
+                    productLabel: item.title,
+                    lockSelection: true,
+                  })
+                }
+                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-brand/30 bg-brand/5 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white"
               >
                 Discuss your {item.title.toLowerCase()} project
                 <FontAwesomeIcon icon={faArrowRight} className="text-xs" />
-              </button> */}
+              </button>
             </div>
           </motion.article>
         ))}
