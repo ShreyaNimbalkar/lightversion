@@ -371,38 +371,80 @@ const networkingCatalogInput: ServiceCatalogCategoryInput[] = [
     title: "Structured cabling & switching",
     description: "Cat6/Cat6A copper, patch panels, and managed switching with labelled documentation.",
     items: [
-      card("Managed network switches", "network", "network", "Managed network switch", "Managed network switches", NW, "Structured cabling & switching", NW_LINE, ["Gigabit and 10G uplinks as required", "VLAN and QoS baseline configuration", "PoE budget calculated for endpoints", "Rack layout drawing supplied", "Spare SFP modules quoted separately"]),
-      card("Cat6 structured cabling", "network", "network", "Cat6 structured cabling", "Cat6 structured cabling", NW, "Structured cabling & switching", NW_LINE, ["Fluke test results on request", "Conduit and trunking per site standards", "Patch panel labelling standard agreed", "As-built diagram in PDF", "Compliance with local fire-stop rules"]),
-      card("Fiber backbone links", "network", "network", "Fiber optic cabling", "Fiber backbone links", NW, "Structured cabling & switching", NW_LINE, ["Single-mode and multimode options", "Splice or LC termination documented", "OTDR report when specified", "Media converters or SFP pairing", "Building-to-building paths planned"]),
-      card("Network rack build-out", "server", "server", "Network equipment rack", "Network rack build-out", NW, "Structured cabling & switching", NW_LINE, ["42U or wall-mount cabinets", "PDU and cable management", "Thermal and power load review", "Earthing check recommended", "Photo pack for IT records"]),
+      card("Managed network switches", "network", "network", "Managed network switch", "Managed network switches", NW, "Structured cabling & switching", NW_LINE, ["Gigabit and 10G uplinks as required", "VLAN and QoS baseline configuration", "PoE budget calculated for endpoints", "Rack layout drawing supplied", "Spare SFP modules quoted separately"],{
+  priceFrom: "₹20,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Cat6 structured cabling", "network", "network", "Cat6 structured cabling", "Cat6 structured cabling", NW, "Structured cabling & switching", NW_LINE, ["Fluke test results on request", "Conduit and trunking per site standards", "Patch panel labelling standard agreed", "As-built diagram in PDF", "Compliance with local fire-stop rules"],{
+  priceFrom: "₹21,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Fiber backbone links", "network", "network", "Fiber optic cabling", "Fiber backbone links", NW, "Structured cabling & switching", NW_LINE, ["Single-mode and multimode options", "Splice or LC termination documented", "OTDR report when specified", "Media converters or SFP pairing", "Building-to-building paths planned"],{
+  priceFrom: "₹22,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Network rack build-out", "server", "server", "Network equipment rack", "Network rack build-out", NW, "Structured cabling & switching", NW_LINE, ["42U or wall-mount cabinets", "PDU and cable management", "Thermal and power load review", "Earthing check recommended", "Photo pack for IT records"],{
+  priceFrom: "₹23,999",
+  priceNote: "Starting Price + GST",
+}),
     ],
   },
   {
     title: "Servers, NAS & backup",
     description: "On-premise storage and light server roles with RAID planning and backup targets.",
     items: [
-      card("Synology & QNAP NAS", "server", "server", "NAS storage system", "Synology and QNAP NAS", NW, "Servers, NAS & backup", NW_LINE, ["RAID level chosen for capacity vs redundancy", "Snapshot and replication options explained", "User quotas and share permissions", "UPS pairing recommended", "Remote support tunnel with consent"]),
-      card("Cloud backup gateway", "server", "server", "Hybrid cloud backup", "Cloud backup gateway", NW, "Servers, NAS & backup", NW_LINE, ["3-2-1 strategy workshop", "Encrypted off-site sync options", "Retention policies documented", "Restore drill scheduled", "Bandwidth shaping for SME links"]),
+      card("Synology & QNAP NAS", "server", "server", "NAS storage system", "Synology and QNAP NAS", NW, "Servers, NAS & backup", NW_LINE, ["RAID level chosen for capacity vs redundancy", "Snapshot and replication options explained", "User quotas and share permissions", "UPS pairing recommended", "Remote support tunnel with consent"],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Cloud backup gateway", "server", "server", "Hybrid cloud backup", "Cloud backup gateway", NW, "Servers, NAS & backup", NW_LINE, ["3-2-1 strategy workshop", "Encrypted off-site sync options", "Retention policies documented", "Restore drill scheduled", "Bandwidth shaping for SME links"],{
+  priceFrom: "₹25,999",
+  priceNote: "Starting Price + GST",
+}),
     ],
   },
   {
     title: "IP telephony & conferencing",
     description: "IP PBX, SIP trunks, handsets, and meeting-room audio configured before go-live.",
     items: [
-      card("IP desk phones", "phone", "phone", "IP desk phone", "IP desk phones", NW, "IP telephony & conferencing", NW_LINE, ["PoE or adapter power options", "Extension, BLF, and speed-dial programming", "Codec and QoS alignment on switches", "Spare handsets for hot-desking", "Training sheet for reception staff"]),
-      card("VoIP gateways", "phone", "phone", "VoIP gateway appliance", "VoIP gateways", NW, "IP telephony & conferencing", NW_LINE, ["FXO/FXS for legacy lines", "Failover rules documented", "Echo cancellation tuned", "Firmware baseline recorded", "Maintenance window agreed"]),
-      card("Conference room phones", "phone", "phone", "Conference speakerphone", "Conference room phones", NW, "IP telephony & conferencing", NW_LINE, ["360° mic pickup for huddle rooms", "USB and Bluetooth models available", "Teams/Zoom certified options", "Acoustic site survey on request", "Ceiling mic arrays for boardrooms"]),
-      card("SIP intercom & paging", "phone", "phone", "SIP intercom system", "SIP intercom and paging", NW, "IP telephony & conferencing", NW_LINE, ["Door station integration", "Zone paging from reception", "Recorded announcements", "Secure VLAN recommended", "Testing with facilities team"]),
+      card("IP desk phones", "phone", "phone", "IP desk phone", "IP desk phones", NW, "IP telephony & conferencing", NW_LINE, ["PoE or adapter power options", "Extension, BLF, and speed-dial programming", "Codec and QoS alignment on switches", "Spare handsets for hot-desking", "Training sheet for reception staff"],{
+  priceFrom: "₹26,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("VoIP gateways", "phone", "phone", "VoIP gateway appliance", "VoIP gateways", NW, "IP telephony & conferencing", NW_LINE, ["FXO/FXS for legacy lines", "Failover rules documented", "Echo cancellation tuned", "Firmware baseline recorded", "Maintenance window agreed"],{
+  priceFrom: "₹27,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Conference room phones", "phone", "phone", "Conference speakerphone", "Conference room phones", NW, "IP telephony & conferencing", NW_LINE, ["360° mic pickup for huddle rooms", "USB and Bluetooth models available", "Teams/Zoom certified options", "Acoustic site survey on request", "Ceiling mic arrays for boardrooms"],{
+  priceFrom: "₹28,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("SIP intercom & paging", "phone", "phone", "SIP intercom system", "SIP intercom and paging", NW, "IP telephony & conferencing", NW_LINE, ["Door station integration", "Zone paging from reception", "Recorded announcements", "Secure VLAN recommended", "Testing with facilities team"],{
+  priceFrom: "₹29,999",
+  priceNote: "Starting Price + GST",
+}),
     ],
   },
   {
     title: "Attendance & access control",
     description: "Biometric terminals, RFID readers, and door control integrated with HR export formats.",
     items: [
-      card("Biometric time terminals", "attendance", "attendance", "Biometric attendance terminal", "Biometric time terminals", NW, "Attendance & access control", NW_LINE, ["Fingerprint and card hybrid models", "Shift rules configured to HR policy", "Excel/CSV export templates", "TCP/IP and PoE wiring", "Tamper alerts enabled"]),
-      card("Face recognition attendance", "attendance", "attendance", "Face recognition terminal", "Face recognition attendance", NW, "Attendance & access control", NW_LINE, ["Mask and lighting guidance on install", "Liveness options where required", "GDPR-style consent signage advised", "Integration with existing HRMS on request", "Fallback card mode configured"]),
-      card("RFID card readers", "attendance", "attendance", "RFID attendance reader", "RFID card readers", NW, "Attendance & access control", NW_LINE, ["Card issuance and printing optional", "Anti-passback rules available", "Visitor badge workflow", "Offline buffer on power loss", "Annual maintenance contracts"]),
-      card("Visitor management kiosk", "attendance", "attendance", "Visitor management system", "Visitor management kiosk", NW, "Attendance & access control", NW_LINE, ["Photo badge printing", "Host notification by SMS/email", "NDA screen optional", "Evacuation report capability", "Branding with company logo"]),
+      card("Biometric time terminals", "attendance", "attendance", "Biometric attendance terminal", "Biometric time terminals", NW, "Attendance & access control", NW_LINE, ["Fingerprint and card hybrid models", "Shift rules configured to HR policy", "Excel/CSV export templates", "TCP/IP and PoE wiring", "Tamper alerts enabled"],{
+  priceFrom: "₹30,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Face recognition attendance", "attendance", "attendance", "Face recognition terminal", "Face recognition attendance", NW, "Attendance & access control", NW_LINE, ["Mask and lighting guidance on install", "Liveness options where required", "GDPR-style consent signage advised", "Integration with existing HRMS on request", "Fallback card mode configured"],{
+  priceFrom: "₹31,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("RFID card readers", "attendance", "attendance", "RFID attendance reader", "RFID card readers", NW, "Attendance & access control", NW_LINE, ["Card issuance and printing optional", "Anti-passback rules available", "Visitor badge workflow", "Offline buffer on power loss", "Annual maintenance contracts"],{
+  priceFrom: "₹32,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Visitor management kiosk", "attendance", "attendance", "Visitor management system", "Visitor management kiosk", NW, "Attendance & access control", NW_LINE, ["Photo badge printing", "Host notification by SMS/email", "NDA screen optional", "Evacuation report capability", "Branding with company logo"],{
+  priceFrom: "₹33,999",
+  priceNote: "Starting Price + GST",
+}),
     ],
   },
 ];
@@ -413,19 +455,40 @@ const cctvCatalogInput: ServiceCatalogCategoryInput[] = [
     title: "IP cameras",
     description: "Dome, bullet, and varifocal models selected for scene, lighting, and storage budget.",
     items: [
-      card("Indoor dome IP cameras", "cctv", "cctv", "Indoor dome IP camera", "Indoor dome IP cameras", CV, "IP cameras", CV_LINE, ["2–8 MP options with WDR", "PoE class and switch budget verified", "Privacy masking for sensitive areas", "ONVIF profile compatibility", "Night scene sample on handover"]),
-      card("Outdoor bullet cameras", "cctv", "cctv", "Outdoor bullet IP camera", "Outdoor bullet IP cameras", CV, "IP cameras", CV_LINE, ["IP66/IK10 rated housings", "IR range matched to perimeter length", "Vandal-resistant mounts", "Lightning protection advised on poles", "Lens field-of-view documented"]),
-      card("Motorised varifocal cameras", "cctv", "cctv", "Varifocal IP camera", "Motorised varifocal cameras", CV, "IP cameras", CV_LINE, ["Remote zoom and focus setup", "Ideal for gates and loading bays", "Presets for incident review", "Bandwidth estimate per channel", "Calibration after install"]),
-      card("Panoramic & fisheye cameras", "cctv", "cctv", "Fisheye surveillance camera", "Panoramic and fisheye cameras", CV, "IP cameras", CV_LINE, ["360° coverage for open plan areas", "Dewarping on client or NVR", "Ceiling mount height guidelines", "Single cable per zone", "Training on digital PTZ"]),
+      card("Indoor dome IP cameras", "cctv", "cctv", "Indoor dome IP camera", "Indoor dome IP cameras", CV, "IP cameras", CV_LINE, ["2–8 MP options with WDR", "PoE class and switch budget verified", "Privacy masking for sensitive areas", "ONVIF profile compatibility", "Night scene sample on handover"],{
+  priceFrom: "₹24,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Outdoor bullet cameras", "cctv", "cctv", "Outdoor bullet IP camera", "Outdoor bullet IP cameras", CV, "IP cameras", CV_LINE, ["IP66/IK10 rated housings", "IR range matched to perimeter length", "Vandal-resistant mounts", "Lightning protection advised on poles", "Lens field-of-view documented"],{
+  priceFrom: "₹25,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Motorised varifocal cameras", "cctv", "cctv", "Varifocal IP camera", "Motorised varifocal cameras", CV, "IP cameras", CV_LINE, ["Remote zoom and focus setup", "Ideal for gates and loading bays", "Presets for incident review", "Bandwidth estimate per channel", "Calibration after install"],{
+  priceFrom: "₹26,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Panoramic & fisheye cameras", "cctv", "cctv", "Fisheye surveillance camera", "Panoramic and fisheye cameras", CV, "IP cameras", CV_LINE, ["360° coverage for open plan areas", "Dewarping on client or NVR", "Ceiling mount height guidelines", "Single cable per zone", "Training on digital PTZ"],{
+  priceFrom: "₹27,999",
+  priceNote: "Starting Price + GST",
+}),
     ],
   },
   {
     title: "Recording & infrastructure",
     description: "NVR/DVR platforms, surveillance drives, and PoE switching sized for retention targets.",
     items: [
-      card("Network video recorders", "cctv", "cctv", "NVR recorder", "Network video recorders", CV, "Recording & infrastructure", CV_LINE, ["Channel count and bitrate planning", "RAID optional on enterprise models", "HTTPS and role-based users", "Automatic health alerts", "UPS runtime calculation"]),
-      card("Surveillance hard drives", "cctv", "cctv", "Surveillance HDD", "Surveillance hard drives", CV, "Recording & infrastructure", CV_LINE, ["Workload-rated for 24/7 write", "Slot count and RAID level advice", "SMART monitoring enabled", "Spare on-site disk optional", "RMA process documented"]),
-      card("PoE switches for CCTV", "network", "network", "PoE switch CCTV", "PoE switches for CCTV", CV, "Recording & infrastructure", CV_LINE, ["Per-port power budget spreadsheet", "VLAN isolation from corporate LAN", "Extended reach with proper cable", "Loop prevention on uplinks", "Labelled patch panel"]),
+      card("Network video recorders", "cctv", "cctv", "NVR recorder", "Network video recorders", CV, "Recording & infrastructure", CV_LINE, ["Channel count and bitrate planning", "RAID optional on enterprise models", "HTTPS and role-based users", "Automatic health alerts", "UPS runtime calculation"],{
+  priceFrom: "₹28,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Surveillance hard drives", "cctv", "cctv", "Surveillance HDD", "Surveillance hard drives", CV, "Recording & infrastructure", CV_LINE, ["Workload-rated for 24/7 write", "Slot count and RAID level advice", "SMART monitoring enabled", "Spare on-site disk optional", "RMA process documented"],{
+  priceFrom: "₹29,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("PoE switches for CCTV", "network", "network", "PoE switch CCTV", "PoE switches for CCTV", CV, "Recording & infrastructure", CV_LINE, ["Per-port power budget spreadsheet", "VLAN isolation from corporate LAN", "Extended reach with proper cable", "Loop prevention on uplinks", "Labelled patch panel"],{
+  priceFrom: "₹30,999",
+  priceNote: "Starting Price + GST",
+}),
       
     ],
   },
@@ -433,9 +496,18 @@ const cctvCatalogInput: ServiceCatalogCategoryInput[] = [
     title: "Door entry & monitoring",
     description: "Video door phones, guard monitors, and display walls for reception and security desks.",
     items: [
-      card("Guard station monitors", "cctv", "cctv", "Security monitor station", "Guard station monitors", CV, "Door entry & monitoring", CV_LINE, ["Wall and desk mounts", "HDMI matrix for video walls", "Burn-in protection settings", "Alignment with NVR layout", "Operator SOP draft optional"]),
-      card("Public view displays", "desk", "desk", "CCTV display monitor", "Public view displays", CV, "Door entry & monitoring", CV_LINE, ["Commercial-grade panels", "Privacy masking on live view", "Auto-timeout to default screen", "Ceiling mount hardware", "Cable concealment options"]),
-      card("Camera mounting hardware", "cctv", "cctv", "CCTV mount bracket", "Camera mounting hardware", CV, "Door entry & monitoring", CV_LINE, ["Pole, wall, and corner brackets", "Stainless options for coastal sites", "Load rating for PTZ heads", "Tamper-proof screws", "Corrosion inspection schedule"]),
+      card("Guard station monitors", "cctv", "cctv", "Security monitor station", "Guard station monitors", CV, "Door entry & monitoring", CV_LINE, ["Wall and desk mounts", "HDMI matrix for video walls", "Burn-in protection settings", "Alignment with NVR layout", "Operator SOP draft optional"],{
+  priceFrom: "₹31,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Public view displays", "desk", "desk", "CCTV display monitor", "Public view displays", CV, "Door entry & monitoring", CV_LINE, ["Commercial-grade panels", "Privacy masking on live view", "Auto-timeout to default screen", "Ceiling mount hardware", "Cable concealment options"],{
+  priceFrom: "₹32,999",
+  priceNote: "Starting Price + GST",
+}),
+      card("Camera mounting hardware", "cctv", "cctv", "CCTV mount bracket", "Camera mounting hardware", CV, "Door entry & monitoring", CV_LINE, ["Pole, wall, and corner brackets", "Stainless options for coastal sites", "Load rating for PTZ heads", "Tamper-proof screws", "Corrosion inspection schedule"],{
+  priceFrom: "₹33,999",
+  priceNote: "Starting Price + GST",
+}),
       
     ],
   },
