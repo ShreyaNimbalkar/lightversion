@@ -36,7 +36,11 @@ export function createServiceCategoryPage(servicePath: string) {
             { label: category.title },
           ]}
         />
-        <ServiceCategoryProductList category={category} serviceLabel={route.label} />
+        <ServiceCategoryProductList
+          category={category}
+          serviceLabel={route.label}
+          defaultInterest={route.defaultInterest}
+        />
       </>
     );
   };
