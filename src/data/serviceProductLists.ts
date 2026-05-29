@@ -129,6 +129,44 @@ const PRODUCT_IMAGE_FILE_BY_SLUG: Record<string, string> = {
   "uc-headsets": pubAsset("network", "Conference room phones.jpg"),
   "speakerphones-for-home": pubAsset("network", "Conference room phones.jpg"),
   "desk-power-protection": pubAsset("repair", "Server & NAS loan.jpg"),
+  // Autodesk
+  "autocad": "AutoCAD.jpg",
+  "autodesk-maya": "Autodesk Maya.jpg",
+  "autodesk-revit": "Autodesk Revit.jpg",
+  "3ds-max": "3ds Max.jpg",
+  "fusion-360": "Fusion 360.jpg",
+  "autodesk-inventor": "Autodesk Inventor.jpg",
+
+  // Antivirus
+"quick-heal-total-security": "Quick Heal Total Security.jpg",
+"kaspersky-endpoint-security": "Kaspersky Endpoint Security.jpg",
+"norton-360": "Norton 360.jpg",
+"mcafee-total-protection": "McAfee Total Protection.jpg",
+"bitdefender-business-security": "Bitdefender Business Security.jpg",
+"eset-endpoint-antivirus": "ESET Endpoint Antivirus.jpg",
+"avast-business-antivirus": "Avast Business Antivirus.jpg",
+"sophos-endpoint": "Sophos Endpoint.jpg",
+"trend-micro-worry-free": "Trend Micro Worry-Free.jpg",
+"malwarebytes-teams": "Malwarebytes Teams.jpg",
+
+// Adobe
+"adobe-photoshop": "Adobe Photoshop.jpg",
+"adobe-illustrator": "Adobe Illustrator.jpg",
+"adobe-premiere-pro": "Adobe Premiere Pro.jpg",
+"adobe-xd": "Adobe XD.jpg",
+"adobe-lightroom": "Adobe Lightroom.jpg",
+"adobe-acrobat": "Adobe Acrobat.jpg",
+"adobe-creative-cloud": "Adobe Creative Cloud.jpg",
+
+// Microsoft
+"microsoft-365-business-basic": "Microsoft 365 Business Basic.jpg",
+"microsoft-365-business-standard": "Microsoft 365 Business Standard.jpg",
+"microsoft-365-business-premium": "Microsoft 365 Business Premium.jpg",
+"microsoft-365-apps-for-business": "Microsoft 365 Apps for Business.jpg",
+"windows-11-pro": "Windows 11 Pro.jpg",
+"microsoft-teams-essentials": "Microsoft Teams Essentials.jpg",
+"microsoft-onedrive-for-business": "Microsoft OneDrive for Business.jpg",
+"microsoft-azure": "Microsoft Azure.jpg",
 };
 
 function resolveProductImage(
